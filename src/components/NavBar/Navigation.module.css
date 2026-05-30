@@ -1,0 +1,27 @@
+.navigation {
+  display: flex;
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+.navigation li {
+  list-style: none;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.navigation a:hover {
+  text-decoration: none;
+  color: #FF3C3C;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}

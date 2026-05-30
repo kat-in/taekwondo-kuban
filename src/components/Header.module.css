@@ -1,0 +1,30 @@
+.header {
+  background-color: #222;
+  color: #fff;
+  display: flex;
+  min-height: 120px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+ display: flex;
+ width: 220px;
+ height: 100px;
+ gap:20px;
+}
+
+.logo1 {
+  width: 100px;
+  height: 100px;
+  background-image: url('../../public/logo_krd.png');
+  background-size: cover;  
+}
+
+.logo2 {
+  width: 100px;
+  height: 100px;
+  background-image: url('../../public/logo_itf.png');
+  background-size: cover;  
+}
