@@ -10,7 +10,6 @@
   text-align: center;
   min-height: 100svh;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   box-sizing: border-box;
 }
@@ -33,6 +32,12 @@ body {
   font-family: "Oswald";
   src: url(../src/fonts/Oswald.ttf);
 }
+
+@font-face {
+  font-family: "Corvetta";
+  src: url(../src/fonts/Corvetta.ttf);
+}
+
 @font-face {
   font-family: "Mulish";
   src: url(../src/fonts/Mulish.ttf);

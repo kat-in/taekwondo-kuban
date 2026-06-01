@@ -1,0 +1,25 @@
+.heroButton {
+    display: flex;
+    padding: 10px 40px;
+    border: none;
+    background-color: #FF3C3C;
+    color: white;
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    
+}
+
+
+
+.heroButton:hover {
+  text-decoration: none;
+  color: #222;
+  background-color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
