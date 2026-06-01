@@ -14,19 +14,6 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 10px;
-  scroll-behavior: smooth;
-}
-
-
-body {
-  font-size: 1.6rem;
-  font-family: "Mulish", sans-serif;
-  background-color: #F2F2F2;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 @font-face {
   font-family: "Oswald";
@@ -39,13 +26,28 @@ body {
 }
 
 @font-face {
-  font-family: "Mulish";
-  src: url(../src/fonts/Mulish.ttf);
+  font-family: "Raleway";
+  src: url(../src/fonts/Raleway.ttf);
 }
 @font-face {
-  font-family: "Mulish Italic";
-  src: url(../src/fonts/Mulish-Italic.ttf);
+  font-family: "Raleway Italic";
+  src: url(../src/fonts/Raleway-Italic.ttf);
 }
+
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+
+body {
+  font-size: 1.6rem;
+  font-family: "Railway", sans-serif;
+  background-color: #F2F2F2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
 h1, h2, h3, h4 {
   font-family: "Oswald";

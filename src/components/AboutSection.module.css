@@ -1,0 +1,23 @@
+.about__section {
+  background-color: white;
+  color: #222;
+  display: flex;
+  min-height: 120px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.history_fact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 20px 40px;
+  background-color: #d2cfcf;
+  color: #222;
+
+}
+
