@@ -1,23 +1,86 @@
+body {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+}
+
 .about__section {
-  background-color: white;
+  background-color:#F2F2F2;
   color: #222;
   display: flex;
   min-height: 120px;
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
+  gap: 20px;
 }
+
+.about_text {
+    display: flex;
+    flex-direction: column;
+    gap:20px; 
+    font-size: 1.5rem;
+}
+
 
 .history_fact {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 300px;
-  margin: 20px;
-  border-radius: 10px;
-  padding: 20px 40px;
-  background-color: #d2cfcf;
+  gap: 20px;
+  min-width: 400px;
+  padding: 20px 40px; 
+  background-color: #e1e1e1;
   color: #222;
-
+  line-height: 3rem;
+  font-size: 1.5rem;
 }
 
+.history_fact h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history_fact h3::after {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url("./public/fact_icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 15px;
+  justify-content: center;
+}
+
+
+
+.about_activity {
+   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 400px;
+  padding: 20px 40px; 
+  background-color: #e1e1e1;
+  color: #222;
+  line-height: 3rem;
+}
+
+.about_activity h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about_activity h3:after {
+  content: "";
+  display: inline-block;
+  width: 54px;
+  height: 40px;
+  background-image: url("./public/fight_icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 15px;
+  justify-content: center;
+}
