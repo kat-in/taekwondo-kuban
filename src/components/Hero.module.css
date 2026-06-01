@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  padding: 20px 40px;
+  padding: 0  40px 20px 40px;
 }
 
 .hero__title__section {
@@ -30,13 +30,18 @@
 }
 
 
-
-h1 {
-  font-weight: 300;
-  font-size: 60px;
+.big {
+  display: flex;
+  font-weight: 250;
+  font-size: 55px;
   line-height: 68px;
 }
 
+h2 {
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+}
 
 .rotated_text {
    position: absolute;
