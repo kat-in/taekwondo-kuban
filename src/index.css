@@ -55,6 +55,7 @@ body {
   color: #F2F2F2;;
 }
 
+
 .ligth {
    background-color: #F2F2F2;
    color: #222;
@@ -77,10 +78,17 @@ p {
     gap: 20px;
 }
 
-.page__title {
+.page__title_dark {
     display: flex;
     justify-content: end;
+    padding: 0 0 10px 0px;
 }
+
+.page__title_light {
+    display: flex;
+    padding: 0 0 10px 0px;
+}
+
 
 /* HEADER START*/
 
@@ -204,6 +212,7 @@ h2 {
     background-color: #e1e1e1;
     color: #222;
     line-height: 3rem;
+    border-radius: 20px;
 }
 
 .about_activity h3 {
@@ -247,6 +256,7 @@ h2 {
     color: #222;
     line-height: 3rem;
     font-size: 1.5rem;
+    border-radius: 20px;
 }
 
 .history_fact h3 {
@@ -275,6 +285,32 @@ h2 {
 }
 
 /* ABOUT TAEKWANDO END */
+
+/* PRESIDENT START */
+
+.president_block {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.president_text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+}
+
+.president_block_img {
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  background-image: url('./president/president.jpg');
+  background-size: cover;
+ background-position: -65px;
+}
+
+/* PRESIDENT END */
 
 /* FOOTER START */
 
