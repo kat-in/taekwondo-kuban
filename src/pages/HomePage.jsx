@@ -1,4 +1,5 @@
 import AboutSection from '../components/AboutSection'
+import AboutTaekwandoSection from '../components/AboutTaekwandoSection'
 import Hero from '../components/Hero'
 
 const HomePage = () => {
@@ -6,7 +7,7 @@ const HomePage = () => {
     <> 
     <Hero />
     <AboutSection/>
-    <main>Привет Тхэквондо!</main>
+    <AboutTaekwandoSection/>
     </>
     )
 }
