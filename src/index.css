@@ -386,10 +386,17 @@ h2 {
   padding: 20px 40px;
 }
 
-.news_card{
+.news_card {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+
+.news_card_text {
+display: flex;
+text-align: right;
+padding: 20px;
 }
 
 .news_card_img {
@@ -440,6 +447,7 @@ h2 {
 
 .news_content {
   display: flex;
+  gap: 20px;
 }
 
 

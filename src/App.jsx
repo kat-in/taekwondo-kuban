@@ -13,6 +13,7 @@ import LearnPage from './pages/materials/LearnPage'
 import AboutPage from './pages/AboutPage'
 import BeginnersPage from './pages/BeginnersPage'
 import MasterVisitPage from './pages/MaterVisitPage'
+import NewsDetailPage from './pages/NewsDetailPage'
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:id" element={<NewsDetailPage />} />
         <Route path="/learn" element={<LearnPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/beginners" element={<BeginnersPage/>} />
