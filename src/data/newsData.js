@@ -21,6 +21,13 @@ const videoUrls = {
 
 const albumUrl = 'https://taekwondo-kuban.ru/photo.htm'
 
+const categories = {
+    'championship': 'Чемпионат',
+    'certification': 'Аттестация',
+    'other': 'Жизнь ассоциации',
+    'festival': 'Фестиваль',
+}
+
 const newsData = [
     // {
     //     id: ,
@@ -35,17 +42,21 @@ const newsData = [
 
     {
         id: 176,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2026-05-17',
         displayDate: '17 мая 2026 г.',
         cover: '/images/news/covers/17.05.26.jpeg',
         videoLink: videoUrls.video2026, //2026
         photoAlbumLink: albumUrl,
-        content: 'Краснодарская городская Ассоциация Му Дук Кван провела чемпионат г. Краснодара по тхэквондо Му Дук Кван. В чемпионате приняли участие 104 участника. Все спортсмены были награждены почетными грамотами и медалями. Фото и Видео чемпионата.',
+        content: `Краснодарская городская Ассоциация Му Дук Кван провела чемпионат г. Краснодара по тхэквондо Му Дук Кван. 
+        
+В чемпионате приняли участие 104 участника. 
+
+Все спортсмены были награждены почетными грамотами и медалями. Фото и Видео чемпионата.`,
     },
     {
         id: 175,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2026-04-26',
         displayDate: '26 апреля 2026 г.',
         cover: '/images/news/covers/26.04.26.jpeg',
@@ -66,20 +77,22 @@ const newsData = [
     },
     {
         id: 174,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2026-03-15',
         displayDate: '15 марта 2026 г.',
         cover: '/images/news/covers/15.03.26.jpeg',
         videoLink: videoUrls.video2026, //2026
         photoAlbumLink: albumUrl,
-        content: `15 марта 2026 г. Краснодарская городская Ассоциация Му Дук Кван провела чемпионат г. Краснодара по тхэквондо Му Дук Кван.
-        В чемпионате приняли участие 132 участника.
-        Все спортсмены были награждены почетными грамотами и медалями.
-        Фото и Видео чемпионата.`,
+        content: `Краснодарская городская Ассоциация Му Дук Кван провела чемпионат г. Краснодара по тхэквондо Му Дук Кван.
+
+В чемпионате приняли участие 132 участника.
+
+Все спортсмены были награждены почетными грамотами и медалями.
+Фото и Видео чемпионата.`,
     },
     {
         id: 173,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2026-01-25',
         displayDate: '25 января 2026 г.',
         cover: '/images/news/covers/25.01.26.jpeg',
@@ -98,7 +111,7 @@ const newsData = [
     },
     {
         id: 172,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2026-01-22',
         displayDate: '22 января 2026 г.',
         images: [
@@ -106,39 +119,43 @@ const newsData = [
             { url: '/images/news/22.01.2026-2.jpeg', description: '' },
             { url: '/images/news/22.01.2026-3.jpeg', description: '' },
         ],
-        content: `22 января 2026 г. наша Ассоциация вместе с депутатами ЗСК приняла участие в закупке и доставки фруктов в госпиталь ветеранов для наших бойцов СВО`,
+        content: `Наша Ассоциация вместе с депутатами ЗСК приняла участие в закупке и доставки фруктов в госпиталь ветеранов для наших бойцов СВО`,
     },
     {
         id: 171,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2025-12-14',
         displayDate: '14 декабря 2025 г.',
         cover: '/images/news/covers/14.12.25.jpeg',
         videoLink: videoUrls.video2025, //2025
         photoAlbumLink: albumUrl,
         externalLinks: ['https://ok.ru/group/70000000330273/topic/156663516244001', 'https://t.me/roman_baranovkrd/2778'],
-        content: `14 декабря 2025 г. Краснодарская городская Ассоциация Му Дук Кван провела чемпионат г. Краснодара по тхэквондо Му Дук Кван.
-        В чемпионате приняли участие 110 участников.
-        Поздравить победителей и участников чемпионата пришёл депутат Северского района Османов Осман Насирович, депутат городской Думы Краснодара Баранов Роман Михайлович, а также ректор Екатеринодарской Духовной Семинарии Свято-Троицкого собора иерей Андрей Кретов.
-        Все спортсмены были награждены почетными грамотами и медалями.
-        Более подробно можно почитать Здесь и Здесь.
-        Фото и Видео чемпионата.`,
+        content: `Краснодарская городская Ассоциация Му Дук Кван провела чемпионат г. Краснодара по тхэквондо Му Дук Кван.
+
+В чемпионате приняли участие 110 участников.
+        
+Поздравить победителей и участников чемпионата пришёл депутат Северского района Османов Осман Насирович, депутат городской Думы Краснодара Баранов Роман Михайлович, а также ректор Екатеринодарской Духовной Семинарии Свято-Троицкого собора иерей Андрей Кретов.
+        
+Все спортсмены были награждены почетными грамотами и медалями.
+        
+Более подробно можно почитать Здесь и Здесь. Фото и Видео чемпионата.`,
     },
     {
         id: 170,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2025-11-27',
         displayDate: '27 ноября 2025 г.',
         cover: '/images/news/covers/27.11.25.jpeg',
         photoAlbumLink: albumUrl,
-        content: `27 ноября 2025 г. спортсмены Ассоциации были приглашены на празднование 37 летней годовщины создания подразделения ОМОН ГУВД КРАСНОДАРСКОГО КРАЯ.
-        Руководством ОМОН была организована ЭКСКУРСИЯ по подразделению, показ современный боевой техники и оружия, которыми пользуются российские спец подразделения.
-        Был организован сладкий стол, а также полевая кухня, где ребят накормили солдатской кашей.
-        Фото экскурсии.`,
+        content: `Спортсмены Ассоциации были приглашены на празднование 37 летней годовщины создания подразделения ОМОН ГУВД КРАСНОДАРСКОГО КРАЯ.
+        
+Руководством ОМОН была организована ЭКСКУРСИЯ по подразделению, показ современный боевой техники и оружия, которыми пользуются российские спец подразделения.
+
+Был организован сладкий стол, а также полевая кухня, где ребят накормили солдатской кашей. Фото экскурсии.`,
     },
     {
         id: 169,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2025-10-26',
         displayDate: '26 октября 2025 г.',
         cover: '/images/news/covers/26.10.25.jpeg',
@@ -157,7 +174,7 @@ const newsData = [
     },
     {
         id: 168,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2025-10-10',
         displayDate: '10 октября 2025 г.',
         images: [
@@ -168,7 +185,7 @@ const newsData = [
     },
     {
         id: 167,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2025-11-28',
         displayDate: '28 сентября 2025 г.',
         videoLink: videoUrls.video2025, //2025
@@ -180,7 +197,7 @@ const newsData = [
     },
     {
         id: 166,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2025-06-29',
         displayDate: '29 июня 2025 г.',
         details: `Были аттестованы 60 спортсменов на следующие пояса:
@@ -196,7 +213,7 @@ const newsData = [
     },
     {
         id: 165,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2025-06-12',
         displayDate: '12 июня 2025 г.',
         image: {
@@ -208,7 +225,7 @@ const newsData = [
     },
     {
         id: 164,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2025-05-18',
         displayDate: '18 мая 2025 г. ',
         videoLink: videoUrls.video2025, //2025
@@ -220,7 +237,7 @@ const newsData = [
     },
     {
         id: 163,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2025-04-27',
         displayDate: '27 апреля 2025 г.',
         cover: '/images/news/covers/27.04.25.jpeg',
@@ -238,7 +255,7 @@ const newsData = [
     },
     {
         id: 162,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2025-03-16',
         displayDate: '16 марта 2025 г.',
         cover: '/images/news/covers/16.03.25.jpeg',
@@ -254,7 +271,7 @@ const newsData = [
     },
     {
         id: 161,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2025-01-26',
         displayDate: '26 января 2025 г.',
         cover: '/images/news/covers/26.01.25.jpeg',
@@ -274,7 +291,7 @@ const newsData = [
     },
     {
         id: 160,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2024-12-15',
         displayDate: '15 декабря 2024 г.',
         cover: '/images/news/covers/15.12.24.jpeg',
@@ -287,7 +304,7 @@ const newsData = [
     },
     {
         id: 159,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2024-11-22',
         displayDate: '22 ноября 2024 г.',
         cover: '/images/news/covers/22.11.24.jpeg',
@@ -299,7 +316,7 @@ const newsData = [
     },
     {
         id: 158,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2024-10-20',
         displayDate: '20 октября 2024 г.',
         details: `Были аттестованы 60 спортсменов на следующие пояса:
@@ -318,7 +335,7 @@ const newsData = [
     },
     {
         id: 157,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2024-09-29',
         displayDate: '29 сентября 2024 г.',
         videoLink: videoUrls.video2024, //2024
@@ -329,7 +346,7 @@ const newsData = [
     },
     {
         id: 156,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2024-06-30',
         displayDate: '30 июня 2024 г. ',
         cover: '/images/news/covers/30.06.24.jpeg',
@@ -348,7 +365,7 @@ const newsData = [
     },
     {
         id: 155,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2024-05-19',
         displayDate: '19 мая 2024 г.',
         cover: '/images/news/covers/19.05.24.jpeg',
@@ -360,7 +377,7 @@ const newsData = [
     },
     {
         id: 154,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2024-03-30',
         displayDate: 'Март 2024 г.',
         videoLink: videoUrls.video2024, //2024
@@ -371,7 +388,7 @@ const newsData = [
     },
     {
         id: 153,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2024-03-13',
         displayDate: '13 марта 2024 г.',
         externalLink: 'https://vk.com/wall710237119_572',
@@ -379,7 +396,7 @@ const newsData = [
     },
     {
         id: 152,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2024-03-11',
         displayDate: '11 марта 2024 г.',
         videoLink: videoUrls.video2024, //2024
@@ -388,10 +405,10 @@ const newsData = [
     },
     {
         id: 151,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2024-02-25',
         displayDate: '25 февраля 2024 г.',
-         cover: '/images/news/covers/25.02.24.jpeg',
+        cover: '/images/news/covers/25.02.24.jpeg',
         details: `Были аттестованы 70 спортсменов на следующие пояса:
         Сине-красный пояс - 2 чел.
         Зелено-синий пояс - 4 чел.
@@ -405,7 +422,7 @@ const newsData = [
     },
     {
         id: 150,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2023-12-24',
         displayDate: '24 декабря 2023 г.',
         videoLink: videoUrls.video2023, //2023
@@ -416,10 +433,10 @@ const newsData = [
     },
     {
         id: 149,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2023-11-26',
         displayDate: '26 ноября 2023 г.',
-         cover: '/images/news/covers/26.11.23.jpeg',
+        cover: '/images/news/covers/26.11.23.jpeg',
         details: `Были аттестованы 74 спортсмена на следующие пояса:
         Красный пояс - 1 чел.
         Синий пояс - 6 чел.
@@ -434,10 +451,10 @@ const newsData = [
     },
     {
         id: 148,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2023-11-25',
         displayDate: '25 ноября 2023 г.',
-         cover: '/images/news/covers/25.11.23.jpeg',
+        cover: '/images/news/covers/25.11.23.jpeg',
         videoLink: videoUrls.video2023, //2023
         photoAlbumLink: albumUrl,
         content: `25 ноября 2023 г. спортсмены Ассоциации были приглашены на празднование 35 летней годовщины создания подразделения ОМОН ГУВД КРАСНОДАРСКОГО КРАЯ, на котором спортсмены Ассоциации выступили с показательными выступлениями.
@@ -447,7 +464,7 @@ const newsData = [
     },
     {
         id: 147,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2023-10-22',
         displayDate: '22 октября 2023 г.',
         videoLink: videoUrls.video2023, //2023
@@ -459,7 +476,7 @@ const newsData = [
     },
     {
         id: 146,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2023-09-01',
         displayDate: '2023 год',
         videoLink: videoUrls.video2023, //2023
@@ -469,10 +486,10 @@ const newsData = [
     },
     {
         id: 145,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2023-06-18',
         displayDate: '18 июня 2023 г. ',
-         cover: '/images/news/covers/18.06.23.jpeg',
+        cover: '/images/news/covers/18.06.23.jpeg',
         details: `Были аттестованы 114 спортсмена на следующие пояса:
         Красный пояс - 2 чел.
         Сине-красный пояс - 2 чел.
@@ -488,10 +505,10 @@ const newsData = [
     },
     {
         id: 144,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2023-04-09',
         displayDate: '9 апреля 2023 г.',
-         cover: '/images/news/covers/09.04.23.jpeg',
+        cover: '/images/news/covers/09.04.23.jpeg',
         photoAlbumLink: albumUrl,
         content: `9 апреля 2023 г. прошёл чемпионат по тхэквондо Му Дук Кван г. Краснодара, который проводила Краснодарская городская Ассоциация тхэквондо Му Дук Кван.
         В чемпионате приняли участие 152 спортсмена из школ № 11, 71, 94, 102, 103, 104.
@@ -500,10 +517,10 @@ const newsData = [
     },
     {
         id: 143,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2023-02-26',
         displayDate: '26 февраля 2023 г.',
-         cover: '/images/news/covers/26.02.23.jpeg',
+        cover: '/images/news/covers/26.02.23.jpeg',
         details: `Были аттестованы 72 спортсмена на следующие пояса:
         Черный пояс - 1 чел.
         Красный пояс - 1 чел.
@@ -520,10 +537,10 @@ const newsData = [
     },
     {
         id: 142,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2022-12-18',
         displayDate: '18 декабря 2022 г.',
-         cover: '/images/news/covers/18.12.22.jpeg',
+        cover: '/images/news/covers/18.12.22.jpeg',
         videoLink: videoUrls.video2022, //2022
         photoAlbumLink: albumUrl,
         content: `18 декабря 2022 г. прошёл чемпионат по тхэквондо Му Дук Кван г. Краснодара, который проводила Краснодарская городская Ассоциация тхэквондо Му Дук Кван.
@@ -533,7 +550,7 @@ const newsData = [
     },
     {
         id: 141,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2022-11-30',
         displayDate: '30 ноября 2022 г.',
         images: [
@@ -545,10 +562,10 @@ const newsData = [
     },
     {
         id: 140,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2022-11-27',
         displayDate: '27 ноября 2022 г.',
-         cover: '/images/news/covers/27.11.22.jpeg',
+        cover: '/images/news/covers/27.11.22.jpeg',
         details: `Были аттестованы 70 спортсменов на следующие пояса:
         Синий пояс - 1 чел.
         Зелено-синий пояс - 4 чел.
@@ -562,10 +579,10 @@ const newsData = [
     },
     {
         id: 139,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2022-10-30',
         displayDate: '30 октября 2022 г.',
-         cover: '/images/news/covers/30.10.22.jpeg',
+        cover: '/images/news/covers/30.10.22.jpeg',
         videoLink: videoUrls.video2022, //2022
         photoAlbumLink: albumUrl,
         content: `30 октября 2022 г. прошёл чемпионат по тхэквондо Му Дук Кван г. Краснодара, который проводила Краснодарская городская Ассоциация тхэквондо Му Дук Кван.
@@ -575,7 +592,7 @@ const newsData = [
     },
     {
         id: 138,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2022-09-01',
         displayDate: '2022 год',
         videoLink: videoUrls.video2022, //2022
@@ -583,20 +600,20 @@ const newsData = [
     },
     {
         id: 137,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2022-07-31',
         displayDate: '31 июля 2022 г.',
-         cover: '/images/news/covers/31.07.22.jpeg',
+        cover: '/images/news/covers/31.07.22.jpeg',
         photoAlbumLink: albumUrl,
         content: `31 июля 2022 г. руководством Ассоциации был аттестован на черный пояс Плахов Артем Денисович.
         Фото аттестации.`,
     },
     {
         id: 136,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2022-06-19',
         displayDate: '19 июня 2022 г. ',
-         cover: '/images/news/covers/19.06.22.jpeg',
+        cover: '/images/news/covers/19.06.22.jpeg',
         details: `Были аттестованы 82 спортсмена на следующие пояса:
         Коричневый пояс - 1 чел.
         Сине-красный пояс - 2 чел.
@@ -612,7 +629,7 @@ const newsData = [
     },
     {
         id: 135,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2022-05-18',
         displayDate: '18 мая 2022 г.',
 
@@ -630,10 +647,10 @@ const newsData = [
     },
     {
         id: 134,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2022-04-10',
         displayDate: '10 апреля 2022 г.',
-         cover: '/images/news/covers/10.04.22.jpeg',
+        cover: '/images/news/covers/10.04.22.jpeg',
         videoLink: videoUrls.video2022, //2022
         photoAlbumLink: albumUrl,
         content: `10 апреля 2022 г. руководством Ассоциации был проведен открытый чемпионат г. Краснодара по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -644,10 +661,10 @@ const newsData = [
     },
     {
         id: 133,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2022-02-27',
         displayDate: '27 февраля 2022 г.',
-         cover: '/images/news/covers/27.02.22.jpeg',
+        cover: '/images/news/covers/27.02.22.jpeg',
         details: `Были аттестованы 74 спортсмена на следующие пояса:
         Коричневый пояс - 1 чел.
         Красно-коричневый пояс - 1 чел.
@@ -666,7 +683,7 @@ const newsData = [
     },
     {
         id: 132,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2021-12-19',
         displayDate: '19 декабря 2021 г.',
         videoLink: videoUrls.video2021, //2021
@@ -678,10 +695,10 @@ const newsData = [
     },
     {
         id: 131,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2021-11-28',
         displayDate: '28 ноября 2021 г.',
-         cover: '/images/news/covers/28.11.21.jpeg',
+        cover: '/images/news/covers/28.11.21.jpeg',
         details: `Были аттестованы 49 спортсменов на следующие пояса:
         Красно-коричневый пояс - 1 чел.
         Синий пояс - 3 чел.
@@ -698,10 +715,10 @@ const newsData = [
     },
     {
         id: 130,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2021-10-24',
         displayDate: '24 октября 2021 г.',
-         cover: '/images/news/covers/24.10.21.jpeg',
+        cover: '/images/news/covers/24.10.21.jpeg',
         videoLink: videoUrls.video2021, //2021
         photoAlbumLink: albumUrl,
         content: `24 октября 2021 г. руководством Ассоциации был проведен открытый чемпионат по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -712,10 +729,10 @@ const newsData = [
     },
     {
         id: 129,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2021-06-19',
         displayDate: '19 июня 2021 г.',
-         cover: '/images/news/covers/19.06.21.jpeg',
+        cover: '/images/news/covers/19.06.21.jpeg',
         details: `Были аттестованы 56 спортсменов на следующие пояса:
         Сине-красный пояс - 2 чел.
         Синий пояс - 2 чел.
@@ -730,7 +747,7 @@ const newsData = [
     },
     {
         id: 128,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2021-04-14',
         displayDate: '14 апреля 2021 г.',
         videoLink: videoUrls.video2021, //2021
@@ -740,7 +757,7 @@ const newsData = [
     },
     {
         id: 127,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2021-04-11',
         displayDate: '11 апреля 2021 г.',
         videoLink: videoUrls.video2021, //2021
@@ -753,14 +770,14 @@ const newsData = [
     },
     {
         id: 126,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2021-04-06',
         displayDate: '6 апреля 2021 г.',
         content: `6 апреля 2021 г. руководство Ассоциации провело матчевую встречу между спортсменами СОШ № 71 и СОШ № 11.`,
     },
     {
         id: 125,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2021-02-27',
         displayDate: '27 февраля 2021 г.',
         details: `Были аттестованы 44 спортсмена на следующие пояса:
@@ -779,7 +796,7 @@ const newsData = [
     },
     {
         id: 124,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2020-12-20',
         displayDate: '20 декабря 2020 г.',
         videoLink: videoUrls.video2020, //2020
@@ -791,7 +808,7 @@ const newsData = [
     },
     {
         id: 123,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2020-11-28',
         displayDate: '28 ноября 2020 г.',
         details: `Были аттестованы 23 спортсмена на следующие пояса:
@@ -807,7 +824,7 @@ const newsData = [
     },
     {
         id: 122,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2020-10-07',
         displayDate: '7 октября 2020 г.',
         cover: '/images/news/covers/07.10.20.jpg',
@@ -821,7 +838,7 @@ const newsData = [
     },
     {
         id: 121,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2020-09-20',
         displayDate: '20 сентября 2020 г. ',
         videoLink: videoUrls.video2020, //2020
@@ -833,7 +850,7 @@ const newsData = [
     },
     {
         id: 120,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2020-02-29',
         displayDate: '29 февраля 2020 г.',
         details: `Были аттестованы 35 спортсменов на следующие пояса:
@@ -850,7 +867,7 @@ const newsData = [
     },
     {
         id: 119,
-        category: 'festival',
+               category: categories.festival,
         date: '2020-02-15',
         displayDate: '15 февраля 2020 г.',
         videoLink: videoUrls.video2020, //2020
@@ -861,7 +878,7 @@ const newsData = [
     },
     {
         id: 118,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2019-12-15',
         displayDate: '15 декабря 2019 г.',
         videoLink: videoUrls.video2019, //2019
@@ -873,7 +890,7 @@ const newsData = [
     },
     {
         id: 117,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2019-11-30',
         displayDate: '30 ноября 2019 г.',
         details: `Были аттестованы 28 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
@@ -892,10 +909,10 @@ const newsData = [
     },
     {
         id: 116,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2019-09-15',
         displayDate: '15 сентября 2019 г.',
-         cover: '/images/news/covers/15.09.19.jpeg',
+        cover: '/images/news/covers/15.09.19.jpeg',
         photoAlbumLink: albumUrl,
         content: `15 сентября 2019 г. спортсмены Ассоциации отпраздновали 29 годовщину со дня ее основания.
         Руководством Ассоциации был организован праздник с выездом на природу и праздничный обед для спортсменов Ассоциации и их родителей.
@@ -903,10 +920,10 @@ const newsData = [
     },
     {
         id: 115,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2019-06-22',
         displayDate: '22 июня 2019 г.',
-         cover: '/images/news/covers/22.06.19.jpeg',
+        cover: '/images/news/covers/22.06.19.jpeg',
         details: `Были аттестованы 28 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Коричневый пояс - 1 чел.
         Красно-коричневый пояс - 1 чел.
@@ -926,10 +943,10 @@ const newsData = [
     },
     {
         id: 114,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2019-04-04',
         displayDate: '4 апреля 2019 г.',
-         cover: '/images/news/covers/14.04.19.jpeg',
+        cover: '/images/news/covers/14.04.19.jpeg',
         videoLink: videoUrls.video2019, //2019
         photoAlbumLink: albumUrl,
         content: `14 апреля 2019 г. руководством Ассоциации был проведен открытый чемпионат по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -941,10 +958,10 @@ const newsData = [
     },
     {
         id: 113,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2019-03-02',
         displayDate: '2 марта 2019 г.',
-         cover: '/images/news/covers/02.03.19.jpeg',
+        cover: '/images/news/covers/02.03.19.jpeg',
         details: `Были аттестованы 30 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Синий пояс - 3 чел.
         Зелено-синий пояс - 2 чел.
@@ -960,10 +977,10 @@ const newsData = [
     },
     {
         id: 112,
-        category: 'festival',
+               category: categories.festival,
         date: '2019-02-09',
         displayDate: '9 февраля 2019 г.',
-         cover: '/images/news/covers/09.02.19.jpeg',
+        cover: '/images/news/covers/09.02.19.jpeg',
         videoLink: videoUrls.video2019, //2019
         photoAlbumLink: albumUrl,
         content: `9 февраля 2019 г. спортсмены Ассоциации выступили на 13-м фестивале боевых искусств Прикубанского внутригородского округа г. Краснодара.
@@ -973,10 +990,10 @@ const newsData = [
     },
     {
         id: 111,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2018-12-16',
         displayDate: '16 декабря 2018 г.',
-         cover: '/images/news/covers/16.12.18.jpeg',
+        cover: '/images/news/covers/16.12.18.jpeg',
         videoLink: videoUrls.video2018, //2018
         photoAlbumLink: albumUrl,
         content: `16 декабря 2018 г. руководством Ассоциации был проведен открытый чемпионат по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -987,10 +1004,10 @@ const newsData = [
     },
     {
         id: 110,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2018-11-24',
         displayDate: '24 ноября 2018 г.',
-         cover: '/images/news/covers/24.11.18.jpeg',
+        cover: '/images/news/covers/24.11.18.jpeg',
         details: `Были аттестованы 19 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Черный пояс I дан - 1 чел.
         Сине-красный пояс - 2 чел.
@@ -1007,10 +1024,10 @@ const newsData = [
     },
     {
         id: 109,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2018-09-16',
         displayDate: '16 сентября 2018 г.',
-         cover: '/images/news/covers/16.09.18.jpeg',
+        cover: '/images/news/covers/16.09.18.jpeg',
         photoAlbumLink: albumUrl,
         content: `16 сентября 2018 г. Ассоциация отпраздновала свою 28 годовщину со дня основания.
         Руководством Ассоциации был организован праздник для спортсменов и их родителей с выездом на природу.
@@ -1018,10 +1035,10 @@ const newsData = [
     },
     {
         id: 108,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2018-06-16',
         displayDate: '16 июня 2018 г.',
-         cover: '/images/news/covers/16.06.18.jpeg',
+        cover: '/images/news/covers/16.06.18.jpeg',
         details: `Были аттестованы 27 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Черный пояс I дан - Марченко Максим
         Красный пояс - 2 чел.
@@ -1040,7 +1057,7 @@ const newsData = [
     },
     {
         id: 107,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2018-06-01',
         displayDate: '1 июня 2018 г.',
         videoLink: videoUrls.video2018, //2018
@@ -1050,10 +1067,10 @@ const newsData = [
     },
     {
         id: 106,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2018-04-22',
         displayDate: '22 апреля 2018 г.',
-         cover: '/images/news/covers/22.04.18.jpeg',
+        cover: '/images/news/covers/22.04.18.jpeg',
         videoLink: videoUrls.video2018, //2018
         photoAlbumLink: albumUrl,
         content: `22 апреля 2018 г. руководством Ассоциации был проведен открытый чемпионат по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -1065,10 +1082,10 @@ const newsData = [
     },
     {
         id: 105,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2018-02-24',
         displayDate: '24 февраля 2018 г.',
-         cover: '/images/news/covers/24.02.18.jpeg',
+        cover: '/images/news/covers/24.02.18.jpeg',
         details: `Были аттестованы 30 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Красно-коричневый пояс - 1 чел.
         Сине-красный пояс - 1 чел.
@@ -1085,7 +1102,7 @@ const newsData = [
     },
     {
         id: 104,
-        category: 'festival',
+               category: categories.festival,
         date: '2018-02-11',
         displayDate: '11 февраля 2018 г.',
         cover: '/images/news/covers/11.02.18.jpeg',
@@ -1098,7 +1115,7 @@ const newsData = [
     },
     {
         id: 103,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2017-12-17',
         displayDate: '17 декабря 2017 г.',
         cover: '/images/news/covers/17.12.17.jpeg',
@@ -1113,7 +1130,7 @@ const newsData = [
     },
     {
         id: 102,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2017-11-25',
         displayDate: '25 ноября 2017 г.',
         cover: '/images/news/covers/25.11.17.jpeg',
@@ -1131,7 +1148,7 @@ const newsData = [
     },
     {
         id: 101,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2017-11-22',
         displayDate: '22 ноября 2017 г.',
         cover: '/images/news/covers/22.11.17.jpeg',
@@ -1141,7 +1158,7 @@ const newsData = [
     },
     {
         id: 100,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2017-09-17',
         displayDate: '17 сентября 2017 г.',
         cover: '/images/news/covers/17.09.17.jpeg',
@@ -1152,10 +1169,10 @@ const newsData = [
     },
     {
         id: 99,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2017-06-17',
         displayDate: '17 июня 2017 г.',
-         cover: '/images/news/covers/17.06.17.jpeg',
+        cover: '/images/news/covers/17.06.17.jpeg',
         details: `Были аттестованы 28 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Сине-красный пояс - 3 чел.
         Синий пояс - 4 чел.
@@ -1172,17 +1189,17 @@ const newsData = [
     },
     {
         id: 98,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2017-05-23',
         displayDate: '23 мая 2017 г.',
         content: `23 мая 2017 г. спортсмены Ассоциации выступили с показательными выступлениями в НОШ № 94 на мероприятии последнего звонка.`,
     },
     {
         id: 97,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2017-04-09',
         displayDate: '9 апреля 2017 г.',
-         cover: '/images/news/covers/09.04.17.jpeg',
+        cover: '/images/news/covers/09.04.17.jpeg',
         videoLink: videoUrls.video2017, //2017
         photoAlbumLink: albumUrl,
         content: `9 апреля 2017 г. руководством Ассоциации был проведен открытый чемпионат по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -1194,10 +1211,10 @@ const newsData = [
     },
     {
         id: 96,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2017-02-25',
         displayDate: '25 февраля 2017 г.',
-         cover: '/images/news/covers/25.02.17.jpeg',
+        cover: '/images/news/covers/25.02.17.jpeg',
         details: `Были аттестованы 26 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Коричневый пояс - 1 чел.
         Красный пояс - 1 чел.
@@ -1216,10 +1233,10 @@ const newsData = [
     },
     {
         id: 95,
-        category: 'festival',
+               category: categories.festival,
         date: '2017-02-18',
         displayDate: '18 февраля 2017 г.',
-         cover: '/images/news/covers/18.02.17.jpeg',
+        cover: '/images/news/covers/18.02.17.jpeg',
         image: {
             url: '/images/news/18.02.2017.jpeg',
             description: 'На снимке команда спортсменов Ассоциации с директором департамента образования Прикубанского округа Дударь А.М. и ветеранами.',
@@ -1233,10 +1250,10 @@ const newsData = [
     },
     {
         id: 94,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2016-12-18',
         displayDate: '18 декабря 2016 г.',
-         cover: '/images/news/covers/18.12.16.jpeg',
+        cover: '/images/news/covers/18.12.16.jpeg',
         videoLink: videoUrls.video2016, //2016
         photoAlbumLink: albumUrl,
         content: `18 декабря 2016 г. руководством Ассоциации был проведен открытый чемпионат по Тхэквондо Краснодарской Ассоциации Тхэквондо МУ ДУК КВАН.
@@ -1249,10 +1266,10 @@ const newsData = [
     },
     {
         id: 93,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2016-11-26',
         displayDate: '26 ноября 2016 г.',
-         cover: '/images/news/covers/26.11.16.jpeg',
+        cover: '/images/news/covers/26.11.16.jpeg',
         details: `Были аттестованы 30 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
         Сине-красный пояс - 1 чел.
         Синий пояс - 3 чел.
@@ -1269,10 +1286,10 @@ const newsData = [
     },
     {
         id: 92,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2016-09-11',
         displayDate: '11 сентября 2016 г.',
-         cover: '/images/news/covers/11.09.16.jpeg',
+        cover: '/images/news/covers/11.09.16.jpeg',
         photoAlbumLink: albumUrl,
         content: `11 сентября 2016 г. Ассоциация отпраздновала свою 26 годовщину со дня основания.
         Руководством Ассоциации был организован праздник для спортсменов и их родителей с выездом на природу.
@@ -1280,10 +1297,10 @@ const newsData = [
     },
     {
         id: 91,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2016-06-11',
         displayDate: '11 июня 2016 г.',
-         cover: '/images/news/covers/11.06.16.jpeg',
+        cover: '/images/news/covers/11.06.16.jpeg',
         details: ` Были аттестованы 42 спортсмена из школ № 71, № 94, № 11 на следующие пояса:
         Cине-красный пояс - 1 чел.
         Зелено-синий пояс - 4 чел.
@@ -1299,7 +1316,7 @@ const newsData = [
     },
     {
         id: 90,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2016-04-10',
         displayDate: '10 апреля 2016 г.',
         cover: '/images/news/covers/10.04.16.jpeg',
@@ -1314,7 +1331,7 @@ const newsData = [
     },
     {
         id: 89,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2016-02-27',
         displayDate: '27 февраля 2016 г.',
         cover: '/images/news/covers/27.02.16.jpeg',
@@ -1336,7 +1353,7 @@ const newsData = [
     },
     {
         id: 88,
-        category: 'festival',
+        category: categories.festival,
         date: '2016-02-20',
         displayDate: '20 февраля 2016 г.',
         cover: '/images/news/covers/20.02.16.jpeg',
@@ -1350,7 +1367,7 @@ const newsData = [
     },
     {
         id: 87,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2015-12-20',
         displayDate: '20 декабря 2015 г.',
         cover: '/images/news/covers/20.12.15.jpeg',
@@ -1367,14 +1384,14 @@ const newsData = [
     },
     {
         id: 86,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2015-11-29',
         displayDate: '29 ноября 2015 г.',
         content: `29 ноября 2015 г. спортсмены Ассоциации выступили с показательными выступлениями в НОШ № 94, на празднике, посвященному Дню Матери.`,
     },
     {
         id: 85,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2015-11-28',
         displayDate: '28 ноября 2015 г.',
         cover: '/images/news/covers/28.11.15.jpeg',
@@ -1393,14 +1410,14 @@ const newsData = [
     },
     {
         id: 84,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2015-09-13',
         displayDate: '13 сентября 2015 г.',
         content: `13 сентября 2015 г. спортсмены Ассоциации выступили с показательными выступлениями в НОШ № 94.`,
     },
     {
         id: 83,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2015-09-13',
         displayDate: '13 сентября 2015 г.',
         content: `13 сентября 2015 г. Ассоциация отпраздновала свою 25 годовщину со дня основания.
@@ -1408,7 +1425,7 @@ const newsData = [
     },
     {
         id: 82,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2015-06-13',
         displayDate: '13 июня 2015 г.',
         details: `Были аттестованы 46 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
@@ -1428,7 +1445,7 @@ const newsData = [
     },
     {
         id: 81,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2015-04-19',
         displayDate: '19 апреля 2015 г.',
         videoLink: videoUrls.video2015, //2015
@@ -1442,7 +1459,7 @@ const newsData = [
     },
     {
         id: 80,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2015-02-28',
         displayDate: '28 февраля 2015 г.',
         details: `Были аттестованы 48 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
@@ -1460,7 +1477,7 @@ const newsData = [
     },
     {
         id: 79,
-        category: 'festival',
+               category: categories.festival,
         date: '2015-02-14',
         displayDate: '14 февраля 2015 г.',
         image: { url: '/images/news/14.02.2015.jpeg', description: 'На снимке, вместе с командой Ассоциации МУ ДУК КВАН, заместитель главы Прикубанского округа Фролова Т.Г. и начальник Департамента образования Прикубанского округа Пащенко А.Н.' },
@@ -1473,14 +1490,14 @@ const newsData = [
     },
     {
         id: 78,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2014-12-23',
         displayDate: '23 декабря 2014 г.',
         content: `23 декабря 2014 г. Спортсмены Ассоциации выступили с показательными выступлениями на празднике в СОШ № 71.`,
     },
     {
         id: 77,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2014-12-21',
         displayDate: '21 декабря 2014 г.',
         videoLink: videoUrls.video2014, //2014
@@ -1494,7 +1511,7 @@ const newsData = [
     },
     {
         id: 76,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2014-11-29',
         displayDate: '29 ноября 2014 г.',
         details: `Были аттестованы 36 спортсменов из школ № 71, № 94, № 11 на следующие пояса:
@@ -1514,14 +1531,14 @@ const newsData = [
     },
     {
         id: 75,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2014-10-27',
         displayDate: '27 октября 2014 г.',
         content: `27 октября 2014 г. Спортсмены Ассоциации выступили с показательными выступлениями на празднике в НОШ № 94.`,
     },
     {
         id: 74,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2014-09-14',
         displayDate: '14 сентября 2014 г.',
         photoAlbumLink: albumUrl,
@@ -1531,7 +1548,7 @@ const newsData = [
     },
     {
         id: 73,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2014-09-13',
         displayDate: '13 сентября 2014 г.',
         photoAlbumLink: albumUrl,
@@ -1540,7 +1557,7 @@ const newsData = [
     },
     {
         id: 72,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2014-06-28',
         displayDate: '28 июня 2014 г.',
         videoLink: videoUrls.video2014, //2014
@@ -1554,7 +1571,7 @@ const newsData = [
     },
     {
         id: 71,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2014-06-14',
         displayDate: '14 июня 2014 г.',
         details: `Были аттестованы 40 спортсменов Ассоциации из школ № 71, № 94, № 11 на следующие пояса:
@@ -1573,7 +1590,7 @@ const newsData = [
     },
     {
         id: 70,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2014-04-13',
         displayDate: '13 апреля 2014 г.',
         videoLink: videoUrls.video2014, //2014
@@ -1586,7 +1603,7 @@ const newsData = [
     },
     {
         id: 69,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2014-03-01',
         displayDate: '1 марта 2014 г.',
         details: `Были аттестованы 51 спортсмен на следующие пояса:
@@ -1606,7 +1623,7 @@ const newsData = [
     },
     {
         id: 68,
-        category: 'festival',
+               category: categories.festival,
         date: '2014-02-15',
         displayDate: '15 февраля 2014 г.',
         image: { url: '/images/news/15.02.2014.jpg', description: 'На снимке начальник Департамента образования Прикубанского округа Пащенко А.Н., Президент Ассоциации Му Дук Кван Герасименко И.В. со спортсменами Ассоциации, участниками фестиваля.' },
@@ -1619,7 +1636,7 @@ const newsData = [
     },
     {
         id: 67,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2013-12-22',
         displayDate: '22 декабря 2013 г.',
         videoLink: videoUrls.video2013, //2013
@@ -1635,7 +1652,7 @@ const newsData = [
     {
         id: 66,
         date: '2013-11-30',
-        category: 'аттестация',
+        category: categories.certification,
         displayDate: '30 ноября 2013 г.',
         details: `Были аттестованы 42 спортсмена на следующие пояса:
         Черный пояс I дан - Воробьев Никита.
@@ -1654,7 +1671,7 @@ const newsData = [
     },
     {
         id: 65,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2013-09-15',
         displayDate: '15 сентября 2013 г.',
         photoAlbumLink: albumUrl,
@@ -1664,7 +1681,7 @@ const newsData = [
     },
     {
         id: 64,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2013-06-05',
         displayDate: '5 июня 2013 г.',
         details: `Были присвоены следующие пояса:
@@ -1684,7 +1701,7 @@ const newsData = [
     },
     {
         id: 63,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2013-04-07',
         displayDate: '7 апреля 2013 г.',
         videoLink: videoUrls.video2013, //2013
@@ -1697,14 +1714,14 @@ const newsData = [
     },
     {
         id: 62,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2013-04-06',
         displayDate: '6 апреля 2013 г.',
         content: `6 апреля 2013 г. спортсмены Ассоциации выступили с показательными выступлениями на праздновании Дня здоровья в СОШ № 71 и СОШ № 11.`,
     },
     {
         id: 61,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2013-03-02',
         displayDate: '2 марта 2013 г.',
         details: `Были присвоены следующие пояса:
@@ -1722,7 +1739,7 @@ const newsData = [
     },
     {
         id: 60,
-        category: 'festival',
+               category: categories.festival,
         date: '2013-02-17',
         displayDate: '17 февраля 2013 г.',
         videoLink: videoUrls.video2013, //2013
@@ -1734,14 +1751,14 @@ const newsData = [
     },
     {
         id: 59,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2013-02-16',
         displayDate: '16 февраля 2013 г.',
         content: `16 февраля 2013 г. спортсмены Ассоциации выступили с показательными выступлениями на празднике посвещенном Дню Защитника Отечества в СОШ № 71, демонстрируя ученикам и гостям школы непревзойденную технику боевого направления Тхэквондо.`,
     },
     {
         id: 58,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2012-12-23',
         displayDate: '23 декабря 2012 г.',
         details: `Спортсмены ассоциации заняли:
@@ -1759,7 +1776,7 @@ const newsData = [
     },
     {
         id: 57,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2012-11-24',
         displayDate: '24 ноября 2012 г.',
         details: `Аттестацию прошли 40 спортсменов. Получены следующие пояса:
@@ -1777,7 +1794,7 @@ const newsData = [
     },
     {
         id: 56,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2012-10-29',
         displayDate: '29 октября 2012 г.',
         videoLink: videoUrls.video2012, //2012
@@ -1786,7 +1803,7 @@ const newsData = [
     },
     {
         id: 55,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2012-10-03',
         displayDate: '3 октября 2012 г.',
         content: `3 октября 2012 г. спортсмены Ассоциации провели показательные выступления в подразделении ОМОНа ГУВД Краснодарского края, на праздновании 24 годовщины создания подразделения.
@@ -1795,7 +1812,7 @@ const newsData = [
     },
     {
         id: 54,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2012-09-16',
         displayDate: '16 сентября 2012 г.',
         content: `16 сентября 2012 г. Ассоциация МУ ДУК КВАН отпразновала свою двадцать вторую годовщину со дня основания.
@@ -1803,7 +1820,7 @@ const newsData = [
     },
     {
         id: 53,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2012-06-09',
         displayDate: '9 июня 2012 г.',
         details: `Аттестацию прошли 42 спортсмена. Получены следующие пояса:
@@ -1818,7 +1835,7 @@ const newsData = [
     },
     {
         id: 52,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2012-06-01',
         displayDate: '1 июня 2012 г.',
         content: '1 июня 2012 г. на праздник "Дня защиты детей", депутатом городской Думы Прикубанского округа г. Краснодара, были приглашены спортсмены Ассоциации. Они выступили с показательными выступлениями, восхищая своим мастерством жителей Прикубанского округа. Пропагандируя здоровый образ жизни и привлечение подрастающего поколения к занятием спортом. Спортсмены Ассоциации были награждены почетными грамотами и памятными подарками.',
@@ -1826,14 +1843,14 @@ const newsData = [
 
     {
         id: 51,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2012-04-08',
         displayDate: '8 апреля 2012 г.',
         content: '8 апреля 2012 г. руководством Ассоциации был проведен чемпионат по Тхэквондо Ассоциации Му Дук Кван, в котором приняли участие 68 спортсменов из СОШ № 71, НОШ № 94 и СОШ № 11. Чемпионат проходил по адресу: ул. Карякина, 8, СОШ № 71. Все участники были награждены грамотами, медалями и памятными подарками.',
     },
     {
         id: 50,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2012-02-25',
         displayDate: '25 февраля 2012 г.',
         details: `Аттестацию прошли 32 спортсмена. Получены следующие пояса:
@@ -1847,28 +1864,28 @@ const newsData = [
     },
     {
         id: 49,
-        category: 'festival',
+               category: categories.festival,
         date: '2012-02-19',
         displayDate: '19 февраля 2012 г.',
         content: '19 февраля 2012 г. был проведен фестиваль боевых искусств "Сыны Отечества" Прикубанского внутригородского округа г. Краснодара. Он проходил в СОШ № 65. В фестивале приняли участие спортсмены нашей Ассоциации, которые, своим мастерством и высоким уровнем профессионализма, поражали изумленных зрителей и членов жюри. Спортсмены Ассоциации были награждены почетной грамотой, кубком и памятными подарками.',
     },
     {
         id: 48,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2011-12-18',
         displayDate: '18 декабря 2011 г.',
         content: '18 декабря 2011 г. руководством Ассоциации был проведен чемпионат по Тхэквондо Ассоциации Му Дук Кван, в котором приняли участие 58 спортсменов из СОШ № 71, НОШ № 94 и СОШ № 11. Чемпионат проходил по адресу: ул. Карякина, 8, СОШ № 71. Все участники были награждены грамотами, медалями и памятными подарками. На чемпионате присутствовала депутат городской Думы Альшева Наталья Ивановна, которая поздравила победителей чемпионата и вручила им денежные призы.',
     },
     {
         id: 47,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2011-12-14',
         displayDate: '14 декабря 2011 г.',
         content: '14 декабря 2011 г. руководство ОМОН ГУВД Краснодарского края, которое шефствует над Ассоциацией Тхэквондо Му Дук Кван, организовали для спортсменов Ассоциации экскурсию по своему подразделению. Ребятам были показаны боевая техника, оружие. Сотрудники ОМОН рассказали о своем подразделении, об участии в боевых действиях и пообещали рассмотреть вопрос о принятии в свои ряды лучших учеников Ассоциации по достижении ими 18-летнего возраста.',
     },
     {
         id: 46,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2011-11-26',
         displayDate: '26 ноября 2011 г.',
         details: `Аттестацию прошли 35 спортсмена. Получены следующие пояса:
@@ -1883,14 +1900,14 @@ const newsData = [
     },
     {
         id: 45,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2011-09-18',
         displayDate: '18 сентября 2011 г.',
         content: '18 сентября 2011 г. Ассоциация МУ ДУК КВАН отпразновала свою двадцать первую годовщину со дня основания. Руководство Ассоциации организовало выезд на природу своих спортсменов, где были проведены тренировка и сам праздник.',
     },
     {
         id: 44,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2011-06-11',
         displayDate: '11 июня 2011 г.',
         details: `Были аттестованы 35 спортсменов и получены следующие пояса:
@@ -1904,7 +1921,7 @@ const newsData = [
     },
     {
         id: 43,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2011-02-26',
         displayDate: '26 февраля 2011 г.',
         details: `Всего было аттестовано 24 спортсмена и получены следующие пояса:
@@ -1915,7 +1932,7 @@ const newsData = [
     },
     {
         id: 42,
-        category: 'festival',
+               category: categories.festival,
         date: '2011-02-19',
         displayDate: '19 февраля 2011 г.',
         videoLink: videoUrls.video2011, //2011
@@ -1923,14 +1940,14 @@ const newsData = [
     },
     {
         id: 41,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2010-12-19',
         displayDate: '19 декабря 2010 г.',
         content: '19 декабря 2010 г. руководством Ассоциации был проведен чемпионат по Тхэквондо Ассоциации Му Дук Кван, который проходил по адресу: ул. Карякина, 8, СОШ № 71. В чемпионате приняли участие более 60 человек - учащиеся СОШ № 71, СОШ № 11 и НОШ № 94. На чемпионате присутствовала депутат городской Думы Альшева Наталья Ивановна, которая пришла поддержать и поздравить спортсменов Ассоциации, вручив всем участникам грамоты, медали и памятные подарки. Лучшим спортсменам Ассоциации были вручены денежные призы. Наталья Ивановна выразила благодарность руководству Ассоциации за проведение этого мероприятия и, в целом, за деятельность Ассоциации. Пожелала дальнейших успехов спортсменам и удачи в продолжении этого направления на Кубани руководству Ассоциации Му Дук Кван.',
     },
     {
         id: 40,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2010-12-04',
         displayDate: '4 декабря 2010 г.',
         details: `Были присвоены пояса: 
@@ -1944,50 +1961,60 @@ const newsData = [
     },
     {
         id: 39,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2010-11-28',
         displayDate: '28 ноября 2010 г.',
-        videoLink: videoUrls.video2010, //2010
-        content: '28 ноября 2010 г. состоялось открытое первенство г. Краснодара по Тхэквондо Ц.Б.И. "БУДОКАН". Спортсмены Ассоциации Му Дук Кван выступили великолепно. Черникова Ангелина заняла 1-е место, закончив поединок в 1-ом раунде досрочно, в виду явного приемущества со счетом 14:0. Шахрай Даниил занял 2-е место, закончив первый поединок в 1-ом раунде досрочно, в виду явного приемущества со счетом 7:3. Веселов Виктор занял 3-е место. Все они были награждены почетными грамотами и медалями директором Ц.Б.И. "БУДОКАН". Руководство Ассоциации приняло решение наградить почетными грамотами за лучшую технику Черникову Ангелину и Шахрая Даниила. Так же Черниковой Ангелине был вручен очередной сине-красный пояс. Эти поединки вы можете увидеть на сайте в разделе "ВИДЕО".',
+        title: `Открытое первенство г. Краснодара по Тхэквондо Ц.Б.И. "БУДОКАН"`,
+        content: `Cостоялось открытое первенство г. Краснодара по Тхэквондо Ц.Б.И. "БУДОКАН".  
+Спортсмены Ассоциации Му Дук Кван выступили великолепно. 
+
+**Черникова Ангелина** заняла **1-е место**, закончив поединок в 1-ом раунде досрочно, в виду явного приемущества со счетом **14:0**.  
+**Шахрай Даниил** занял **2-е место**, закончив первый поединок в 1-ом раунде досрочно, в виду явного приемущества со счетом **7:3**.  
+**Веселов Виктор** занял **3-е место**.  
+
+Все они были награждены почетными грамотами и медалями директором Ц.Б.И. "БУДОКАН". 
+
+Руководство Ассоциации приняло решение наградить почетными грамотами за лучшую технику Черникову Ангелину и Шахрая Даниила.  
+Так же Черниковой Ангелине был вручен очередной сине-красный пояс.`,
     },
     {
         id: 38,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2010-10-30',
         displayDate: '30 октября 2010 г.',
         content: '30 октября 2010 г. руководством Ассоциации Му Дук Кван и клубом боевых исскуств "Триединство" была проведена товарищеская вcтреча, на которой спортсмены обоих команд повышали свой уровень подготовки, отрабатывая практически и в бою, полученные на тренировках знания.',
     },
     {
         id: 37,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2010-10-12',
         displayDate: '12 октября 2010 г.',
         content: '12 октября 2010 г. на телеканале НТК спортсмены Ассоциации были приглашены на съемку, где выступали с показательными выступлениями, демонстрируя свое мастерство и спортивные достижения. Эта съемка была преурочена к 20 летнему юбилею создания Ассоциации Му Дук Кван. Съемочная группа НТК пожелала руководству и спортсменам Ассоциации успехов и дальнейшего продвижения своего вида спорта на Кубани.',
     },
     {
         id: 36,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2010-09-25',
         displayDate: '25 сентября 2010 г.',
         content: '25 сентября 2010 г. в жилом микрорайоне по ул. Карякина был проведен праздник спорта, на который были приглашены спортсмены Ассоциации Му Дук Кван. Они провели показательные выступления, поражая своим мастерством не только жителей микрорайона, но и присутствующего на празднике депутата городской Думы Альшеву Наталью Ивановну.',
     },
     {
         id: 35,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2010-09-01',
         displayDate: 'сентябрь 2010 г',
         content: 'В сентябрьском 2010 г. выпуске журнала Администрации Краснодарского края "Кубанское качество", к 20 летниму юбилею создания Ассоциации Му Дук Кван, была напечатана статья о работе Ассоциации, которая нашла много положительных отзывов, как в руководящих органах, так и у жителей Кубани, которые пожелали дальнейших успехов и процветания Ассоциации.',
     },
     {
         id: 34,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2010-06-13',
         displayDate: '13 июня 2010 г.',
         content: '13 июня 2010 г. руководством Ассоциации совместно с руководством клуба боевых исскуств "Триединство" была проведена товарищеская встреча, на которой были проведены поединки между спортсменами Ассоциации МУ ДУК КВАН и клуба боевых исскуств "Триединство", которая проходила в спортивном зале СОШ № 71.',
     },
     {
         id: 33,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2010-06-12',
         displayDate: '12 июня 2010 г.',
         details: `В аттестации приняли участие 20 спортсменов и получили следующие пояса:
@@ -2002,14 +2029,14 @@ const newsData = [
     },
     {
         id: 32,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2010-03-06',
         displayDate: '6 марта 2010 г.',
         content: '6 марта 2010 г. в г. Краснодаре, во дворце спорта "Спартак", прошел чемпионат Краснодарского края по Тхэквондо В.Т.Ф. Его проводила Краснодарская краевая Ассоциация Тхэквондо В.Т.Ф., в котором приняли участие сильнейшие спортсмены Краснодарского края. В чемпионате участвовали три спортсмена Ассоциации МУ ДУК КВАН: Рогожинский Олег стал победителем чемпионата и занял первое место в весовой категории до 87 кг, Кирогосян Тигран занял третье место в весовой категории до 74 кг. Они были награждены почетными грамотами и медалями.',
     },
     {
         id: 31,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2010-02-20',
         displayDate: '20 февраля 2010 г.',
         details: `Были аттестованы 22 спортсмена и присвоены пояса:
@@ -2024,14 +2051,14 @@ const newsData = [
     },
     {
         id: 30,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2009-12-20',
         displayDate: '20 декабря 2009 г.',
         content: '20 декабря 2009 г. состоялся чемпионат по Тхэквондо Ассоциации МУ ДУК КВАН, который проходил по адресу: ул. Карякина, 8, в СОШ № 71. В чемпионате приняли участие более 50 спортсменов Ассоциации МУ ДУК КВАН. Победителям и участникам были вручены грамоты, медали и памятные подарки.',
     },
     {
         id: 29,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2009-11-28',
         displayDate: '28 ноября 2009 г.',
         details: `Были присвоены пояса:
@@ -2043,7 +2070,7 @@ const newsData = [
 
     {
         id: 28,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2009-06-13',
         displayDate: '13 июня 2009 г.',
         details: `Были аттестованы:
@@ -2054,14 +2081,14 @@ const newsData = [
     },
     {
         id: 27,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2009-04-12',
         displayDate: '12 апреля 2009 г.',
         content: '12 апреля 2009 г. состоялся чемпионат Ассоциации Тхэквондо Му Дук Кван, в котором приняли участие более 60 спортсменов. Все участники чемпионата были награждены грамотами, медалями и памятными подарками.',
     },
     {
         id: 26,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2009-02-28',
         displayDate: '8 февраля 2009 г.',
         details: 'Синий пояс получили - 1 чел., зелёно-синий - 2 чел., жёлто-зелёный - 2 чел., жёлтый - 6 чел., бело-жёлтый - 19 чел.',
@@ -2069,24 +2096,24 @@ const newsData = [
     },
     {
         id: 25,
-        category: 'festival',
+               category: categories.festival,
         date: '2009-01-24',
         displayDate: '24 января 2009 г.',
         content: 'Спортсмены Ассоциации Му Дук Кван приняли участие в 3-м фестивале боевых искусств Прикубанского внутригородского округа г. Краснодара. Все участники были награждены грамотами и памятными подарками.',
     },
     {
         id: 24,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2008-12-21',
         displayDate: '21 декабря 2008 г.',
         content: 'Краснодарская Ассоциация тхэквондо Му Дук Кван, при поддержке администрации муниципального образования г. Краснодар, провела чемпионат Ассоциации по тхэквондо. В нем приняли участие более 60 спортсменов из СОШ № 71 и НОШ № 94. Все участники чемпионата были награждены почётными грамотами, медалями и памятными подарками.',
     },
     {
         id: 23,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2008-11-29',
         displayDate: '29 ноября 2008 г.',
-        details: `Результаты атесттации:
+        details: `Результаты аттестации:
         Красный пояс получил 1 человек
         Сине-красный пояс получил 1 человек
         Синие пояса получили 4 человека
@@ -2095,54 +2122,72 @@ const newsData = [
         Желто-зеленый пояс получили 6 человек
         Желтый пояс получили 10 человек
         Бело-желтый пояс получили 8 человек`,
-        content: 'Ассоциация Му Дук Кван провела квалификационную аттестацию спортсменовов, которую проводили: президент Ассоциации Герасименко И.В., вице-президент Ассоциации Ладыгин В.В. инструктор Ассоциации Малыхин С.В.'
+        content: 'В Ассоциации Му Дук Кван состоялась квалификационная аттестация спортсменов, которую проводили: президент Ассоциации Герасименко И.В., вице-президент Ассоциации Ладыгин В.В. инструктор Ассоциации Малыхин С.В.'
     },
     {
         id: 22,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2008-06-16',
         displayDate: '6 июня 2008 г.',
         details: 'Синий пояс получил 1 человек. Зелёно-синий пояс получили 6 человек. Зелёный пояс получили 5 человек. Жёлто-зелёный пояс получили 9 человек. Жёлтый пояс получили 6 человек. Бело-жёлтый пояс получили 5 человек.',
-        content: 'Проведена квалификационная аттестация спортсменов ассоциации Му Дук Кван, в которой приняли участие 32 человека. Аттестацию проводили: президент Ассоциации Герасимено И.В. и вице-президент Ладыгин В.В.',
+        content: `Проведена квалификационная аттестация спортсменов ассоциации Му Дук Кван, в которой приняли участие 32 человека. Аттестацию проводили: президент Ассоциации Герасимено И.В. и вице-президент Ладыгин В.В.`,
     },
     {
         id: 21,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2008-03-16',
         displayDate: '16 марта 2008 г.',
-        content: 'При поддержке администрации муниципального образования г. Краснодар, был проведён третий чемпионат Ассоциации МУ ДУК КВАН. Чемпионат проходил в СОШ № 71 г. Краснодара. Спортсмены Ассоциации заняли: 14 первых, 12 вторых и 23 третьих места. Все участники чемпионата были награждены грамотами, медалями и памятными подарками.',
+        content: `При поддержке администрации муниципального образования г. Краснодар, был проведён третий чемпионат Ассоциации МУ ДУК КВАН. 
+        
+Чемпионат проходил в СОШ № 71 г. Краснодара. 
+
+Спортсмены Ассоциации заняли: 14 первых, 12 вторых и 23 третьих места. Все участники чемпионата были награждены грамотами, медалями и памятными подарками.`,
     },
     {
         id: 20,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2008-02-23',
         displayDate: '23 февраля 2008 г.',
-        content: 'Проведена квалификационная аттестация городской ассоциации Му Дук Кван. Аттестацию провели - президент Ассоциации Герасименко И.В., вице-президент Ладыгин В.В. и представитель городской администрации, вице-президент Ассоциации Симонов М.П. Симонов М.П. от лица городской администрации вручил памятные подарки участникам аттестации. Троим участникам аттестации - были присвоены синие, четверым зелёные, двоим жёлто-зелёные, четверым жёлтые и двенадцати бело-жёлтые пояса.',
+        content: `Проведена квалификационная аттестация городской ассоциации Му Дук Кван.
+    
+Аттестацию провели - президент Ассоциации Герасименко И.В., вице-президент Ладыгин В.В. и представитель городской администрации, вице-президент Ассоциации Симонов М.П. 
+    
+Симонов М.П. от лица городской администрации вручил памятные подарки участникам аттестации. 
+    
+Троим участникам аттестации - были присвоены синие, четверым зелёные, двоим жёлто-зелёные, четверым жёлтые и двенадцати бело-жёлтые пояса.`,
     },
     {
         id: 19,
-        category: 'festival',
+               category: categories.festival,
         date: '2008-01-26',
         displayDate: '6 января 2008 г.',
         content: 'Ученики Ассоциации учавствовали во 2-м фестивале боевых искусств Прикубанского округа, который проходил в СОШ № 93.',
     },
     {
         id: 18,
-        category: 'аттестация',
+        category: categories.certification,
         date: '2007-11-24',
         displayDate: '24 ноября 2007 г.',
-        content: 'Руководством Ассоциации Му Дук Кван в г. Краснодар был приглашен Северо Корейский мастер направления Гёк Сул и Му Дук Кван ПАН МЕН ДО, обладатель VI дана, бывший инструктор армейского спец. подразделения К.Н.Д.Р., который провел в Краснодаре 2 дня. Мастер провел семинар, на котором рассказал историю боевых направлений. Пути совершенствования и воссоединения силы духа и тела, духовное совершенствование война. Провел аттестацию спортсменов Ассоциации. Мастером был аттестован президент Ассоциации Му Дук Кван Герасименко И.В., присвоив ему IV дан; вице президент по спортивно организационной работе Ладыгин В.В., присвоив ему II дан. Вручил Диплом, за вклад в развитие и продвижение на Кубани Тхэквондо, вице-президенту Ассоциации по связям с общественностью, зам. директора департамента экономического развития администрации г. Краснодара, Симонову Н.П. Так же аттестовал более 50 человек, спортсменов Ассоциации, на цветные пояса.',
+        cover: '/images/photoAlbums/24.11.07/cover-24.11.07.jpeg',
+        content: `Руководством Ассоциации Му Дук Кван в г. Краснодар был приглашен Северо Корейский мастер направления Гёк Сул и Му Дук Кван, обладатель VI дана, бывший инструктор армейского спец. подразделения К.Н.Д.Р. - ПАН МЕН ДО.
+
+Мастер находился в Краснодаре 2 дня. Он провел семинар, на котором рассказал историю боевых направлений. Пути совершенствования и воссоединения силы духа и тела, духовное совершенствование воина. 
+    
+ПАН МЕН ДО аттестовал президента Ассоциации Му Дук Кван Герасименко И.В., присвоив ему IV дан, а так же вице президента по спортивно-организационной работе Ладыгина В.В., присвоив ему II дан. 
+
+Вручил Диплом за вклад в развитие и продвижение на Кубани Тхэквондо вице-президенту Ассоциации по связям с общественностью, зам. директора департамента экономического развития администрации г. Краснодара Симонову Н.П. 
+А так же аттестовал более 50 человек, спортсменов Ассоциации, на цветные пояса.`,
     },
     {
         id: 17,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2007-03-01',
         displayDate: '2007 год',
-        content: 'При воддержке департамента экономического развития, были проведены 2 чемпионата Ассоциации МУ ДУК КВАН по Тхэквондо, в которых учавствовало более 50 человек. Участники чемпионата были награждены грамотами и памятными подарками.',
+        content: 'При поддержке департамента экономического развития, были проведены 2 чемпионата Ассоциации МУ ДУК КВАН по Тхэквондо, в которых учавствовало более 50 человек. Участники чемпионата были награждены грамотами и памятными подарками.',
     },
     {
         id: 16,
-        category: 'жизнь ассоциации',
+               category: categories.other,
         date: '2007-02-01',
         displayDate: '2007 год',
         content: 'Выпущено методическое пособие "Методика тренировок искусству Тхэквондо (направление МУ ДУК КВАН), от белого пояса к черному". Автор пособия президент Ассоциации Герасименко И.В.',
@@ -2150,78 +2195,78 @@ const newsData = [
 
     {
         id: 15,
-        category: 'festival',
+               category: categories.festival,
         date: '2007-01-01',
         displayDate: '2007 год',
         content: 'Краснодарская Ассоциация, участвовала в первом фестивале боевых искусств Прикубанского округа г. Краснодара. Все участники были награждены грамотами и ценными подарками. Спортсмены Ассоциации участвовали в открытом чемпионате по тхэквондо клуба «Виктория», в котором принимали участие команды Краснодарского края. Спортсмены Ассоциации заняли I место – 4 чел., II место – 6 чел., III место - 2 чел. Победители были награждены грамотами и медалями.',
     },
     {
         id: 14,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2006-01-01',
         displayDate: '2006 год',
         content: 'Краснодарская Ассоциация, при поддержке мэрии г. Краснодара, провела чемпионат Ассоциации тхэквондо Му Дук Кван. Все участники были награждены грамотами и памятными подарками.',
     },
     {
         id: 13,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2005-01-01',
         displayDate: '2005 год',
         content: 'Краснодарская Ассоциация принимала участие в открытом чемпионате клуба «Виктория» по тхэквондо среди команд Краснодарского края. Спортсмены Ассоциации заняли I место – 8 чел., II место – 3 чел., III место – 1 чел. Победители были награждены грамотами и медалями.',
     },
     {
         id: 12,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2004-01-01',
         displayDate: '2004 год',
         content: 'Краснодарская Ассоциация принимала участие в матчевой встрече, среди команд Краснодарского края. И провела чемпионат Ассоциации тхэквондо Му Дук Кван. В чемпионате принимали участие более 50 человек. Все участники были награждены грамотами и памятными подарками.',
     },
     {
         id: 11,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2003-01-01',
         displayDate: '2003 год',
         content: 'Краснодарская Ассоциация провела чемпионат Ассоциации тхэквондо Му Дук Кван, который проходил в г. Краснодаре. В чемпионате принимали участие 50 чел. Все участники чемпионата были награждены грамотами и памятными подарками.',
     },
     {
         id: 10,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2002-01-01',
         displayDate: '2002 год',
         content: 'Cпортсмены Ассоциации Му Дук Кван участвовали в краевых отборочных соревнованиях по тхэквондо, которые проходили в г. Усть-Лабинске Краснодарского края. Спортсмены Ассоциации заняли: I место – 2 чел., II место - 1 чел., III место – 3 чел.. Все участники были награждены почётными грамотами.',
     },
     {
         id: 9,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2001-02-01',
         displayDate: '2001 год',
         content: 'Cпортсмены Ассоциации Му Дук Кван участвовали в открытом первенстве Краснодарского края по тхэквондо (WTF) которое проходило в ст. Фастовецкой, Тихорецкого района Краснодарского края. Спортсмены Ассоциации заняли: I место – 3 чел., II ме-сто – 2 чел., III место – 1 чел. Все участники были награждены почётными грамотами и отмечены в прессе и на телевидении.',
     },
     {
         id: 8,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2001-01-01',
         displayDate: '2001 год',
         details: 'Спортсмены Ассоциации заняли: I место – 5 чел., II место – 2 чел.',
-        content: 'Cпортсмены Ассоциации Му Дук Кван участвовали в открытом чемпионате рес-публики Адыгея, который проходил в п. Тульском Майкопского района.',
+        content: 'Cпортсмены Ассоциации Му Дук Кван участвовали в открытом чемпионате республики Адыгея, который проходил в п. Тульском Майкопского района.',
     },
     {
         id: 7,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '2000-01-01',
         displayDate: '2000 год',
         content: 'Краснодарская Ассоциация провела чемпионат Ассоциации тхэквондо Му Дук Кван, который проходил в г. Краснодаре. Все участники были награждены грамотами и ценными подарками.',
     },
     {
         id: 6,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '1998-01-01',
         displayDate: '1998 год',
         content: 'Краснодарская Ассоциация провела чемпионат Ассоциации тхэквондо Му Дук Кван, который проходил в г. Краснодаре. Все участники были награждены грамотами и ценными подарками.',
     },
     {
         id: 5,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '1996-01-01',
         displayDate: '1996 год',
         content: 'Краснодарская Ассоциация провела чемпионат Ассоциации тхэквондо Му Дук Кван, который проходил в ст. Каневской Краснодарского края. В чемпионате принимали участие более 150 спортсменов. Все участники были награждены грамотами и призами.',
@@ -2229,14 +2274,14 @@ const newsData = [
 
     {
         id: 4,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '1993-02-01',
         displayDate: '1993 год',
         content: 'Краснодарская Ассоциация провела чемпионат Ассоциации тхэквондо Му Дук Кван, который прошёл в ст. Каневской Краснодарского края. В чемпионате принимали участие более 200 спортсменов. Все участники чемпионата были награждены грамотами и призами.',
     },
     {
         id: 3,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '1993-01-01',
         displayDate: '1993 год',
         details: 'Наши спортсмены заняли: I место - 2 человека, III место – 2 человека.',
@@ -2244,7 +2289,7 @@ const newsData = [
     },
     {
         id: 2,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '1992-01-01',
         displayDate: '1992 год',
         content: `Cпортсмены Ассоциации участвовали в чемпионате России в г.Одессе.
@@ -2253,7 +2298,7 @@ I место заняли - 2 человека, II место – 1 челове
     },
     {
         id: 1,
-        category: 'cоревнования',
+        category: categories.championship,
         date: '1990-01-01',
         displayDate: '1991 год',
         content: `Наша Ассоциация, при поддержке городских властей, провела первый чемпионат Краснодарского края по тхэквондо (WTF), в котором приняли участие все секции и клубы края.
