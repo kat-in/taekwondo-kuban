@@ -10,7 +10,7 @@ const Navigation = () => {
         <li><a href="/video">Видео</a></li>
         <li><a href="/beginners">Новичкам</a></li>
         <li><a href="/news">Новости</a></li>
-        <li><a href="/master-visit">Приезд мастера</a></li>
+        <li><a href="/news/18">Приезд мастера</a></li>
       </ul>
     )
 }

@@ -20,7 +20,7 @@ const NewsPage = () => {
                 {cover}
 
                 <div className={newsContentWidth}>
-                    <div>{item.category} </div>
+                    <div><h3>{item.title}</h3></div>
                     <div className="news_date">{item.displayDate} </div>
                     <div className="news_card_text">
                         <Markdown>{item.content}</Markdown>
