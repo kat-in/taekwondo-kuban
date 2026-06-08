@@ -7,6 +7,142 @@ const videoData = [
         //     title: ,
         // },
 
+         // {
+        //     newsId: ,
+        //     id: 2,
+        //     date: ,
+        //     videoId: ,
+        //     title: ,
+        // },
+
+         // {
+        //     newsId: ,
+        //     id: 2,
+        //     date: ,
+        //     videoId: ,
+        //     title: ,
+        // },
+
+         // {
+        //     newsId: ,
+        //     id: 2,
+        //     date: ,
+        //     videoId: ,
+        //     title: ,
+        // },
+
+         // {
+        //     newsId: ,
+        //     id: 2,
+        //     date: ,
+        //     videoId: ,
+        //     title: ,
+        // },
+
+         // {
+        //     newsId: ,
+        //     id: 2,
+        //     date: ,
+        //     videoId: ,
+        //     title: ,
+        // },
+
+         {
+            newsId: 94,
+            id: 33,
+            date: '2016-12-18',
+            videoId: 'efc04559ebc0992377ea6d2e85a6e22d',
+            title: 'Открытый чемпионат Ассоциации по Тхэквондо ',
+        },
+
+         {
+            newsId: 93,
+            id: 32,
+            date: '2016-11-26',
+            videoId: '153170f3bbaba35a702ae6a9d237879d',
+            title: 'Аттестация спортсменов Ассоциации',
+        },
+
+         {
+            newsId: 91,
+            id: 31,
+            date: '2016-06-11',
+            videoId: '7138e2290656f9ca7972d9deb46f26e6',
+            title: 'Аттестация спортсменов Ассоциации ',
+        },
+
+         {
+            newsId: 90,
+            id: 30,
+            date: '2016-04-10',
+            videoId: '78bd88114be5c29e5d1d6509fdf4c349',
+            title: 'Открытый чемпионат Ассоциации по Тхэквондо ',
+        },
+
+         {
+            newsId: 89,
+            id: 29,
+            date: '2016-02-27',
+            videoId: '90a9e67bf6d452c9068a793fd3d62a42',
+            title: 'Аттестация спортсменов Ассоциации ',
+        },
+
+         {
+            newsId: 88,
+            id: 28,
+            date: '2016-02-20',
+            videoId: 'd12979bbab653ce8c3ef6583c2aebaf0',
+            title: 'Фестиваль боевых искусств',
+        },
+
+         {
+            newsId: 87,
+            id: 27,
+            date: '2015-12-20',
+            videoId: 'eba0f57f96f116accbd0e7e20e3daca2',
+            title: 'Открытый чемпионат Ассоциации по Тхэквондо',
+        },
+
+         {
+            newsId: 85,
+            id: 26,
+            date: '2015-11-28',
+            videoId: 'd9331da53ef5e857b2c3bcaa6781ae3c',
+            title: 'Аттестация спортсменов Ассоциации ',
+        },
+
+         {
+            newsId: 82,
+            id: 25,
+            date: '2015-06-13',
+            videoId: '89859aa8e343bfa651efc03efe31c031',
+            title: 'Аттестация спортсменов Ассоциации',
+        },
+
+         {
+            newsId: 81,
+            id: 24,
+            date: '2015-04-19',
+            videoId: 'fb569e02c4f01b35b0b1648d895cbdd6',
+            title: 'Открытый чемпионат Ассоциации по Тхэквондо',
+        },
+
+         {
+            newsId: 80,
+            id: 23,
+            date: '2015-02-28',
+            videoId: '454923e7193be784cea08e73ee756ca2',
+            title: 'Аттестация спортсменов Ассоциации',
+        },
+
+         {
+            newsId: 79,
+            id: 22,
+            date: '2015-02-14',
+            videoId: 'e450815ccd70af52b470a34772f5ce6f',
+            title: 'Фестиваль боевых искусств',
+        },
+
          {
             newsId: 77,
             id: 21,

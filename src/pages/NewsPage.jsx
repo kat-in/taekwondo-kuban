@@ -1,15 +1,19 @@
 import newsData from "../data/newsData"
 import videoData from "../data/videoData"
+import albumsData from "../data/albumsData"
 import Markdown from "react-markdown"
-import RutubeVideo from "../components/RutubeVideo"
+
 
 const NewsPage = () => {
     const sortedNews = [...newsData].sort((a, b) => b.date.localeCompare(a.date))
     const news = sortedNews.map((item) => {
-        const imgCover = item.cover && <div className='news_card_cover'><img src={item.cover} /></div>
-        const video = videoData.find((video) => item.id === video.newsId)
-        const thumbnailUrl = video && `https://rutube.ru/api/video/${video.videoId}/thumbnail/?redirect=1`
-        const videoCover = video && <div className='news_card_cover'><img src={thumbnailUrl} alt={video.title} /></div>
+        const hasAlbum = albumsData.find((album) => album.newsId === item.id)
+        const imgCover = hasAlbum && <div className='news_card_cover'><img src={hasAlbum.photos[0]} /></div>
+
+        const hasVideo = videoData.find((video) => item.id === video.newsId)
+        const thumbnailUrl = hasVideo && `https://rutube.ru/api/video/${hasVideo.videoId}/thumbnail/?redirect=1`
+        const videoCover = hasVideo && <div className='news_card_cover'><img src={thumbnailUrl} alt={hasVideo.title} /></div>
+
         const cover = imgCover || videoCover || null
 
         const newsContentWidth = cover ? "news_content" : 'news_short_content'
