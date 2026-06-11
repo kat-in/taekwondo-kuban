@@ -17,7 +17,7 @@ const NewsDetailPage = () => {
     const album = albumsData.find((album) => album.newsId === Number(newsId))
     const videos = videoData.filter((video) => video.newsId === newsId)
     const images = album && album.photos.map((photo) => <div key={photo}><img src={photo} /></div>)
-    const video = videos && videos.map((item) => <div className='video_container' key={item.id} ><h4>{item.title}</h4><RutubeVideo videoId={item.videoId} /></div>)
+    const video = videos && videos.map((item) => <div className='video_container' key={item.id} ><RutubeVideo videoId={item.videoId} /></div>)
 
 
     return (
