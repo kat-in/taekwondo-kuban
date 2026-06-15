@@ -39,7 +39,7 @@ const albumsData = [
         newsId: 173,
         id: 85,
         title: 'Аттестация спортсменов Ассоциации',
-        date: '2026-01-26',
+        date: '2026-01-25',
         photos: getPhotoUrl('25.01.26', 5),
     },
 
@@ -149,7 +149,7 @@ const albumsData = [
     {
         newsId: 149,
         id: 71,
-        title: 'Экскурсия в ОМОН ГУ Росгвардии',
+        title: 'Квалификационная аттестация спортсменов',
         date: '2023-11-26',
         photos: getPhotoUrl('26.11.23', 5),
     },

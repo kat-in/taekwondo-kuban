@@ -17,7 +17,7 @@ const Hero = () => {
       <Button handleClick={goToBeginners}>Новичкам</Button>
     </div>
     <div className='hero__img__section'>
-    <img src='../../public/hero_img.png' />
+    <img src='/hero_img.png' />
     <span className='rotated_text'>35 лет успеха!</span>
      </div>
     </div>
