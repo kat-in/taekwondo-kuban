@@ -8,6 +8,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 app.use(cors())
+app.use('/uploads', express.static('uploads'));
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -23,6 +24,18 @@ app.get('/api/news', async (req, res) => {
     }
 });
 
+app.get('/api/news/:id', async (req, res) => {
+    try {
+        const newsId = parseInt(req.params.id);
+        const data = await fs.readFile('./data/news.json', 'utf8')
+        const news = JSON.parse(data).find((item) => item.id === newsId)
+        res.json(news);
+    } catch (parseErr) {
+        res.status(500).send(parseErr.message);
+    }
+});
+
+
 app.get('/api/albums', async (req, res) => {
     try {
         const data = await fs.readFile('./data/albums.json', 'utf8')
@@ -37,8 +50,11 @@ app.get('/api/albums/:id', async (req, res) => {
     try {
         const newsId = parseInt(req.params.id);
         const data = await fs.readFile('./data/albums.json', 'utf8')
-        const newsAlbum = JSON.parse(data).filter((album) => album.newsId === newsId)
-        res.json(newsAlbum);
+        const newsAlbum = JSON.parse(data).find((album) => album.newsId === newsId)
+        if (!newsAlbum) {
+            return res.status(404).json({ error: 'Альбом не найден', data: null });
+        }
+         res.json(newsAlbum);
     } catch (parseErr) {
         res.status(500).send(parseErr.message);
     }
