@@ -150,7 +150,8 @@ p {
   justify-content: space-around;
   text-align: left;
   max-width: 600px;
-  gap: 20px;
+  gap: 10px;
+
 }
 
 .hero__img__section {
@@ -418,7 +419,7 @@ h2 {
 }
 
 .news__detail__images img {
-  max-width: 300px;
+  max-height: 300px;
 
 }
 
@@ -635,3 +636,18 @@ h2 {
 }
 
 /* VIDEO END */
+
+/*LOGIN START*/
+
+.login_container {
+  margin: auto;
+  gap:20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  border-radius: 20px;
+  background-color: #f5f5f5
+}
+
+/*LOGIN END*/

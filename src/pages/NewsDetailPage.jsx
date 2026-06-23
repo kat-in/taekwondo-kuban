@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router";
+import { useState, useEffect } from "react";
 import Markdown from 'react-markdown';
 import RutubeVideo from "../components/RutubeVideo";
-import { useState, useEffect } from "react";
+
 
 
 const NewsDetailPage = () => {
@@ -33,9 +34,9 @@ const NewsDetailPage = () => {
                     setCurrentAlbum(null)
                 }
                 else {
-                const currentAlbumData = await resAlbum.json()
-                setCurrentAlbum(currentAlbumData)
-            }
+                    const currentAlbumData = await resAlbum.json()
+                    setCurrentAlbum(currentAlbumData)
+                }
             }
             catch (er) {
                 console.log(er.message)
@@ -62,7 +63,6 @@ const NewsDetailPage = () => {
     }, [newsId])
 
     const image = currentNews?.image && <div className="news__detail__img_container"><img src={currentNews.image.url} /><div>{currentNews.image.description}</div></div>
-    const details = currentNews?.details && <Markdown>{currentNews.details}</Markdown>
     const images = currentAlbum?.photos && currentAlbum?.photos.map((photo) => <div key={photo}><img src={photo} /></div>)
     const video = currentVideo && currentVideo.map((item) => <div className='video_container' key={item.id} ><RutubeVideo videoId={item.videoId} /></div>)
 
@@ -73,14 +73,12 @@ const NewsDetailPage = () => {
                 <div>{currentNews?.displayDate}</div>
                 <div><h2>{currentNews?.title}</h2></div>
                 <Markdown>{currentNews?.content}</Markdown>
-                {details}
+                <Markdown>{currentNews?.details}</Markdown>
                 {image}
                 {video}
                 <div className="news__detail__images">{images}</div>
                 <button onClick={() => navigate(-1)}>Назад</button>
             </div>
-
-
         </>
     )
 
