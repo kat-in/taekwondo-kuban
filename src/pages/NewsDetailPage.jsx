@@ -68,10 +68,10 @@ const NewsDetailPage = () => {
 
 
     return (
-        <>
+        <main>
             <div className="news__detail__section">
-                <div>{currentNews?.displayDate}</div>
                 <div><h2>{currentNews?.title}</h2></div>
+                <h3>{currentNews?.displayDate}</h3>
                 <Markdown>{currentNews?.content}</Markdown>
                 <Markdown>{currentNews?.details}</Markdown>
                 {image}
@@ -79,7 +79,7 @@ const NewsDetailPage = () => {
                 <div className="news__detail__images">{images}</div>
                 <button onClick={() => navigate(-1)}>Назад</button>
             </div>
-        </>
+        </main>
     )
 
 }
