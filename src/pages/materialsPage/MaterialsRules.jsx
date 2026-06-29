@@ -1,23 +1,31 @@
+import rulesData from "../../data/materialsData/rulesData";
+
 const MaterialsRules = () => {
+    const { fightArea, handStrikes, legStrikes, illegal, victoryOptions } = rulesData
+    const victory = victoryOptions.content.map((item, i) => <li key={i}>{item}</li>)
+
     return (
         <>
             <h1>Правила поединка спортсменов направления МУ ДУК КВАН</h1>
-            Зона поединка должна иметь размеры 12 х 12 метров.
-
-            УДАРЫ РУКАМИ разрешены под любым углом в голову, корпус, спину.
-
-            УДАРЫ НОГАМИ разрешены под любым углом в голову, затылок, корпус, спину, по ногам.
-
-            ЗАПРЕЩЕННЫЕ УДАРЫ: В горло, глаза, пах; удары коленями и локтями.
-
-            ПОБЕДА В ПОЕДИНКЕ:
-
-            1. Победа нокаутом;
-            2. Победа в виду явного преимущества;
-            3. Победа по счёту;
-            4. Победа из-за не явки;
-            5. Победа по дисквалификации;
-            6. Победа в следствии мер взыскания.
+            <div className="materials__line"></div>
+            <div className="rules">
+                {fightArea}
+                <div className="rules__section">
+                    <h3>{handStrikes.title}</h3>
+                    {handStrikes.content}
+                </div>
+                <div className="rules__section">
+                    <h3>{legStrikes.title}</h3> {legStrikes.content}
+                </div>
+                <div className="rules__section">
+                    <h3>{illegal.title}</h3> {illegal.content}
+                </div>
+                <div className="rules__victory">
+                    <h3>{victoryOptions.title}</h3>
+                    <ol> {victory}</ol>
+                   
+                </div>
+            </div>
         </>
     );
 }

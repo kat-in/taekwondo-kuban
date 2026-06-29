@@ -749,14 +749,14 @@ p {
 }
 
 .materials__nav-link:hover {
-   background-color: #222;
-  color:#fff;
+  background-color: #222;
+  color: #fff;
   transition: all 0.2s ease;
 }
 
 .materials__nav-link_active {
   background-color: #222;
-  color:#fff;
+  color: #fff;
   transition: all 0.2s ease;
 }
 
@@ -1041,3 +1041,36 @@ p {
 }
 
 /*MATERIALS ATTESTATION END*/
+
+/*MATERIALS RULES START*/
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
+  padding: 0 30px;
+}
+
+.rules__section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rules__victory {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.rules__victory ol {
+  padding: 0 15px;
+}
+
+.rules__victory li {
+  padding: 0 10px;
+  text-align: left;
+}
+
+/*MATERIALS RULES END*/
