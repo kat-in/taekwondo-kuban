@@ -7,14 +7,14 @@ import PartnersSection from '../components/PartnersSection'
 
 const HomePage = () => {
     return ( 
-    <> 
+    <>
     <Hero />
     <AboutSection/>
     <PresidentSection/>
     <AboutTaekwandoSection/>
     <LastNewsSection/>
     <PartnersSection/>
-    </>
+  </>
     )
 }
 

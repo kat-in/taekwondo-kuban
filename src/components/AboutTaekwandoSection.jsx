@@ -1,25 +1,21 @@
 import Markdown from 'react-markdown'
-import PageSection from './PageSection'
+import aboutTaekwandoData from '../data/aboutTaekwandoData'
 
 const AboutTaekwandoSection = () => {
+    const { title, p1, p2, p3 } = aboutTaekwandoData
+
     return (
-        <PageSection title='О тхэквандо' theme='dark'>
-            <div className='taekwando_block'>
-                <div>
-                    <span>МУ ДУК КВАН - одно из самых древних и боевых направлений в тхэквондо.</span>
-                    <span>В Корее в средние века личную охрану для императора готовили именно мастера стиля МУ ДУК КВАН.</span>
+        <section className='about-taekwando'>
+            <div className='about-taekwando__section'>
+                <div className='about-taekwando__content'>
+                    <Markdown>{p1}</Markdown>
+                    <Markdown>{p2}</Markdown>
+                    <Markdown>{p3}</Markdown>
                 </div>
-                <div><Markdown>`Корейское боевое искусство, буквальный перевод - "путь ноги и кулака". 
-Всемирная Федерация Тхэквондо (В.Ф.Т.) была создана в 1955 г. Руководимая Ким Уньемом, со штаб-квартирой в Академии Тхэквондо Куккивоне г. Сеул. 
-С 1994 г. Тхэквондо первое боевое искусство, которое стало Олимпийским видом спорта.
-Направление - МУ ДУК КВАН известно как самый боевой стиль Тхэквондо. Основатель этого стиля - мастер Хван Ки.
-В нашей стране существует несколько школ направления МУ ДУК КВАН.
-Одна из них Краснодарская городская Ассоциация Тхэквондо МУ ДУК КВАН.`
-</Markdown>
-                    </div>
-                </div>
-    
-        </PageSection>
+
+            </div>
+
+        </section>
     )
 }
 

@@ -1,29 +1,27 @@
-import PageSection from './PageSection'
+import aboutUsData from '../data/aboutUsData'
+import Markdown from 'react-markdown'
 
 const AboutSection = () => {
-    return (
-        <PageSection title='О нас' theme='light'>
-            <div className='about_block'>
-                <div className='about_text'>
-                    <div>Краснодарская городская Ассоциация Тхэквондо МУ ДУК КВАН была создана при поддержке мэрии г. Краснодара в 1990 г. и поддерживается властями города по настоящее время.</div>
-                    <div>Ученики Ассоциации неоднократно становились чемпионами России и края. Некоторые из них служат в ОМОНе, спецназе, участвовали в боевых действиях в горячих точках.</div>
-                    <div>ОСНОВНАЯ ДЕЯТЕЛЬНОСТЬ Ассоциации направлена на физическое и нравственное развитие подрастающего поколения.</div>
-                    <div>ОБУЧЕНИЕ ВКЛЮЧАЕТ В СЕБЯ не только владение техникой самообороны, способной защитить себя и близких, но и духовное совершенствование: развитие силы духа, уверенности в себе, стремления к победе, порядочности, готовности прийти на помощь слабому.</div>
-                    <div>УЧЕБНЫЙ ГОД составляет 12 месяцев. Тренировки проходят в выходные, праздничные и в дни школьных каникул.</div>
-                </div>
-                <div className='about_activity'>
-                    <h3>Деятельность Ассоциации</h3>
-                    <span>квалификационные аттестации спортсменов - 3 раза в год</span>
-                    <span>соревнования - 3 раза в год</span>
-                    <span>участие в городских и краевых турнирах</span>
-                    <span>тренировки с выездом на природу</span>
-                    <div>Первое место в рейтинге городских спортивных объединений
+    const { title, text, activity, pullquote } = aboutUsData
 
-Наша организация является профессиональной. Именно у нас Вы можете получить степень мастера,
-а также в дальнейшем получить трудоустройство в нашей Ассоциации.</div>
+    const aboutActivity = activity.map((item, i) => <div className="about__activity-item" key={i}><div className='about__activity-icon'></div><div className='about__activity-text'>{item}</div></div>)
+
+    return (
+        <section className='about'>
+            <div className='about__section'>
+                {/* <div className='about__title'><h2>{title}</h2></div> */}
+                <div className='about__content'>
+                    <div className='about__activity'>
+                        <h4>Первое место в рейтинге городских спортивных объединений</h4>
+                        <div className='about__activity-block'>{aboutActivity}</div>
+                    </div>
+                    <div className='about__text'>
+                        <Markdown>{text}</Markdown>
+                        <Markdown>{pullquote}</Markdown>
+                    </div>
                 </div>
             </div>
-        </PageSection>
+        </section>
 
     )
 }

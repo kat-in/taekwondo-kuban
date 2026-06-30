@@ -1,0 +1,147 @@
+@import '../abstracts/variables';
+
+.hero {
+    display: flex;
+    justify-content: center;
+    background-color: $dark;
+    color: $white;
+}
+
+.hero__container {
+    display: flex;
+    max-width: 1440px;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding: 0 40px 20px 40px;
+
+}
+
+
+.hero__title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    text-align: left;
+    max-width: 600px;
+    gap: 20px;
+
+    @media (max-width: 1260px) {
+        max-width: 500px;
+    }
+
+    @media (max-width: 925px) {
+        max-width: 400px;
+    }
+
+    @media (max-width: 875px) {
+        max-width: 600px;
+    }
+
+    @media (max-width: 620px) {
+        max-width: 400px;
+    }
+
+    & h1 {
+        display: flex;
+        font-weight: 250;
+        font-size: 5.5rem;
+        line-height: 6.8rem;
+
+        @media (max-width: 1260px) {
+            font-size: 4.5rem;
+            line-height: 5.5rem;
+        }
+
+        @media (max-width: 925px) {
+            font-size: 4rem;
+            line-height: 4.5rem;
+        }
+
+        @media (max-width: 875px) {
+            font-size: 5.5rem;
+            line-height: 6.8rem;
+        }
+
+        @media (max-width: 620px) {
+            font-size: 3.5rem;
+            line-height: 4rem;
+        }
+
+    }
+
+    & h2 {
+        font-weight: 300;
+
+        @media (max-width: 1260px) {
+            font-size: 22px;
+        }
+    }
+}
+
+.hero__img__section {
+    display: flex;
+    position: relative;
+    width: 600px;
+
+    @media (max-width: 1260px) {
+        width: 500px;
+    }
+
+    @media (max-width: 875px) {
+        display: none;
+    }
+
+
+    & img {
+        display: flex;
+        width: 500px;
+        height: 351px;
+
+        @media (max-width: 1260px) {
+            width: 400px;
+            height: 280px;
+        }
+    }
+}
+
+.rotated-text {
+    position: absolute;
+    top: 250px;
+    left: 280px;
+    display: inline-block;
+    font-family: "Corvetta";
+    font-size: 3rem;
+    color: $accent;
+    transform: rotate(-10deg);
+
+    @media (max-width: 1260px) {
+        top: 220px;
+        left: 200px;
+        font-size: 2rem;
+    }
+
+}
+
+.hero__button {
+    display: flex;
+    padding: 10px 40px;
+    border: none;
+    background-color: $accent;
+    color: $white;
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    text-transform: uppercase;
+    border-radius: 10px;
+}
+
+.hero__button:hover {
+    text-decoration: none;
+    color: $dark;
+    background-color: $white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}

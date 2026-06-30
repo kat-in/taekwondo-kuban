@@ -1,0 +1,74 @@
+@import '../../abstracts/variables';
+
+.president {
+    display: flex;
+    width: 100%;
+}
+
+.president__section {
+    display: grid;
+    grid-template-columns: 2fr 1fr 3fr;
+    place-items: center;
+    max-width: $max-width;
+    margin: 0 auto;
+    gap: 30px;
+    padding: 30px 20px;
+
+    @media (max-width: 1090px) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+     @media (max-width: 500px) {
+        padding: 0;
+        gap: 15px;
+         padding: 20px 15px;
+    }
+}
+
+.president__img-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.6rem;
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+.president__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.president__img {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background-image: url('/images/president/president.jpg');
+    background-size: cover;
+    background-position: -75px;
+
+    @media (max-width: 500px) {
+        width: 280px;
+        height: 280px;
+        background-position: -60px;
+    }
+}
+
+.president__text {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: justify;
+    gap: 10px;
+    align-items: start;
+
+    @media (max-width: 560px) {
+        padding: 20px 40px;
+    }
+}

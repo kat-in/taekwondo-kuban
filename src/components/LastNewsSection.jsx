@@ -1,49 +1,47 @@
 import PageSection from "./PageSection"
 import newsData from "../data/newsData"
+import albumsData from "../data/albumsData"
+import videoData from "../data/videoData"
 
 const LastNewsSection = () => {
     const sortedNews = [...newsData].sort((a, b) => b.date.localeCompare(a.date))
-    const last = sortedNews.slice(0, 1).map((item) => {
-        const cover = item.cover && <div className='lastnews_card_cover'><img src={item.cover} /></div>
-        return (
-            <article className="lastnews_card" id={item.id} key={item.id}>
-                {cover}
-                 <div className="lastnews_info">
-                    <div>{item.category} </div>
-                    <div>{item.displayDate}</div>
-                </div>
-                <div className="lastnews_card_text">{item.content}</div>
-                <div className="read_more">
-                    <a href={`/news/${item.id}`}>Читать полностью</a>
-                </div>
-            </article>
-        )
-    })
-    const lastNews = sortedNews.slice(1, 4).map((item) => {
+    const lastNews = sortedNews.slice(0, 4).map((item) => {
+
+        const hasAlbum = albumsData.find((album) => album.newsId === item.id)
+        const albumCover = hasAlbum && <div className='lastnews__cover'><img src={hasAlbum.photos[0]} /></div>
+
+        const newsImgCover = item.image && <div className='lastnews__cover'><img src={item.image.url} /></div>
+        const hasVideo = videoData.find((video) => item.id === video.newsId)
+        const thumbnailUrl = hasVideo && `https://rutube.ru/api/video/${hasVideo.videoId}/thumbnail/?redirect=1`
+        const videoCover = hasVideo && <div className='lastnews__cover'><img src={thumbnailUrl} alt={hasVideo.title} /></div>
+
+        const cover = newsImgCover || albumCover || videoCover || null
 
         return (
-            <article id={item.id} key={item.id}>
-                  <div className="lastnews_info">
-                    <div>{item.category} </div>
-                    <div>{item.displayDate}</div>
+            <div className="lastnews__card" id={item.id} key={item.id}>
+                <div className="lastnews__title">
+                    <div>{item.title} </div>
+
                 </div>
-                <div className="news_content">
-                    <div className="lastnews_card_text">{item.content}</div>
-                     <div className="read_more">
-                    <a href={`/news/${item.id}`}>Читать полностью</a>
+                <div className="lastnews__content">
+                    {cover}
+                    <div className="lastnews__text">{item.content}</div>
+                    <div className="lastnews__more">
+                        <a href={`/news/${item.id}`}>Читать полностью</a>
+                        {item.displayDate}
+                    </div>
                 </div>
-                </div>
-            </article>
+            </div>
         )
     })
 
     return (
-        <PageSection title='Последние новости' theme='light'>
-            <div className="lastnews_container">
-                {last}
-                <div className="lastnews_short">{lastNews}</div>
+        <section className="lastnews">
+            <div className="lastnews__section">
+                <h2>Последние новости</h2>
+                <div className="lastnews__container">{lastNews}</div>
             </div>
-        </PageSection>
+        </section>
     )
 }
 

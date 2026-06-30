@@ -1,18 +1,25 @@
-import PageSection from "./PageSection"
+import partnersData from "../data/partnersData"
+import Markdown from "react-markdown"
 
 const PartnersSection = () => {
+    const { offer, partners, title} = partnersData
+
+    const sponsors = partners.map((sponsor, i) =>{
+        return (
+           <span key={i}><Markdown>{sponsor}</Markdown></span>
+        )
+    })
+
     return (
-        <PageSection title='Шефствуют над Ассоциацией' theme='dark'>
-        <div>ОМОН ГУВД Краснодарского края;
-            Главное управление Федеральной службы войск национальной гвардии Российской Федерации по Краснодарскому краю;
-            депутат Законодательного Собрания Краснодарского края - Брагарник Игорь Самуилович;
-            депутаты городской Думы г. Краснодара:
-            - Бурлачко Максим Юрьевич
-            - Баранов Роман Михайлович
-            депутат муниципального образования Краснодарского края - Османов Осман Насирович.
+        <section className="partners">
+            <div className="partners__section">
+                <h2>{title}</h2>
+                <div className="partners__content">
+                 {sponsors}
+                </div>
+                <div className="partners__offer"><Markdown>{offer}</Markdown></div>
             </div>
-            <div>Предлагаем клубам и секциям тхэквондо города и края вступить в нашу Ассоциацию, что даст вам возможность работать под эгидой Ассоциации и учавствовать в наших чемпионатах и других мероприятиях.</div>
-        </PageSection>
+        </section>
     )
 }
 

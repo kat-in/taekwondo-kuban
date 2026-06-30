@@ -1,9 +1,8 @@
-import styles from './Button.module.css'
 import { useState } from 'react'
 
 const Button = ({children, handleClick}) => {
    return (
-    <button className={styles.heroButton} onClick={handleClick}>{children}</button>
+    <button className="hero__button" onClick={handleClick}>{children}</button>
 )
 }
 

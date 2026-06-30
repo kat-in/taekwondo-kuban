@@ -12,7 +12,6 @@ import NewsPage from './pages/NewsPage'
 import NotFound from './pages/NotFound'
 import AboutPage from './pages/AboutPage'
 import BeginnersPage from './pages/BeginnersPage'
-import MasterVisitPage from './pages/MaterVisitPage'
 import NewsDetailPage from './pages/NewsDetailPage'
 import LoginPage from './pages/LoginPage'
 import AdminLayout from './pages/adminPanelPage/AdminLayout'
@@ -49,7 +48,6 @@ function App() {
         </Route>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/beginners" element={<BeginnersPage />} />
-        <Route path="/master-visit" element={<MasterVisitPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin/*" element={localStorage.getItem('token') ? <AdminLayout /> : <Navigate to="/login" />} />

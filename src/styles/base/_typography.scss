@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Oswald";
+    src: url(../src/fonts/Oswald.ttf);
+}
+
+@font-face {
+    font-family: "Corvetta";
+    src: url(../src/fonts/Corvetta.ttf);
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url(../src/fonts/Raleway.ttf);
+}
+
+@font-face {
+    font-family: "Raleway Italic";
+    src: url(../src/fonts/Raleway-Italic.ttf);
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url(../src/fonts/Lato-Regular.ttf);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Oswald";
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 16px;
+}
