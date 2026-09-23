@@ -30,7 +30,7 @@ const NewsDetailPage = () => {
         const getCurrentAlbums = async () => {
 
             try {
-                const resAlbum = await fetch(`/api/albums/${newsId}`)
+                const resAlbum = await fetch(`/api/albums/by-news/${newsId}`)
                 if (!resAlbum.ok) {
                     setCurrentAlbum(null)
                 }
@@ -65,7 +65,7 @@ const NewsDetailPage = () => {
 
     const image = currentNews?.image && <div className="news__detail__img_container"><img src={currentNews.image.url} /><div>{currentNews.image.description}</div></div>
     const images = currentAlbum?.photos && currentAlbum?.photos.map((photo) => <div key={photo}><img src={photo} /></div>)
-    const video = currentVideo && currentVideo.map((item) => <div className='video_container' key={item.id} ><RutubeVideo videoId={item.videoId} /></div>)
+    const video = currentVideo && currentVideo.map((item) => <div className='video_container' key={item.videoId} ><RutubeVideo videoId={item.videoId} /></div>)
 
 
     return (

@@ -6,7 +6,7 @@ const PAGE_NAMES = {
     'news': 'Новости',
     'materials': 'Знания',
     'about': 'О нас',
-    'photo': 'Фото и видео',
+    'gallery': 'Фото и видео',
     'ranks': 'Степени мастерства',
     'poomsae': 'Пумсэ',
     'belt-colors': 'Значение цвета пояса',

@@ -24,6 +24,8 @@ import MaterialsGlossary from './pages/materialsPage/MaterialsGlossary'
 import MaterialsAttestation from './pages/materialsPage/MaterialsAttestation'
 import MaterialsCodex from './pages/materialsPage/MaterialsCodex'
 import MaterialsRules from './pages/materialsPage/MaterialsRules'
+import GalleryPage from './pages/galleryPage/GalleryPage'
+import AlbumGalleryPage from './pages/galleryPage/AlbumGalleryPage'
 
 
 
@@ -48,6 +50,9 @@ function App() {
         
         </Route>
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/gallery/:albumId" element={<AlbumGalleryPage />} />
+        <Route path="/photo/*" element={<Navigate to="/gallery/*" />} />
         <Route path="/beginners" element={<BeginnersPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginPage />} />
