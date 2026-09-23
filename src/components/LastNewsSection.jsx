@@ -36,7 +36,10 @@ const LastNewsSection = () => {
     return (
         <section className="lastnews">
             <div className="lastnews__section">
-                <h2>Последние новости</h2>
+                <div className="lastnews__header">
+                    <h2>Последние новости</h2>
+                    <a className="lastnews__all" href="/news">Все новости</a>
+                </div>
                 <div className="lastnews__container">{lastNews}</div>
             </div>
         </section>
