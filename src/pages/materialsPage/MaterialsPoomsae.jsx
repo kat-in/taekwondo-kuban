@@ -14,7 +14,7 @@ const MaterialsPoomsae = () => {
     return (
         <>
             <h1>Значение каждого пумсэ</h1>
-            <div className="materials__line"></div>
+            <div className='divider'></div>
             <div className="poomsae">{poomsae}</div>
 
         </>

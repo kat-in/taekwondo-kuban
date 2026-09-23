@@ -7,7 +7,7 @@ const MaterialsRules = () => {
     return (
         <>
             <h1>Правила поединка спортсменов направления МУ ДУК КВАН</h1>
-            <div className="materials__line"></div>
+            <div className='divider'></div>
             <div className="rules">
                 {fightArea}
                 <div className="rules__section">

@@ -13,8 +13,8 @@ const MaterialsGlossary = () => {
 
     return (
         <>
-            <h1>Словарик для запоминания</h1>
-              <div className="materials__line"></div>
+            <h1>Словарик для запоминания</h1>              
+            <div className='divider'></div>
             <div className='glossary'>{glossary}</div>
 
         </>

@@ -8,7 +8,7 @@ const AboutPage = () => {
             <main>
                 <div className="history__layout">
                     <h1>{title}</h1>
-                    <div className="history__line"></div>
+                    <div className='divider'></div>
                     <div className="history__content">
                         <Markdown>{p1}</Markdown>
                         <div>{p2}</div>

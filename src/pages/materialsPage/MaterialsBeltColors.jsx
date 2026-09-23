@@ -3,7 +3,7 @@ const MaterialsBeltColors = () => {
     return (
         <>
             <h1>Значение цвета пояса</h1>
-              <div className="materials__line"></div>
+               <div className="divider"></div>
             <dl className="belt__block">
                 <dt className={`white_belt belt__color-block`}>
                     <h2>Белый</h2></dt>

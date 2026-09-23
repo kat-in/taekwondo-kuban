@@ -15,7 +15,7 @@ const MaterialsAttestation = () => {
     return (
         <>
             <h1>Аттестационная программа сдачи на пояса</h1>
-            <div className="materials__line"></div>
+            <div className="divider"></div>
             <div className="attestation">{standarts}</div>
         </>
     );

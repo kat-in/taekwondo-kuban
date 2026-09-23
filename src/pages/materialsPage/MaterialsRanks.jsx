@@ -28,7 +28,7 @@ const MaterialsRanks = () => {
     return (
         <>
             <h1>Степени мастерства в Тхэквондо</h1>
-            <div className="materials__line"></div>
+            <div className='divider'></div>
             <Markdown>{general}</Markdown>
             <Markdown>{children}</Markdown>
             <Markdown>{experience}</Markdown>
