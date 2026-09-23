@@ -551,3 +551,64 @@ p {
 }
 
 /*TABS END*/
+
+
+/*GYM START*/
+.gym-map {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 500px;
+  gap:30px;
+
+  }
+
+  .gym__section {
+    display: flex;
+    padding: 30px 60px 40px;
+    gap: 40px;
+
+  }
+
+  .gym__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+  
+
+  /*GYM END*/
+}
+
+ .gym__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .gym__card__days {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .gym__card__day{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $light;
+    border-radius: 10px;
+    padding: 5px 10px;
+     font-weight: 600;
+  }
+
+  .gym__card__time {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }

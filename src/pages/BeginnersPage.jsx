@@ -1,4 +1,4 @@
-import GymMap from '../components/GymMap'
+import GymMap from '../components/GymSection/GymMap'
 import Breadcrumbs from '../components/Breadcrumbs'
 
 const BeginnersPage = () => {
