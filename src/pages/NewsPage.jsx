@@ -1,13 +1,16 @@
 import Markdown from "react-markdown"
 import { useState, useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
 import Breadcrumbs from "../components/Breadcrumbs"
 
-
+const NEWS_PER_PAGE = 10
 
 const NewsPage = () => {
     const [newsData, setNews] = useState([])
     const [albumsData, setAlbums] = useState([])
     const [videoData, setVideo] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+    const page = Math.max(1, parseInt(searchParams.get("page"), 10) || 1)
 
     useEffect(() => {
 
@@ -39,7 +42,9 @@ const NewsPage = () => {
 
 
     const sortedNews = [...newsData].sort((a, b) => b.date.localeCompare(a.date))
-    const news = sortedNews.map((item) => {
+    const visibleNews = sortedNews.slice(0, page * NEWS_PER_PAGE)
+    const hasMore = page * NEWS_PER_PAGE < sortedNews.length
+    const news = visibleNews.map((item) => {
         const hasAlbum = albumsData.find((album) => album.newsId === item.id)
         const albumCover = hasAlbum && <div className='news_card_cover'><img src={hasAlbum.photos[0]} /></div>
 
@@ -77,6 +82,13 @@ const NewsPage = () => {
             <div className="news__section">
                 {news}
             </div>
+            {hasMore && (
+                <div className="news__show-more">
+                    <button onClick={() => setSearchParams({ page: String(page + 1) })}>
+                        Показать ещё
+                    </button>
+                </div>
+            )}
             </div>
         </main>
     )

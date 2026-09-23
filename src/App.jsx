@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer/Footer'
+import ScrollToTopButton from './components/ScrollToTopButton'
 import HomePage from './pages/homePage/HomePage'
 import NewsPage from './pages/NewsPage'
 import NotFound from './pages/NotFound'
@@ -52,6 +53,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin/*" element={localStorage.getItem('token') ? <AdminLayout /> : <Navigate to="/login" />} />
       </Routes>
+      <ScrollToTopButton />
       <Footer />
     </Router >
   )

@@ -6,6 +6,7 @@
 @import 'component-styles/footer';
 @import 'component-styles/burger';
 @import 'component-styles/breadcrumbs';
+@import 'component-styles/scroll-top';
 
 @import 'page-styles/materials/materials';
 @import 'page-styles/home-page/homepage-index';
@@ -442,6 +443,43 @@ p {
 .read_more a::after {
   content: '>>';
   padding: 5px;
+}
+
+.news__show-more {
+  display: flex;
+  justify-content: center;
+  padding: 10px 40px 20px;
+}
+
+.news__show-more button {
+  padding: 10px 40px;
+  border: 1px solid $dark;
+  border-radius: 10px;
+  background-color: transparent;
+  color: $dark;
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $dark;
+    border-color: $dark;
+    color: $white;
+  }
+}
+
+@media (max-width: 560px) {
+  .news__show-more {
+    padding: 10px 16px 16px;
+  }
+
+  .news__show-more button {
+    width: 100%;
+  }
 }
 
 
