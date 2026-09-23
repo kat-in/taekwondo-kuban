@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
+  Navigate,
+  useLocation
 } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer/Footer'
@@ -16,6 +17,12 @@ import BeginnersPage from './pages/BeginnersPage'
 import NewsDetailPage from './pages/NewsDetailPage'
 import LoginPage from './pages/LoginPage'
 import AdminLayout from './pages/adminPanelPage/AdminLayout'
+import NewsList from './pages/adminPanelPage/NewsList'
+import NewsForm from './pages/adminPanelPage/NewsForm'
+import AlbumsList from './pages/adminPanelPage/AlbumsList'
+import AlbumForm from './pages/adminPanelPage/AlbumForm'
+import VideosList from './pages/adminPanelPage/VideosList'
+import VideoForm from './pages/adminPanelPage/VideoForm'
 import MaterialsLayout from './pages/materialsPage/MaterialsLayout'
 import MaterialsRanks from './pages/materialsPage/MaterialsRanks'
 import MaterialsPoomsae from './pages/materialsPage/MaterialsPoomsae'
@@ -34,6 +41,19 @@ function App() {
   return (
     <Router>
       <Header />
+      <PageRoutes />
+      <ScrollToTopButton />
+      <Footer />
+    </Router >
+  )
+}
+
+function PageRoutes() {
+  const location = useLocation()
+  const isLoginOpen = location.pathname === '/login'
+
+  return (
+    <>
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
@@ -47,7 +67,7 @@ function App() {
           <Route path="attestation" element={<MaterialsAttestation />} />
           <Route path="codex" element={<MaterialsCodex />} />
           <Route path="rules" element={<MaterialsRules />} />
-        
+
         </Route>
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
@@ -55,12 +75,25 @@ function App() {
         <Route path="/photo/*" element={<Navigate to="/gallery/*" />} />
         <Route path="/beginners" element={<BeginnersPage />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/admin/*" element={localStorage.getItem('token') ? <AdminLayout /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<HomePage />} />
+        <Route
+          path="/admin/*"
+          element={localStorage.getItem('token') ? <AdminLayout /> : <Navigate to="/login" />}
+        >
+          <Route index element={<Navigate to="/admin/news" />} />
+          <Route path="news" element={<NewsList />} />
+          <Route path="news/new" element={<NewsForm />} />
+          <Route path="news/:id/edit" element={<NewsForm />} />
+          <Route path="albums" element={<AlbumsList />} />
+          <Route path="albums/new" element={<AlbumForm />} />
+          <Route path="albums/:id/edit" element={<AlbumForm />} />
+          <Route path="videos" element={<VideosList />} />
+          <Route path="videos/new" element={<VideoForm />} />
+          <Route path="videos/:id/edit" element={<VideoForm />} />
+        </Route>
       </Routes>
-      <ScrollToTopButton />
-      <Footer />
-    </Router >
+      {isLoginOpen && <LoginPage />}
+    </>
   )
 }
 

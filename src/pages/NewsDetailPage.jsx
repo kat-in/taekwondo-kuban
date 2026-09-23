@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Markdown from 'react-markdown';
 import RutubeVideo from "../components/RutubeVideo";
 import Breadcrumbs from "../components/Breadcrumbs";
+import { BELTS, humanCount } from "../utils/belts";
 
 
 
@@ -67,6 +68,18 @@ const NewsDetailPage = () => {
     const images = currentAlbum?.photos && currentAlbum?.photos.map((photo) => <div key={photo}><img src={photo} /></div>)
     const video = currentVideo && currentVideo.map((item) => <div className='video_container' key={item.videoId} ><RutubeVideo videoId={item.videoId} /></div>)
 
+    const attestationRows = (currentNews?.attestation && BELTS.filter((belt) => currentNews.attestation[belt] != null).reverse()) || []
+    const attestation = attestationRows.length > 0 && (
+        <section className="news__detail__attestation">
+            <p className="news__detail__attestation-title">Результаты аттестации:</p>
+            <ul>
+                {attestationRows.map((belt) => (
+                    <li key={belt}>{belt} - {humanCount(currentNews.attestation[belt])}</li>
+                ))}
+            </ul>
+        </section>
+    )
+
 
     return (
         <main>
@@ -75,7 +88,7 @@ const NewsDetailPage = () => {
                 <div><h2>{currentNews?.title}</h2></div>
                 <h3>{currentNews?.displayDate}</h3>
                 <Markdown>{currentNews?.content}</Markdown>
-                <Markdown>{currentNews?.details}</Markdown>
+                {attestation}
                 {image}
                 {video}
                 <div className="news__detail__images">{images}</div>

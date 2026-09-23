@@ -13,6 +13,7 @@
 @import 'page-styles/home-page/homepage-index';
 @import 'page-styles/about-page/about-history';
 @import 'page-styles/beginners-page/beginners';
+@import 'page-styles/admin/admin';
 
 @import 'abstracts/variables';
 
@@ -195,6 +196,27 @@ p {
   gap: 10px;
   max-width: 600px;
   margin: auto;
+}
+
+.news__detail__attestation {
+  padding: 16px 22px;
+  border-radius: 12px;
+  background-color: $light;
+  font-size: 1.5rem;
+
+  .news__detail__attestation-title {
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .news__detail__images img {
@@ -467,15 +489,111 @@ p {
 
 /*LOGIN START*/
 
-.login_container {
-  margin: auto;
-  gap: 20px;
+.login__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login__modal-window {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
-  max-width: 600px;
-  border-radius: 20px;
-  background-color: #f5f5f5
+  gap: 24px;
+  padding: 40px 32px 32px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.login__modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  color: #222;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background-color: #FF3C3C;
+    color: #fff;
+  }
+}
+
+.login__modal-title {
+  padding-right: 40px;
+  text-align: left;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.login__modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login__modal-form input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #cfcece;
+  border-radius: 10px;
+  background-color: #F2F2F2;
+  font-size: 1.6rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: #FF3C3C;
+  }
+}
+
+.login__modal-form button {
+  padding: 12px 24px;
+  border: 1px solid $dark;
+  border-radius: 10px;
+  background-color: transparent;
+  color: $dark;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background-color: $dark;
+    border-color: $dark;
+    color: $white;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.login__modal-error {
+  color: #FF3C3C;
+  font-size: 1.4rem;
+  text-align: left;
+}
+
+@media (max-width: 560px) {
+  .login__modal-window {
+    padding: 32px 20px 24px;
+  }
 }
 
 /*LOGIN END*/

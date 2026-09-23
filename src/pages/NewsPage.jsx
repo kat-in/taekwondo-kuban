@@ -48,7 +48,7 @@ const NewsPage = () => {
         const hasAlbum = albumsData.find((album) => album.newsId === item.id)
         const albumCover = hasAlbum && <div className='news_card_cover'><img src={hasAlbum.photos[0]} /></div>
 
-        const newsImgCover = item.image && <div className='news_card_cover'><img src={item.image.url} /></div>
+        const newsImgCover = item.image?.url && <div className='news_card_cover'><img src={item.image.url} /></div>
         const hasVideo = videoData.find((video) => item.id === video.newsId)
         const thumbnailUrl = hasVideo && `https://rutube.ru/api/video/${hasVideo.videoId}/thumbnail/?redirect=1`
         const videoCover = hasVideo && <div className='news_card_cover'><img src={thumbnailUrl} alt={hasVideo.title} /></div>
