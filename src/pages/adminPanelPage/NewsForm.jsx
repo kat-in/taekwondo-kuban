@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
 import { BELTS } from "../../utils/belts";
+import { formatDate } from "../../utils/date";
 
 const emptyAttestation = () => BELTS.reduce((acc, belt) => ({ ...acc, [belt]: '' }), {})
 
@@ -195,7 +196,7 @@ const NewsForm = () => {
             {albums
               .filter((a) => !a.newsId || (isEdit && a.newsId === Number(id)))
               .map((a) => (
-                <option key={a.id} value={a.id}>{a.date ? `${a.title} (${a.date})` : a.title}</option>
+                <option key={a.id} value={a.id}>{a.date ? `${a.title} (${formatDate(a.date)})` : a.title}</option>
               ))}
           </select>
         </label>
@@ -206,7 +207,7 @@ const NewsForm = () => {
             {videos
               .filter((v) => !v.newsId || (isEdit && v.newsId === Number(id)))
               .map((v) => (
-                <option key={v.id} value={v.id}>{v.date ? `${v.title} (${v.date})` : v.title}</option>
+                <option key={v.id} value={v.id}>{v.date ? `${v.title} (${formatDate(v.date)})` : v.title}</option>
               ))}
           </select>
         </label>

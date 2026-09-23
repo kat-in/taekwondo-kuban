@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
+import { formatDate } from "../../utils/date";
 
 const AlbumForm = () => {
   const { id } = useParams()
@@ -101,7 +102,7 @@ const AlbumForm = () => {
           <select name="newsId" value={form.newsId} onChange={handleChange}>
             <option value="">— без новости —</option>
             {newsList.map((n) => (
-              <option key={n.id} value={n.id}>{n.title}</option>
+              <option key={n.id} value={n.id}>{n.date ? `${n.title} (${formatDate(n.date)})` : n.title}</option>
             ))}
           </select>
         </label>
