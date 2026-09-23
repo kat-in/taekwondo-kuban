@@ -33,6 +33,21 @@
     color: #fff;
 }
 
+.lastnews__all_header {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.lastnews__all_bottom {
+    display: none;
+
+    @media (max-width: 768px) {
+        display: block;
+        align-self: center;
+    }
+}
+
 .lastnews__section {
     display: flex;
     flex-direction: column;

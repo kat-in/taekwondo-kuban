@@ -38,9 +38,10 @@ const LastNewsSection = () => {
             <div className="lastnews__section">
                 <div className="lastnews__header">
                     <h2>Последние новости</h2>
-                    <a className="lastnews__all" href="/news">Все новости</a>
+                    <a className="lastnews__all lastnews__all_header" href="/news">Все новости</a>
                 </div>
                 <div className="lastnews__container">{lastNews}</div>
+                <a className="lastnews__all lastnews__all_bottom" href="/news">Все новости</a>
             </div>
         </section>
     )
