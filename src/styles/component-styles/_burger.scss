@@ -1,18 +1,111 @@
+@import '../abstracts/variables';
+
 .burger {
     display: none;
-    flex-direction: column;
+    position: relative;
     height: 24px;
     width: 24px;
-    justify-content: space-around;
     cursor: pointer;
+    z-index: 1002;
 
     @media (max-width: 875px) {
-        display: flex;
+        display: block;
     }
 }
 
 .burger__line {
-    height: 2px;
-    background-color: #ffffff;
+    position: absolute;
+    left: 0;
     width: 100%;
+    height: 2px;
+    background-color: $white;
+    transition: transform 0.3s ease, opacity 0.3s ease, top 0.3s ease;
+}
+
+.burger__line:nth-child(1) {
+    top: 0;
+}
+
+.burger__line:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.burger__line:nth-child(3) {
+    bottom: 0;
+}
+
+.burger--open .burger__line:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.burger--open .burger__line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger--open .burger__line:nth-child(3) {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.burger-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.burger-menu__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.side-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 290px;
+    height: 100%;
+    background-color: $dark;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: burger-slide-in 0.3s ease;
+    overflow-y: auto;
+}
+
+@keyframes burger-slide-in {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.side-menu__list {
+    list-style: none;
+    margin-top: 120px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.side-menu__item a {
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: $white;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    &:hover {
+        color: $accent;
+    }
 }

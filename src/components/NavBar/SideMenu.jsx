@@ -1,13 +1,27 @@
-const SideMenu = () => {
+const SideMenu = ({ onClose }) => {
     return (
-        <ul className="side-menu">
-            <li><a href="/">Главная</a></li>
-            <li><a href="/beginners">Новичкам</a></li>
-            <li><a href="/news">Новости</a></li>
-            <li><a href="/materials">Знания</a></li>
-            <li><a href="/about">О нас</a></li>
-            <li><a href="/photo">Фото и видео</a></li>
-        </ul>
+        <nav className="side-menu">
+            <ul className="side-menu__list">
+                <li className="side-menu__item">
+                    <a href="/" onClick={onClose}>Главная</a>
+                </li>
+                <li className="side-menu__item">
+                    <a href="/beginners" onClick={onClose}>Новичкам</a>
+                </li>
+                <li className="side-menu__item">
+                    <a href="/news" onClick={onClose}>Новости</a>
+                </li>
+                <li className="side-menu__item">
+                    <a href="/materials" onClick={onClose}>Знания</a>
+                </li>
+                <li className="side-menu__item">
+                    <a href="/about" onClick={onClose}>О нас</a>
+                </li>
+                <li className="side-menu__item">
+                    <a href="/photo" onClick={onClose}>Фото и видео</a>
+                </li>
+            </ul>
+        </nav>
     )
 }
 
