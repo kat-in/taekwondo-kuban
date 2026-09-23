@@ -13,3 +13,13 @@
   padding: 0 10px;
   font-weight: 500;
 }
+
+@media (max-width: 560px) {
+  .codex {
+    padding: 0 10px;
+  }
+
+  .codex li {
+    padding: 0 6px;
+  }
+}

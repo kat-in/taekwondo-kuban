@@ -25,3 +25,16 @@
   min-width: 160px;
 }
 
+@media (max-width: 560px) {
+  .ranks__row {
+    gap: 12px;
+    padding: 6px 0;
+  }
+
+  .cell_left {
+    justify-content: flex-start;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+}
+

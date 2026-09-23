@@ -29,3 +29,14 @@
   text-align: left;
 }
 
+@media (max-width: 560px) {
+  .rules {
+    padding: 0 10px;
+  }
+
+  .rules__section {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+

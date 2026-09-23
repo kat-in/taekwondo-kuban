@@ -29,3 +29,13 @@
   background-color: #dedede;
 }
 
+@media (max-width: 560px) {
+  .poomsae__block h2 {
+    padding: 5px 0 5px 10px;
+  }
+
+  .poomsae__description {
+    padding: 0 10px;
+  }
+}
+

@@ -1,4 +1,3 @@
-
 .glossary {
   display: flex;
   flex-direction: column;
@@ -9,7 +8,8 @@
   display: flex;
   justify-content: center;
 
-  min-width: 500px;
+  width: 100%;
+  min-width: 0;
   border-bottom: 1px solid rgb(207, 207, 207);
 }
 
@@ -32,4 +32,109 @@
   width: 250px;
 
 
+}
+
+.glossary__print-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.glossary__print-button {
+  padding: 10px 30px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #222;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #222;
+    color: #fff;
+  }
+}
+
+.glossary__print-footer {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .glossary__print-area,
+  .glossary__print-area * {
+    visibility: visible;
+  }
+
+  .glossary__print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .glossary__print-area h1 {
+    font-size: 18px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .glossary__print-area .divider {
+    margin-bottom: 8px;
+  }
+
+  .glossary {
+    column-count: 2;
+    column-gap: 40px;
+    align-items: stretch;
+  }
+
+  .glossary__block {
+    break-inside: avoid;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .glossary__word,
+  .glossary__translation {
+    width: auto;
+    flex: 1 1 0;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .glossary__print-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: auto;
+    padding: 12px 0 0;
+    border-top: 1px solid #cfcece;
+    font-family: "Oswald", sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #4b4b4b;
+  }
+}
+
+@media (max-width: 875px) {
+  .glossary__word,
+  .glossary__translation {
+    width: auto;
+    flex: 1 1 0;
+  }
 }

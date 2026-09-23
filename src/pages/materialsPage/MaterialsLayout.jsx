@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 import { useState } from "react";
 import cn from 'classnames'
 import Breadcrumbs from "../../components/Breadcrumbs"
@@ -15,6 +15,8 @@ const links = [
 
 const MaterialsLayout = () => {
     const [activeLink, setActiveLink] = useState(0)
+    const { pathname } = useLocation()
+    const isGlossary = pathname === '/materials/glossary'
 
     const handleClick = (e) => {
         setActiveLink(Number(e.target.id))
@@ -37,7 +39,12 @@ const MaterialsLayout = () => {
                 </div>
 
                 <div className="materials__content">
-                     <Breadcrumbs />
+                    <div className="materials__content-header">
+                        <Breadcrumbs />
+                        {isGlossary && (
+                            <button className="glossary__print-button" onClick={() => window.print()}>Распечатать</button>
+                        )}
+                    </div>
                     <Outlet />
                 </div>
             </div>

@@ -62,4 +62,30 @@
   color: #fff;
 }
 
+@media (max-width: 560px) {
+  .belt__block {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .belt__color-block {
+    width: 100%;
+    min-width: 0;
+    max-height: none;
+    min-height: 60px;
+    border-radius: 16px;
+  }
+
+  .belt__description-block {
+    padding: 0 4px;
+  }
+}
+
+@media (min-width: 561px) and (max-width: 768px) {
+  .belt__color-block {
+    width: 70px;
+    min-width: 70px;
+  }
+}
+
 
