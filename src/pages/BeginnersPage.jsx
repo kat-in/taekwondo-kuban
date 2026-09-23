@@ -1,7 +1,11 @@
+import GymMap from '../components/GymMap'
+import Breadcrumbs from '../components/Breadcrumbs'
+
 const BeginnersPage = () => {
     return (
         <main className="page__section">
             <div className="beginners__content">
+                <Breadcrumbs />
                 <h1>Информация для новичков</h1>
                 <div className='divider'></div>
                 <p>Мы принимаем в наши секции детей с 5 лет.</p>
@@ -14,9 +18,9 @@ const BeginnersPage = () => {
                 <img src='./images/dobok/form3.jpg' />
                 <img src='./images/dobok/form4.jpg' />
             </div>
+         <GymMap/>
             </div>
-       
-
+    
         </main>
 
     )

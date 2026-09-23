@@ -6,8 +6,8 @@ import {
   Navigate
 } from 'react-router-dom'
 import Header from './components/Header'
-import Footer from './components/Footer'
-import HomePage from './pages/HomePage'
+import Footer from './components/Footer/Footer'
+import HomePage from './pages/homePage/HomePage'
 import NewsPage from './pages/NewsPage'
 import NotFound from './pages/NotFound'
 import AboutPage from './pages/AboutPage'

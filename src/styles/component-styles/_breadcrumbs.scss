@@ -1,0 +1,39 @@
+.breadcrumbs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    a {
+        text-decoration: none;
+        color: #000;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #FF3C3C;
+        }
+    }
+
+    .breadcrumbs__sep {
+        color: #222;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1;
+        padding: 0 2px;
+        margin-right: 8px;
+    }
+}
+
+@media (max-width: 560px) {
+    .breadcrumbs {
+        gap: 6px;
+        font-size: 1.4rem;
+    }
+
+    .breadcrumbs__sep {
+        font-size: 1.6rem;
+        margin-right: 4px;
+        padding: 0;
+    }
+}

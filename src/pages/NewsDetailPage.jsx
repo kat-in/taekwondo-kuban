@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import Markdown from 'react-markdown';
 import RutubeVideo from "../components/RutubeVideo";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 
 
@@ -70,6 +71,7 @@ const NewsDetailPage = () => {
     return (
         <main>
             <div className="news__detail__section">
+                <Breadcrumbs name={currentNews?.title} />
                 <div><h2>{currentNews?.title}</h2></div>
                 <h3>{currentNews?.displayDate}</h3>
                 <Markdown>{currentNews?.content}</Markdown>
@@ -77,7 +79,8 @@ const NewsDetailPage = () => {
                 {image}
                 {video}
                 <div className="news__detail__images">{images}</div>
-                <button onClick={() => navigate(-1)}>Назад</button>
+                <button className="news__back" onClick={() => navigate(-1)}>Назад
+                </button>
             </div>
         </main>
     )

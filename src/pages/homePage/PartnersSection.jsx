@@ -1,4 +1,4 @@
-import partnersData from "../data/partnersData"
+import partnersData from "../../data/partnersData"
 import Markdown from "react-markdown"
 
 const PartnersSection = () => {

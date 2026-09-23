@@ -1,5 +1,7 @@
 import Markdown from "react-markdown"
 import { useState, useEffect } from "react"
+import Breadcrumbs from "../components/Breadcrumbs"
+
 
 
 const NewsPage = () => {
@@ -68,9 +70,13 @@ const NewsPage = () => {
 
     return (
         <main>
+            <div className="news__container">
+            <Breadcrumbs />
             <h1>Новости</h1>
+            <div className="divider"></div>
             <div className="news__section">
                 {news}
+            </div>
             </div>
         </main>
     )

@@ -1,5 +1,6 @@
 import Markdown from "react-markdown"
 import historyOfAssociationData from "../data/historyOfAssociationData"
+import Breadcrumbs from "../components/Breadcrumbs"
 
 const AboutPage = () => {
     const { title, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, firstStudents } = historyOfAssociationData
@@ -7,6 +8,7 @@ const AboutPage = () => {
         <>
             <main>
                 <div className="history__layout">
+                    <Breadcrumbs />
                     <h1>{title}</h1>
                     <div className='divider'></div>
                     <div className="history__content">

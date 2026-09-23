@@ -1,4 +1,3 @@
-import PageSection from "./PageSection"
 import newsData from "../data/newsData"
 import albumsData from "../data/albumsData"
 import videoData from "../data/videoData"

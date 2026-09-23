@@ -1,4 +1,4 @@
-import aboutUsData from '../data/aboutUsData'
+import aboutUsData from '../../data/aboutUsData'
 import Markdown from 'react-markdown'
 
 const AboutSection = () => {
