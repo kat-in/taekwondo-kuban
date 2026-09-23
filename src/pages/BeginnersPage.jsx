@@ -1,5 +1,5 @@
-import GymMap from '../components/GymSection/GymMap'
 import Breadcrumbs from '../components/Breadcrumbs'
+
 
 const BeginnersPage = () => {
     return (
@@ -18,7 +18,6 @@ const BeginnersPage = () => {
                 <img src='./images/dobok/form3.jpg' />
                 <img src='./images/dobok/form4.jpg' />
             </div>
-         <GymMap/>
             </div>
     
         </main>

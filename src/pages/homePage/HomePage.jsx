@@ -4,7 +4,6 @@ import Hero from '../../components/Hero'
 import PresidentSection from './PresidentSection'
 import LastNewsSection from '../../components/LastNewsSection'
 import PartnersSection from './PartnersSection'
-import GymSection from '../../components/GymSection/GymSection'
 
 const HomePage = () => {
     return ( 
@@ -13,7 +12,6 @@ const HomePage = () => {
     <AboutSection/>
     <PresidentSection/>
     <AboutTaekwandoSection/>
-    <GymSection/>
     <LastNewsSection/>
     <PartnersSection/>
   </>
