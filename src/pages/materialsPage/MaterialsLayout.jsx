@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import { useState } from "react";
 import cn from 'classnames'
+import Breadcrumbs from "../../components/Breadcrumbs"
 
 const links = [
     { title: 'Аттестация', link: '/materials/attestation' },
@@ -36,6 +37,7 @@ const MaterialsLayout = () => {
                 </div>
 
                 <div className="materials__content">
+                     <Breadcrumbs />
                     <Outlet />
                 </div>
             </div>
