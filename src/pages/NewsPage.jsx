@@ -58,7 +58,7 @@ const NewsPage = () => {
         const newsContentWidth = cover ? "news_content" : 'news_short_content'
 
         return (
-            <article className="news_card" id={item.id} key={item.id}>
+            <a className="news_card" href={`/news/${item.id}`} key={item.id}>
                 {cover}
 
                 <div className={newsContentWidth}>
@@ -67,9 +67,8 @@ const NewsPage = () => {
                     <div className="news_card_text">
                         <Markdown>{item.content}</Markdown>
                     </div>
-                    <div className="read_more"><a href={`/news/${item.id}`}>Читать полностью</a></div>
                 </div>
-            </article>
+            </a>
         )
     })
 

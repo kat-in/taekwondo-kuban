@@ -17,7 +17,7 @@ const LastNewsSection = () => {
         const cover = newsImgCover || albumCover || videoCover || null
 
         return (
-            <div className="lastnews__card" id={item.id} key={item.id}>
+            <a className="lastnews__card" href={`/news/${item.id}`} key={item.id}>
                 <div className="lastnews__title">
                     <div>{item.title} </div>
 
@@ -26,11 +26,10 @@ const LastNewsSection = () => {
                     {cover}
                     <div className="lastnews__text">{item.content}</div>
                     <div className="lastnews__more">
-                        <a href={`/news/${item.id}`}>Читать полностью</a>
-                        {item.displayDate}
+                        <span>{item.displayDate}</span>
                     </div>
                 </div>
-            </div>
+            </a>
         )
     })
 

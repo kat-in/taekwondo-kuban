@@ -57,6 +57,13 @@
   gap: 20px;
 }
 
+.photo__content-header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
 .photo__content-title {
   display: flex;
   flex-direction: column;
@@ -69,6 +76,108 @@
   font-weight: 400;
   text-transform: uppercase;
   font-size: 2.4rem;
+}
+
+.photo__year-filter {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.photo__year-dropdown {
+  position: relative;
+}
+
+.photo__year-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%23222' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 34px 6px 16px;
+  color: #222;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.photo__year-select:hover,
+.photo__year-select_open {
+  border-color: #222;
+  outline: none;
+}
+
+.photo__year-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 10;
+  min-width: 160px;
+  max-height: 320px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  transform-origin: top right;
+  animation: photo-year-in 0.18s ease-out;
+}
+
+@keyframes photo-year-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.photo__year-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.photo__year-options::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+.photo__year-options::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+.photo__year-option {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: #222;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.photo__year-option:hover {
+  background-color: #F2F2F2;
+}
+
+.photo__year-option_active,
+.photo__year-option_active:hover {
+  background-color: #222;
+  color: #fff;
 }
 
 .photo__albums {
@@ -479,8 +588,23 @@
     right: 8px;
   }
 
+  .photo__content-header-block {
+    align-items: flex-end;
+    gap: 12px;
+  }
+
   .photo__content-title h1 {
     font-size: 1.9rem;
+  }
+
+  .photo__year-select {
+    font-size: 0.7em;
+    padding: 5px 30px 5px 14px;
+    background-position: right 10px center;
+  }
+
+  .photo__year-options {
+    max-height: 260px;
   }
 
   .photo__album-title,
