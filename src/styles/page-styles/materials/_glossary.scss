@@ -1,0 +1,35 @@
+
+.glossary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.glossary__block {
+  display: flex;
+  justify-content: center;
+
+  min-width: 500px;
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+.glossary__word {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 20px;
+  border-right: 1px solid rgb(207, 207, 207);
+  font-weight: 600;
+  width: 250px;
+}
+
+.glossary__translation {
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 20px;
+  width: 250px;
+
+
+}

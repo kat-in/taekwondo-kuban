@@ -1,0 +1,15 @@
+
+.codex {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  padding: 0 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.codex li {
+  padding: 0 10px;
+  font-weight: 500;
+}

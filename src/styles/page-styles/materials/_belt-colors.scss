@@ -1,0 +1,65 @@
+
+.belt__block {
+  display: flex;
+  gap: 20px;
+}
+
+.belt__color-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  min-width: 100px;
+  max-height: 70px;
+  min-height: 70px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px #edecec;
+}
+
+.belt__color-block h2 {
+  font-size: 1em;
+}
+
+.belt__description-block {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 0 20px;
+
+}
+
+.white_belt {
+  background-color: #fff;
+
+}
+
+.yellow_belt {
+  background-color: yellow;
+}
+
+.green_belt {
+  background-color: rgb(3, 151, 3);
+  color: #fff;
+}
+
+.blue_belt {
+  background-color: rgb(45, 45, 222);
+  color: #fff;
+}
+
+.red_belt {
+  background-color: rgb(228, 14, 14);
+  color: #fff;
+}
+
+.brown_belt {
+  background-color: rgb(93, 41, 35);
+  color: #fff;
+}
+
+.black_belt {
+  background-color: black;
+  color: #fff;
+}
+
+

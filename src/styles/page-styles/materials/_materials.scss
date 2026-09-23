@@ -1,0 +1,66 @@
+@use '../../abstracts/variables';
+@use './belt-colors';
+@use './glossary';
+@use './poomsae';
+@use './ranks';
+@use './codex';
+@use './attestation';
+@use './rules';
+
+.materials__layout {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.materials__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 80px 0 80px 20px;
+  min-width: 200px;
+  /* background-image: linear-gradient(-90deg,white, #F2F2F2); */
+  border-right: 1px solid #ededed;
+}
+
+
+.materials__nav-link {
+  text-decoration: none;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px 0 0 20px;
+  color: #222;
+  text-align: right;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9em;
+
+}
+
+.materials__nav-link:hover {
+  background-color: #222;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.materials__nav-link_active {
+  background-color: #222;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.materials__content {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  padding: 20px 40px;
+  gap: 30px;
+  background-image: linear-gradient(90deg, #fdfdfd, #F2F2F2);
+}
+
+.materials__line {
+  display: flex;
+  width: 100%;
+  height: 1px;
+  background-color: #cfcece;
+}

@@ -1,0 +1,60 @@
+@use '../../abstracts/variables';
+
+.history__layout {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 60px 40px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.history__line {
+    display: flex;
+    width: 100%;
+    height: 1px;
+    background-color: #cfcece;
+}
+
+.history__content {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    gap: 30px;
+}
+
+.history__students {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    padding: 0 200px;
+
+    @media (max-width: 900px) {
+        padding: 0px 80px;
+    }
+
+    @media (max-width: 500px) {
+        padding: 0px 20px;
+    }
+}
+
+.history__president {
+    display: flex;
+    flex-direction: column;
+    background-color: $section-light;
+    padding: 30px;
+    gap: 30px;
+    border-radius: 10px;
+
+    & a {
+        text-decoration: none;
+        color: $dark;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            color: $accent;
+            animation: all 0.3s ease-in-out;
+        }
+    }
+}

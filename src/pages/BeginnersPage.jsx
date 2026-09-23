@@ -1,5 +1,3 @@
-import Markdown from "react-markdown"
-
 const BeginnersPage = () => {
     return (
         <main className="page__section">

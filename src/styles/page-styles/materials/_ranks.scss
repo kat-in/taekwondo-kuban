@@ -1,0 +1,27 @@
+
+.ranks__grid {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.ranks__row {
+  display: flex;
+  gap: 30px;
+}
+
+.ranks__cell {
+  display: flex;
+
+}
+
+.cell_right {
+  justify-content: flex-start;
+  min-width: 60px;
+}
+
+.cell_left {
+  justify-content: flex-end;
+  min-width: 160px;
+}
+
