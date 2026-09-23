@@ -9,6 +9,7 @@
 @import 'page-styles/materials/materials';
 @import 'page-styles/home-page/homepage-index';
 @import 'page-styles/about-page/about-history';
+@import 'page-styles/beginners-page/beginners';
 
 @import 'abstracts/variables';
 
@@ -362,21 +363,6 @@ p {
 }
 
 /*LOGIN END*/
-
-/* BEGINNERS PAGE START*/
-.beginners_dobok {
-  display: flex;
-  padding: 20px;
-  justify-content: center;
-  gap: 20px;
-}
-
-.beginners_dobok img {
-  max-height: 400px;
-  width: auto;
-}
-
-/* BEGINNERS PAGE END*/
 
 /*TABS START*/
 .tab__container {

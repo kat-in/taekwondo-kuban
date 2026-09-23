@@ -1,0 +1,64 @@
+.beginners__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.beginners__content h1 {
+  margin: 0 0 10px;
+}
+
+.beginners__content .divider {
+  margin: -10px 0 0;
+}
+
+.beginners__content p {
+  margin: 0;
+  text-align: center;
+}
+
+.beginners__dobok {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.beginners__dobok img {
+  max-height: 400px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .beginners__dobok img {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .beginners__dobok {
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .beginners__dobok img {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .beginners__dobok {
+    gap: 10px;
+    padding: 0;
+  }
+
+  .beginners__dobok img {
+    width: 46%;
+    max-height: none;
+  }
+}
