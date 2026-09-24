@@ -13,7 +13,7 @@ const parseDateKey = (value) => {
   return toDateKey(date) === value ? date : null
 }
 
-const Calendar = ({ value, onChange }) => {
+const Calendar = ({ value, onChange, maxDate = '', required = false }) => {
   const [open, setOpen] = useState(false)
   const [viewMonth, setViewMonth] = useState(() => {
     const selected = parseDateKey(value)
@@ -52,7 +52,11 @@ const Calendar = ({ value, onChange }) => {
 
   const monthLabel = viewMonth.toLocaleDateString('ru-RU', { month: 'long' })
   const selectedDateKey = value || getTodayDate()
+  const isDateDisabled = (date) => Boolean(maxDate && toDateKey(date) > maxDate)
+  const maxSelectableYear = maxDate ? Number(maxDate.slice(0, 4)) : MAX_YEAR
+  const isNextMonthDisabled = Boolean(maxDate && toDateKey(new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1)) > maxDate)
   const selectDate = (date) => {
+    if (isDateDisabled(date)) return
     onChange(toDateKey(date))
     setOpen(false)
   }
@@ -64,13 +68,13 @@ const Calendar = ({ value, onChange }) => {
   const handleYearChange = (event) => {
     const nextYear = event.target.value
     setYearInput(nextYear)
-    if (/^\d{4}$/.test(nextYear) && Number(nextYear) >= MIN_YEAR && Number(nextYear) <= MAX_YEAR) {
+    if (/^\d{4}$/.test(nextYear) && Number(nextYear) >= MIN_YEAR && Number(nextYear) <= maxSelectableYear) {
       setViewMonth((current) => new Date(Number(nextYear), current.getMonth(), 1))
     }
   }
   const handleYearBlur = () => {
     const parsedYear = Number.parseInt(yearInput, 10)
-    const year = Number.isFinite(parsedYear) ? Math.min(MAX_YEAR, Math.max(MIN_YEAR, parsedYear)) : viewMonth.getFullYear()
+    const year = Number.isFinite(parsedYear) ? Math.min(maxSelectableYear, Math.max(MIN_YEAR, parsedYear)) : viewMonth.getFullYear()
     setYearInput(String(year))
     setViewMonth((current) => new Date(year, current.getMonth(), 1))
   }
@@ -85,7 +89,7 @@ const Calendar = ({ value, onChange }) => {
 
   return (
     <div className="admin-calendar" ref={ref}>
-      <button type="button" className="admin-calendar__trigger" onClick={handleToggle} aria-expanded={open} aria-haspopup="dialog">
+      <button type="button" className="admin-calendar__trigger" onClick={handleToggle} aria-expanded={open} aria-haspopup="dialog" aria-required={required}>
         <span>{formatDate(value) || 'Выберите дату'}</span>
         <span className="admin-calendar__chevron" aria-hidden="true">▾</span>
       </button>
@@ -99,14 +103,14 @@ const Calendar = ({ value, onChange }) => {
               type="number"
               inputMode="numeric"
               min={MIN_YEAR}
-              max={MAX_YEAR}
+              max={maxSelectableYear}
               value={yearInput}
               onChange={handleYearChange}
               onBlur={handleYearBlur}
               onKeyDown={(event) => { if (event.key === 'Enter') event.currentTarget.blur() }}
               aria-label="Год"
             />
-            <button type="button" className="admin-calendar__nav" onClick={() => changeMonth(1)} aria-label="Следующий месяц">›</button>
+            <button type="button" className="admin-calendar__nav" onClick={() => changeMonth(1)} aria-label="Следующий месяц" disabled={isNextMonthDisabled}>›</button>
           </div>
           <div className="admin-calendar__weekdays" aria-hidden="true">
             {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((day) => <span key={day}>{day}</span>)}
@@ -116,8 +120,9 @@ const Calendar = ({ value, onChange }) => {
               <button
                 type="button"
                 key={toDateKey(date)}
-                className={`admin-calendar__day${toDateKey(date) === selectedDateKey ? ' admin-calendar__day_selected' : ''}`}
+                className={`admin-calendar__day${toDateKey(date) === selectedDateKey ? ' admin-calendar__day_selected' : ''}${isDateDisabled(date) ? ' admin-calendar__day_disabled' : ''}`}
                 onClick={() => selectDate(date)}
+                disabled={isDateDisabled(date)}
               >
                 {date.getDate()}
               </button>

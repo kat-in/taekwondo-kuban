@@ -279,6 +279,10 @@
   background-color: #fff;
 }
 
+.admin-form__required {
+  color: $accent;
+}
+
 .admin-form__title {
   font-size: 2rem;
 }
@@ -310,6 +314,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.admin-form__hint-text {
+  margin: 0;
+  color: #777;
+  font-size: 1.2rem;
+  line-height: 1.4;
 }
 
 .admin-form__video-picker {
@@ -634,6 +645,18 @@ input.admin-calendar__year[type='number'] {
   font: inherit;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.admin-calendar__day_disabled,
+.admin-calendar__day_disabled:hover {
+  color: #bbb;
+  background: transparent;
+  cursor: not-allowed;
+}
+
+.admin-calendar__nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .admin-calendar__day:hover,

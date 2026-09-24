@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
 import Calendar from "../../components/ui/Calendar";
-import { formatDate, sortByDateDesc } from "../../utils/date";
+import { formatDate, getTodayDate, sortByDateDesc } from "../../utils/date";
 
 const AlbumForm = () => {
   const { id } = useParams()
@@ -96,7 +96,7 @@ const AlbumForm = () => {
       <div className="admin-form__row">
         <label className="admin-form__field">
           <span>Дата</span>
-          <Calendar value={form.date} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
+          <Calendar value={form.date} maxDate={getTodayDate()} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
         <label className="admin-form__field">
           <span>Привязать к новости</span>

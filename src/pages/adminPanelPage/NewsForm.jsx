@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
 import { BELTS } from "../../utils/belts";
 import Calendar from "../../components/ui/Calendar";
-import { formatDate, sortByDateDesc } from "../../utils/date";
+import { formatDate, getTodayDate, sortByDateDesc } from "../../utils/date";
 
 const emptyAttestation = () => BELTS.reduce((acc, belt) => ({ ...acc, [belt]: '' }), {})
 
@@ -38,7 +38,6 @@ const NewsForm = () => {
     attestation: emptyAttestation(),
   })
   const [coverFile, setCoverFile] = useState(null)
-  const [isCoverOpen, setIsCoverOpen] = useState(false)
   const [existingImage, setExistingImage] = useState(null)
   const [albums, setAlbums] = useState([])
   const [videos, setVideos] = useState([])
@@ -47,6 +46,7 @@ const NewsForm = () => {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const isNewsFormValid = Boolean(form.title.trim() && form.category && form.date && form.content.trim())
 
   useEffect(() => {
     const load = async () => {
@@ -118,7 +118,7 @@ const NewsForm = () => {
       body.append('category', form.category)
       body.append('date', form.date)
       body.append('content', form.content)
-      if (isCoverOpen || existingImage || coverFile) body.append('imageDescription', form.imageDescription)
+      if (existingImage || coverFile) body.append('imageDescription', form.imageDescription)
       body.append('albumId', form.albumId || '')
       body.append('videoIds', JSON.stringify(form.videoIds))
       const attestationData = form.attestation
@@ -158,14 +158,14 @@ const NewsForm = () => {
       {error && <p className="admin-form__error">{error}</p>}
 
       <label className="admin-form__field">
-        <span>Заголовок</span>
+        <span>Заголовок <b className="admin-form__required">*</b></span>
         <input name="title" value={form.title} onChange={handleChange} required />
       </label>
 
       <div className="admin-form__row">
         <label className="admin-form__field">
-          <span>Категория</span>
-          <select name="category" value={form.category} onChange={handleChange}>
+          <span>Категория <b className="admin-form__required">*</b></span>
+          <select name="category" value={form.category} onChange={handleChange} required>
             <option value="">— выберите категорию —</option>
             {categories.map((category) => (
               <option key={category} value={category}>{category}</option>
@@ -173,14 +173,14 @@ const NewsForm = () => {
           </select>
         </label>
         <label className="admin-form__field">
-          <span>Дата</span>
-          <Calendar value={form.date} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
+          <span>Дата <b className="admin-form__required">*</b></span>
+          <Calendar value={form.date} maxDate={getTodayDate()} required onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
       </div>
 
       <label className="admin-form__field">
-        <span>Содержание (Markdown)</span>
-        <textarea name="content" rows={8} value={form.content} onChange={handleChange} />
+        <span>Содержание (Markdown) <b className="admin-form__required">*</b></span>
+        <textarea name="content" rows={8} value={form.content} onChange={handleChange} required />
         <MarkdownHint />
       </label>
 
@@ -217,6 +217,7 @@ const NewsForm = () => {
                 <option key={a.id} value={a.id}>{a.date ? `${a.title} (${formatDate(a.date)})` : a.title}</option>
               ))}
           </select>
+          <p className="admin-form__hint-text">Отображаются альбомы, не прикреплённые к другой новости, и текущий выбранный альбом.</p>
         </label>
 
         <label className="admin-form__field">
@@ -245,29 +246,23 @@ const NewsForm = () => {
               <span>Видео не выбраны</span>
             )}
           </div>
+          <p className="admin-form__hint-text">Можно выбрать несколько видео. В списке доступны видео, не прикреплённые к другой новости.</p>
         </label>
       </div>
 
-      {(isCoverOpen || existingImage || coverFile) && (
-        <div className="admin-form__row">
-          <label className="admin-form__field">
-            <span>Описание обложки</span>
-            <input name="imageDescription" value={form.imageDescription} onChange={handleChange} placeholder="Кто на фото?" />
-          </label>
-          <label className="admin-form__field">
-            <span>Обложка</span>
-            <input type="file" accept="image/*" onChange={(e) => { setCoverFile(e.target.files[0] || null); setForm((prev) => ({ ...prev, removeImage: false })) }} />
-          </label>
-        </div>
-      )}
+      <div className="admin-form__row">
+        <label className="admin-form__field">
+          <span>Описание обложки</span>
+          <input name="imageDescription" value={form.imageDescription} onChange={handleChange} placeholder="Кто на фото?" />
+        </label>
+        <label className="admin-form__field">
+          <span>Обложка</span>
+          <input type="file" accept="image/*" onChange={(e) => { setCoverFile(e.target.files[0] || null); setForm((prev) => ({ ...prev, removeImage: false })) }} />
+        </label>
+      </div>
 
-      {!existingImage && !coverFile && (
-        <div className="admin-form__actions">
-          <button type="button" className="admin-btn admin-btn_dashed" onClick={() => setIsCoverOpen((open) => !open)}>
-            {isCoverOpen ? 'Скрыть обложку' : 'Добавить обложку (опционально)'}
-          </button>
-        </div>
-      )}
+
+      <p className="admin-form__hint-text">Обложка внутри новости отображается как главная крупная фотография с подписью. Если обложка не выбрана, новость отобразится с первой фотографией из альбома или обложкой видео.</p>
 
       {existingImage && !coverFile && (
         <div className="admin-form__preview">
@@ -289,7 +284,7 @@ const NewsForm = () => {
       )}
 
       <div className="admin-form__actions">
-        <button type="submit" className="admin-btn admin-btn_primary" disabled={saving}>
+        <button type="submit" className="admin-btn admin-btn_primary" disabled={saving || !isNewsFormValid}>
           {saving ? 'Сохранение...' : 'Сохранить'}
         </button>
         <button type="button" className="admin-btn" onClick={() => navigate('/admin/news')}>Отмена</button>
