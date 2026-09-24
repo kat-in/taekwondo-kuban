@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { getToken } from "../../utils/api"
 import SocialButtons from "./Socialbuttons";
 
 const Footer = () => {
@@ -22,7 +23,7 @@ const Footer = () => {
                 </div>
                 <p className="copyright">© {startYear} - {currentYear} Краснодарская городская ассоциация тхэквондо Му Дук Кван</p>
                 <div className="footer__admin">
-                    <Link to="/login">Для сотрудников</Link>
+                    <Link to={getToken() ? "/admin" : "/login"}>Для сотрудников</Link>
                 </div>
 
             </div>
