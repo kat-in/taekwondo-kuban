@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
-import { formatDate } from "../../utils/date";
+import Calendar from "../../components/ui/Calendar";
+import { formatDate, sortByDateDesc } from "../../utils/date";
 
 const VideoForm = () => {
   const { id } = useParams()
@@ -19,7 +20,7 @@ const VideoForm = () => {
       try {
         setLoading(true)
         const newsData = await adminFetch('/news')
-        setNewsList(newsData)
+        setNewsList(sortByDateDesc(newsData))
         if (isEdit) {
           const videosData = await adminFetch('/video')
           const current = videosData.find((item) => item.id === Number(id))
@@ -84,8 +85,8 @@ const VideoForm = () => {
 
       <div className="admin-form__row">
         <label className="admin-form__field">
-          <span>Дата (YYYY-MM-DD)</span>
-          <input type="date" name="date" value={form.date} onChange={handleChange} />
+          <span>Дата</span>
+          <Calendar value={form.date} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
         <label className="admin-form__field">
           <span>Привязать к новости</span>

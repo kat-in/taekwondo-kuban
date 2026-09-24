@@ -2,7 +2,7 @@ import Markdown from 'react-markdown'
 import aboutTaekwandoData from '../../data/aboutTaekwandoData'
 
 const AboutTaekwandoSection = () => {
-    const { title, p1, p2, p3 } = aboutTaekwandoData
+    const { p1, p2, p3 } = aboutTaekwandoData
 
     return (
         <section className='about-taekwando'>

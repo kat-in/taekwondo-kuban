@@ -1,7 +1,8 @@
 import Markdown from "react-markdown"
 import { useState, useEffect } from "react"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, Link } from "react-router-dom"
 import Breadcrumbs from "../components/Breadcrumbs"
+import { formatDate, sortByDateDesc } from "../utils/date"
 
 const NEWS_PER_PAGE = 10
 
@@ -9,12 +10,16 @@ const NewsPage = () => {
     const [newsData, setNews] = useState([])
     const [albumsData, setAlbums] = useState([])
     const [videoData, setVideo] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
     const page = Math.max(1, parseInt(searchParams.get("page"), 10) || 1)
 
     useEffect(() => {
 
         const getNews = async () => {
+            setLoading(true)
+            setError('')
             try {
                 const [resNews, resAlbums, resVideo] = await Promise.all([
                     fetch('/api/news'),
@@ -33,7 +38,9 @@ const NewsPage = () => {
                 setVideo(allVideoData)
             }
             catch (er) {
-                console.log(er.message)
+                setError(er.message)
+            } finally {
+                setLoading(false)
             }
         }
         getNews()
@@ -41,7 +48,7 @@ const NewsPage = () => {
     }, [])
 
 
-    const sortedNews = [...newsData].sort((a, b) => b.date.localeCompare(a.date))
+    const sortedNews = sortByDateDesc(newsData)
     const visibleNews = sortedNews.slice(0, page * NEWS_PER_PAGE)
     const hasMore = page * NEWS_PER_PAGE < sortedNews.length
     const news = visibleNews.map((item) => {
@@ -58,19 +65,22 @@ const NewsPage = () => {
         const newsContentWidth = cover ? "news_content" : 'news_short_content'
 
         return (
-            <a className="news_card" href={`/news/${item.id}`} key={item.id}>
+            <Link className="news_card" to={`/news/${item.id}`} key={item.id}>
                 {cover}
 
                 <div className={newsContentWidth}>
                     <div><h3>{item.title}</h3></div>
-                    <div className="news_date">{item.displayDate} </div>
+                    <div className="news_date">{item.displayDate || formatDate(item.date)} </div>
                     <div className="news_card_text">
                         <Markdown>{item.content}</Markdown>
                     </div>
                 </div>
-            </a>
+            </Link>
         )
     })
+
+    if (loading) return <main>Загрузка...</main>
+    if (error) return <main>Не удалось загрузить новости <button type="button" onClick={() => window.location.reload()}>Повторить</button></main>
 
     return (
         <main>

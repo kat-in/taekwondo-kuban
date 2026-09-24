@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import cn from 'classnames'
 import Breadcrumbs from "../../components/Breadcrumbs"
 import RutubeVideo from "../../components/RutubeVideo"
+import { formatDate, sortByDateDesc } from "../../utils/date"
 
 const tabs = [
     { id: 'photo', title: 'Фото' },
@@ -67,6 +69,8 @@ const GalleryPage = () => {
     const [activeTab, setActiveTab] = useState('photo')
     const [albums, setAlbums] = useState([])
     const [videos, setVideos] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
     const [activeVideo, setActiveVideo] = useState(null)
     const [albumsVisibleCount, setAlbumsVisibleCount] = useState(CARDS_PER_PAGE)
     const [videosVisibleCount, setVideosVisibleCount] = useState(CARDS_PER_PAGE)
@@ -75,6 +79,8 @@ const GalleryPage = () => {
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true)
+            setError('')
             try {
                 const [resAlbums, resVideo] = await Promise.all([
                     fetch('/api/albums'),
@@ -91,25 +97,31 @@ const GalleryPage = () => {
                 setVideos(allVideos)
             }
             catch (er) {
-                console.log(er.message)
+                setError(er.message)
+            } finally {
+                setLoading(false)
             }
         }
         getData()
     }, [])
 
-    const sortedAlbums = [...albums].sort((a, b) => b.date.localeCompare(a.date))
-    const sortedVideos = [...videos].sort((a, b) => b.date.localeCompare(a.date))
+    const sortedAlbums = sortByDateDesc(albums)
+    const sortedVideos = sortByDateDesc(videos)
+
+    const getYear = (item) => {
+        return typeof item.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(item.date) ? item.date.slice(0, 4) : null
+    }
 
     const getYears = (items) => {
-        const years = [...new Set(items.map((item) => item.date.slice(0, 4)))]
-        return years.sort((a, b) => b.localeCompare(a)).map(String)
+        const years = [...new Set(items.map(getYear).filter(Boolean))]
+        return years.sort((a, b) => b.localeCompare(a))
     }
 
     const albumsYears = getYears(sortedAlbums)
     const videosYears = getYears(sortedVideos)
 
-    const filteredAlbums = albumsYear === 'all' ? sortedAlbums : sortedAlbums.filter((album) => album.date.slice(0, 4) === albumsYear)
-    const filteredVideos = videosYear === 'all' ? sortedVideos : sortedVideos.filter((video) => video.date.slice(0, 4) === videosYear)
+    const filteredAlbums = albumsYear === 'all' ? sortedAlbums : sortedAlbums.filter((album) => getYear(album) === albumsYear)
+    const filteredVideos = videosYear === 'all' ? sortedVideos : sortedVideos.filter((video) => getYear(video) === videosYear)
 
     const visibleAlbums = filteredAlbums.slice(0, albumsVisibleCount)
     const hasMoreAlbums = albumsVisibleCount < filteredAlbums.length
@@ -128,25 +140,25 @@ const GalleryPage = () => {
     }
 
     const photoCards = visibleAlbums.map((album) => (
-        <a key={album.id} className="photo__album-card" href={`/gallery/${album.id}`}>
+        <Link key={album.id} className="photo__album-card" to={`/gallery/${album.id}`}>
             <div className="photo__album-cover">
-                <img src={album.photos[0]} alt={album.title} loading="lazy" />
+                {album.photos?.[0] ? <img src={album.photos[0]} alt={album.title} loading="lazy" /> : <span className="photo__album-empty">Нет фото</span>}
             </div>
             <div className="photo__album-title">{album.title}</div>
-            <div className="photo__album-date">{new Date(album.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-        </a>
+            <div className="photo__album-date">{formatDate(album.date)}</div>
+        </Link>
     ))
 
     const videoCards = visibleVideos.map((video) => {
         const thumbnailUrl = `https://rutube.ru/api/video/${video.videoId}/thumbnail/?redirect=1`
         return (
-            <button key={video.videoId} className="photo__video-card" onClick={() => setActiveVideo(video)}>
+            <button key={video.id} className="photo__video-card" onClick={() => setActiveVideo(video)}>
                 <div className="photo__video-cover">
                     <img src={thumbnailUrl} alt={video.title} loading="lazy" />
                     <div className="photo__video-play"></div>
                 </div>
                 <div className="photo__video-title">{video.title}</div>
-                <div className="photo__video-date">{new Date(video.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+                <div className="photo__video-date">{formatDate(video.date)}</div>
             </button>
         )
     })
@@ -160,6 +172,9 @@ const GalleryPage = () => {
             </button>
         )
     })
+
+    if (loading) return <main>Загрузка...</main>
+    if (error) return <main>Не удалось загрузить галерею <button type="button" onClick={() => window.location.reload()}>Повторить</button></main>
 
     return (
         <main>

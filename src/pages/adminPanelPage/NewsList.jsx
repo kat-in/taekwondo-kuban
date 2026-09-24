@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { IconPencil, IconTrash } from "@tabler/icons-react";
 import { useAdminList } from "./AdminList";
+import { formatDate, sortByDateDesc } from "../../utils/date";
 
 const confirmDelete = (title) =>
   window.confirm(`Удалить новость «${title}»? Альбом и видео останутся в галерее.`)
@@ -8,7 +9,7 @@ const confirmDelete = (title) =>
 const NewsList = () => {
   const navigate = useNavigate()
   const { items, error, loading, remove } = useAdminList('/news')
-  const sorted = [...items].sort((a, b) => b.date.localeCompare(a.date))
+  const sorted = sortByDateDesc(items)
 
   const handleDelete = async (item) => {
     if (!confirmDelete(item.title)) return
@@ -44,14 +45,15 @@ const NewsList = () => {
         </div>
         {sorted.map((item) => (
           <div className="admin-table__row" key={item.id}>
-            <div className="admin-table__cell admin-table__cell_id">{item.id}</div>
-            <div className="admin-table__cell admin-table__cell_title">{item.title}</div>
-            <div className="admin-table__cell admin-table__cell_mid">{item.category}</div>
-            <div className="admin-table__cell admin-table__cell_mid">{item.displayDate}</div>
-            <div className="admin-table__cell admin-table__cell_actions">
+            <div className="admin-table__cell admin-table__cell_id" data-label="ID">{item.id}</div>
+            <div className="admin-table__cell admin-table__cell_title" data-label="Заголовок">{item.title}</div>
+            <div className="admin-table__cell admin-table__cell_mid" data-label="Категория">{item.category}</div>
+            <div className="admin-table__cell admin-table__cell_mid" data-label="Дата">{item.displayDate || formatDate(item.date)}</div>
+            <div className="admin-table__cell admin-table__cell_actions" data-label="Действия">
               <button className="admin-icon-btn" title="Редактировать" onClick={() => navigate(`/admin/news/${item.id}/edit`)}><IconPencil size={18} /></button>
               <button className="admin-icon-btn admin-icon-btn_danger" title="Удалить" onClick={() => handleDelete(item)}><IconTrash size={18} /></button>
             </div>
+            <div className="admin-table__mobile-meta">ID: {item.id} · Категория: {item.category || '—'} · Дата: {item.displayDate || formatDate(item.date)}</div>
           </div>
         ))}
       </div>

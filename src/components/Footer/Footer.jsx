@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import SocialButtons from "./Socialbuttons";
 
 const Footer = () => {
@@ -20,6 +21,9 @@ const Footer = () => {
                     </div>
                 </div>
                 <p className="copyright">© {startYear} - {currentYear} Краснодарская городская ассоциация тхэквондо Му Дук Кван</p>
+                <div className="footer__admin">
+                    <Link to="/login">Для сотрудников</Link>
+                </div>
 
             </div>
         </div>

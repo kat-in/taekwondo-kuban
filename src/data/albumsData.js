@@ -5,9 +5,6 @@ const getPhotoUrl = (albumName, numberOfPhotos, ext = 'jpeg') => {
     return photos
 }
 
-const getAlbumCoverUrl = (albumName, ext = 'jpeg') => `${albumPath}/${albumName}/1.${ext}`
-
-
 const albumsData = [
 
      {

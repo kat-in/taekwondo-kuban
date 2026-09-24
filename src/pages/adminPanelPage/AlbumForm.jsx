@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
-import { formatDate } from "../../utils/date";
+import Calendar from "../../components/ui/Calendar";
+import { formatDate, sortByDateDesc } from "../../utils/date";
 
 const AlbumForm = () => {
   const { id } = useParams()
@@ -22,7 +23,7 @@ const AlbumForm = () => {
       try {
         setLoading(true)
         const newsData = await adminFetch('/news')
-        setNewsList(newsData)
+        setNewsList(sortByDateDesc(newsData))
         if (isEdit) {
           const albumsData = await adminFetch('/albums')
           const current = albumsData.find((item) => item.id === Number(id))
@@ -94,8 +95,8 @@ const AlbumForm = () => {
 
       <div className="admin-form__row">
         <label className="admin-form__field">
-          <span>Дата (YYYY-MM-DD)</span>
-          <input type="date" name="date" value={form.date} onChange={handleChange} />
+          <span>Дата</span>
+          <Calendar value={form.date} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
         <label className="admin-form__field">
           <span>Привязать к новости</span>

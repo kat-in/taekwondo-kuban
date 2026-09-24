@@ -2,7 +2,7 @@ import aboutUsData from '../../data/aboutUsData'
 import Markdown from 'react-markdown'
 
 const AboutSection = () => {
-    const { title, text, activity, pullquote } = aboutUsData
+    const { text, activity, pullquote } = aboutUsData
 
     const aboutActivity = activity.map((item, i) => <div className="about__activity-item" key={i}><div className='about__activity-icon'></div><div className='about__activity-text'>{item}</div></div>)
 

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
 import { BELTS } from "../../utils/belts";
-import { formatDate } from "../../utils/date";
+import Calendar from "../../components/ui/Calendar";
+import { formatDate, sortByDateDesc } from "../../utils/date";
 
 const emptyAttestation = () => BELTS.reduce((acc, belt) => ({ ...acc, [belt]: '' }), {})
 
@@ -32,7 +33,7 @@ const NewsForm = () => {
     content: '',
     imageDescription: '',
     albumId: '',
-    videoId: '',
+    videoIds: [],
     removeImage: false,
     attestation: emptyAttestation(),
   })
@@ -41,6 +42,7 @@ const NewsForm = () => {
   const [existingImage, setExistingImage] = useState(null)
   const [albums, setAlbums] = useState([])
   const [videos, setVideos] = useState([])
+  const [videoToAdd, setVideoToAdd] = useState('')
   const [categories, setCategories] = useState([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -55,8 +57,8 @@ const NewsForm = () => {
           adminFetch('/albums'),
           adminFetch('/video'),
         ])
-        setAlbums(albumsData)
-        setVideos(videosData)
+        setAlbums(sortByDateDesc(albumsData))
+        setVideos(sortByDateDesc(videosData))
         setCategories([...new Set(newsData.map((item) => item.category).filter(Boolean))].filter((c) => c !== 'Фестиваль'))
         if (isEdit) {
           const current = newsData.find((item) => item.id === Number(id))
@@ -68,7 +70,7 @@ const NewsForm = () => {
               content: current.content || '',
               imageDescription: current.image?.description || '',
               albumId: albumsData.find((a) => a.newsId === current.id)?.id || '',
-              videoId: videosData.find((v) => v.newsId === current.id)?.id || '',
+              videoIds: videosData.filter((v) => v.newsId === current.id).map((v) => v.id),
               removeImage: false,
               attestation: BELTS.reduce(
                 (acc, belt) => ({ ...acc, [belt]: current.attestation?.[belt] != null ? current.attestation[belt] : '' }),
@@ -92,6 +94,16 @@ const NewsForm = () => {
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handleAddVideo = () => {
+    if (!videoToAdd) return
+    setForm((prev) => ({ ...prev, videoIds: [...new Set([...prev.videoIds, Number(videoToAdd)])] }))
+    setVideoToAdd('')
+  }
+
+  const handleRemoveVideo = (videoId) => {
+    setForm((prev) => ({ ...prev, videoIds: prev.videoIds.filter((id) => id !== videoId) }))
+  }
+
   const handleAttestationChange = (belt, value) => {
     setForm((prev) => ({ ...prev, attestation: { ...prev.attestation, [belt]: value } }))
   }
@@ -108,7 +120,7 @@ const NewsForm = () => {
       body.append('content', form.content)
       if (isCoverOpen || existingImage || coverFile) body.append('imageDescription', form.imageDescription)
       body.append('albumId', form.albumId || '')
-      body.append('videoId', form.videoId || '')
+      body.append('videoIds', JSON.stringify(form.videoIds))
       const attestationData = form.attestation
       const attestationResult = BELTS.reduce(
         (acc, belt) => {
@@ -133,6 +145,12 @@ const NewsForm = () => {
 
   if (loading) return <div>Загрузка...</div>
 
+  const selectedVideos = videos.filter((video) => form.videoIds.includes(video.id))
+  const availableVideos = videos.filter((video) => {
+    const canAttach = !video.newsId || (isEdit && video.newsId === Number(id))
+    return canAttach && !form.videoIds.includes(video.id)
+  })
+
   return (
     <form className="admin-form" onSubmit={handleSubmit}>
       <h1 className="admin-form__title">{isEdit ? 'Редактировать новость' : 'Новая новость'}</h1>
@@ -155,8 +173,8 @@ const NewsForm = () => {
           </select>
         </label>
         <label className="admin-form__field">
-          <span>Дата (YYYY-MM-DD)</span>
-          <input type="date" name="date" value={form.date} onChange={handleChange} />
+          <span>Дата</span>
+          <Calendar value={form.date} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
       </div>
 
@@ -188,7 +206,7 @@ const NewsForm = () => {
         </fieldset>
       )}
 
-      <div className="admin-form__row">
+      <div className="admin-form__attachments">
         <label className="admin-form__field">
           <span>Прикрепить альбом</span>
           <select name="albumId" value={form.albumId} onChange={handleChange}>
@@ -200,16 +218,33 @@ const NewsForm = () => {
               ))}
           </select>
         </label>
+
         <label className="admin-form__field">
-          <span>Прикрепить видео</span>
-          <select name="videoId" value={form.videoId} onChange={handleChange}>
-            <option value="">— без видео —</option>
-            {videos
-              .filter((v) => !v.newsId || (isEdit && v.newsId === Number(id)))
-              .map((v) => (
-                <option key={v.id} value={v.id}>{v.date ? `${v.title} (${formatDate(v.date)})` : v.title}</option>
+          <span>Добавить видео</span>
+          <div className="admin-form__video-picker">
+            <select value={videoToAdd} onChange={(event) => setVideoToAdd(event.target.value)}>
+              <option value="">— выберите видео —</option>
+              {availableVideos.map((video) => (
+                <option key={video.id} value={video.id}>{video.date ? `${video.title} (${formatDate(video.date)})` : video.title}</option>
               ))}
-          </select>
+            </select>
+            <button type="button" className="admin-btn admin-btn_primary" onClick={handleAddVideo} disabled={!videoToAdd}>Добавить</button>
+          </div>
+          <div className="admin-form__selected-videos">
+            <strong>Выбранные видео:</strong>
+            {selectedVideos.length > 0 ? (
+              <ul>
+                {selectedVideos.map((video) => (
+                  <li key={video.id}>
+                    <span>{video.title}</span>
+                    <button type="button" className="admin-btn admin-btn_small" onClick={() => handleRemoveVideo(video.id)}>Убрать</button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <span>Видео не выбраны</span>
+            )}
+          </div>
         </label>
       </div>
 
@@ -221,7 +256,7 @@ const NewsForm = () => {
           </label>
           <label className="admin-form__field">
             <span>Обложка</span>
-            <input type="file" accept="image/*" onChange={(e) => setCoverFile(e.target.files[0] || null)} />
+            <input type="file" accept="image/*" onChange={(e) => { setCoverFile(e.target.files[0] || null); setForm((prev) => ({ ...prev, removeImage: false })) }} />
           </label>
         </div>
       )}

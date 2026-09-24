@@ -1191,5 +1191,18 @@
       "/uploads/albums/2007-11-24-master/24.jpeg",
       "/uploads/albums/2007-11-24-master/25.jpeg"
     ]
+  },
+  {
+    "newsId": 177,
+    "id": 87,
+    "title": "Аттестация спортсменов ассоциации",
+    "date": "2026-06-28",
+    "photos": [
+      "/uploads/albums/1790201486498-637028527.jpeg",
+      "/uploads/albums/1790201486500-638746969.jpeg",
+      "/uploads/albums/1790201486501-122385636.jpeg",
+      "/uploads/albums/1790201486501-494486899.jpeg",
+      "/uploads/albums/1790201486501-189751544.jpeg"
+    ]
   }
 ]

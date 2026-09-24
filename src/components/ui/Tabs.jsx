@@ -1,5 +1,4 @@
 import { useState} from "react"
-import Button from "./Button"
 
 
 const Tabs = ({ tabsData }) => {

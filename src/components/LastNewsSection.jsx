@@ -1,47 +1,83 @@
-import newsData from "../data/newsData"
-import albumsData from "../data/albumsData"
-import videoData from "../data/videoData"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { formatDate, sortByDateDesc } from "../utils/date"
 
 const LastNewsSection = () => {
-    const sortedNews = [...newsData].sort((a, b) => b.date.localeCompare(a.date))
-    const lastNews = sortedNews.slice(0, 4).map((item) => {
+    const [newsData, setNewsData] = useState([])
+    const [albumsData, setAlbumsData] = useState([])
+    const [videoData, setVideoData] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
 
-        const hasAlbum = albumsData.find((album) => album.newsId === item.id)
-        const albumCover = hasAlbum && <div className='lastnews__cover'><img src={hasAlbum.photos[0]} /></div>
+    useEffect(() => {
+        const getData = async () => {
+            setLoading(true)
+            setError('')
+            try {
+                const [newsResponse, albumsResponse, videoResponse] = await Promise.all([
+                    fetch('/api/news'),
+                    fetch('/api/albums'),
+                    fetch('/api/video'),
+                ])
+                if (!newsResponse.ok || !albumsResponse.ok || !videoResponse.ok) throw new Error('Ошибка загрузки')
 
-        const newsImgCover = item.image && <div className='lastnews__cover'><img src={item.image.url} /></div>
+                const [news, albums, videos] = await Promise.all([
+                    newsResponse.json(),
+                    albumsResponse.json(),
+                    videoResponse.json(),
+                ])
+                setNewsData(news)
+                setAlbumsData(albums)
+                setVideoData(videos)
+            } catch (err) {
+                setError(err.message)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        getData()
+    }, [])
+
+    const lastNews = sortByDateDesc(newsData).slice(0, 4).map((item) => {
+        const hasAlbum = albumsData.find((album) => album.newsId === item.id && album.photos?.[0])
+        const albumCover = hasAlbum && <div className='lastnews__cover'><img src={hasAlbum.photos[0]} alt={item.title} /></div>
+
+        const newsImgCover = item.image?.url && <div className='lastnews__cover'><img src={item.image.url} alt={item.title} /></div>
         const hasVideo = videoData.find((video) => item.id === video.newsId)
         const thumbnailUrl = hasVideo && `https://rutube.ru/api/video/${hasVideo.videoId}/thumbnail/?redirect=1`
-        const videoCover = hasVideo && <div className='lastnews__cover'><img src={thumbnailUrl} alt={hasVideo.title} /></div>
+        const videoCover = hasVideo && <div className='lastnews__cover'><img src={thumbnailUrl} alt={hasVideo.title || item.title} /></div>
 
         const cover = newsImgCover || albumCover || videoCover || null
 
         return (
-            <a className="lastnews__card" href={`/news/${item.id}`} key={item.id}>
+            <Link className="lastnews__card" to={`/news/${item.id}`} key={item.id}>
                 <div className="lastnews__title">
                     <div>{item.title} </div>
-
                 </div>
                 <div className="lastnews__content">
                     {cover}
                     <div className="lastnews__text">{item.content}</div>
                     <div className="lastnews__more">
-                        <span>{item.displayDate}</span>
+                        <span>{item.displayDate || formatDate(item.date)}</span>
                     </div>
                 </div>
-            </a>
+            </Link>
         )
     })
+
+    if (loading) return <section className="lastnews"><div className="lastnews__section">Загрузка...</div></section>
+    if (error) return <section className="lastnews"><div className="lastnews__section">Не удалось загрузить новости <button type="button" onClick={() => window.location.reload()}>Повторить</button></div></section>
 
     return (
         <section className="lastnews">
             <div className="lastnews__section">
                 <div className="lastnews__header">
                     <h2>Последние новости</h2>
-                    <a className="lastnews__all lastnews__all_header" href="/news">Все новости</a>
+                    <Link className="lastnews__all lastnews__all_header" to="/news">Все новости</Link>
                 </div>
                 <div className="lastnews__container">{lastNews}</div>
-                <a className="lastnews__all lastnews__all_bottom" href="/news">Все новости</a>
+                <Link className="lastnews__all lastnews__all_bottom" to="/news">Все новости</Link>
             </div>
         </section>
     )

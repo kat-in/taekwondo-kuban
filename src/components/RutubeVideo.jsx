@@ -1,5 +1,3 @@
-import React from 'react';
-
 const RutubeVideo = ({ videoId }) => {
   return (
       <iframe

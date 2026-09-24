@@ -2,7 +2,7 @@ import presidentData from "../../data/presidentData"
 import Markdown from "react-markdown"
 
 const PresidentSection = () => {
-    const { name, description, info } = presidentData
+    const { description, info } = presidentData
 
 
     return (

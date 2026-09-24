@@ -198,6 +198,16 @@
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
+.photo__album-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #777;
+  font-size: 1.3rem;
+}
+
 .photo__album-card:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
@@ -395,6 +405,12 @@
   font-size: 1.3rem;
 }
 
+.photo-album__empty {
+  color: $info-text;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
 .photo-album__grid {
   display: flex;
   flex-wrap: wrap;
@@ -539,6 +555,10 @@
   .photo__nav-link_active {
     background-color: #222;
     color: #fff;
+  }
+
+  .photo__year-dropdown {
+    z-index: 10;
   }
 
   .photo__content {

@@ -1,23 +1,27 @@
 import express from 'express';
 import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const DATA_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'albums.json');
 
 const router = express.Router();
 
 const readAlbums = async () => {
-    const data = await fs.readFile('./data/albums.json', 'utf8')
+    const data = await fs.readFile(DATA_FILE, 'utf8')
     const albumsData = JSON.parse(data)
 
     const seen = new Set()
-    const seenNews = new Set()
     const unique = []
     for (const album of albumsData) {
         if (!album || album.id === undefined || seen.has(album.id)) continue
-        if (album.newsId !== null && album.newsId !== undefined && seenNews.has(album.newsId)) continue
         seen.add(album.id)
-        if (album.newsId !== null && album.newsId !== undefined) seenNews.add(album.newsId)
         unique.push(album)
     }
-    return unique
+    return unique.sort((a, b) => {
+        const dateOrder = (b.date || '').localeCompare(a.date || '')
+        return dateOrder || (Number(b.id) || 0) - (Number(a.id) || 0)
+    })
 }
 
 router.get('/', async (req, res) => {
