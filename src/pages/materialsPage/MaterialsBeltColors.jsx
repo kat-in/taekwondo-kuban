@@ -1,7 +1,10 @@
+import SEO from "../../components/SEO/SEO"
+
 const MaterialsBeltColors = () => {
 
     return (
         <>
+            <SEO title="Цвета поясов — Тхэквондо Му Дук Кван" description="Значение цветов поясов и их уровней в тхэквондо Му Дук Кван." />
             <h1>Значение цвета пояса</h1>
                <div className="divider"></div>
             <dl className="belt__block">

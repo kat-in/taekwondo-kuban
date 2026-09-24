@@ -1,5 +1,6 @@
 import Markdown from "react-markdown"
 import ranksData from "../../data/materialsData/ranksData"
+import SEO from "../../components/SEO/SEO"
 
 const {
     general,
@@ -27,6 +28,7 @@ const MaterialsRanks = () => {
 
     return (
         <>
+            <SEO title="Степени мастерства — Тхэквондо Му Дук Кван" description="Степени мастерства и квалификационные требования в тхэквондо Му Дук Кван." />
             <h1>Степени мастерства в Тхэквондо</h1>
             <div className='divider'></div>
             <Markdown>{general}</Markdown>

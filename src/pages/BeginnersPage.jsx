@@ -1,9 +1,11 @@
 import Breadcrumbs from '../components/Breadcrumbs'
+import SEO from '../components/SEO/SEO'
 
 
 const BeginnersPage = () => {
     return (
         <main className="page__section">
+            <SEO title="Новичкам — Тхэквондо Му Дук Кван" description="Информация для тех, кто хочет начать заниматься тхэквондо в Краснодаре." />
             <div className="beginners__content">
                 <Breadcrumbs />
                 <h1>Информация для новичков</h1>

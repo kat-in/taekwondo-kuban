@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router"
 import { useState, useEffect, useCallback } from "react"
 import Breadcrumbs from "../../components/Breadcrumbs"
+import SEO from "../../components/SEO/SEO"
 import NotFound from "../NotFound"
 import { formatDate } from "../../utils/date"
 
@@ -72,6 +73,7 @@ const AlbumGalleryPage = () => {
 
     return (
         <main>
+            <SEO title={album?.title || 'Фотоальбом'} description={`Фотографии альбома «${album?.title || 'Тхэквондо Му Дук Кван'}» на сайте Краснодарской ассоциации.`} image={album?.photos?.[0]} />
             <div className="photo-album__section">
                 <Breadcrumbs name={album?.title} />
                 <div className="photo-album__header">

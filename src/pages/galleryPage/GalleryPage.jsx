@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import cn from 'classnames'
 import Breadcrumbs from "../../components/Breadcrumbs"
+import SEO from "../../components/SEO/SEO"
 import RutubeVideo from "../../components/RutubeVideo"
 import { formatDate, sortByDateDesc } from "../../utils/date"
 
@@ -178,6 +179,7 @@ const GalleryPage = () => {
 
     return (
         <main>
+            <SEO title="Фото и видео — Тхэквондо Му Дук Кван" description="Фотографии и видео с соревнований, аттестаций и тренировок Краснодарской ассоциации тхэквондо Му Дук Кван." />
             <div className="photo__layout">
                 <div className="photo__sidebar">
                     {navLinks}

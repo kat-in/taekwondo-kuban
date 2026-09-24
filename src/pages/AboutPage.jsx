@@ -1,12 +1,14 @@
 import Markdown from "react-markdown"
 import historyOfAssociationData from "../data/historyOfAssociationData"
 import Breadcrumbs from "../components/Breadcrumbs"
+import SEO from "../components/SEO/SEO"
 
 const AboutPage = () => {
     const { title, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, firstStudents } = historyOfAssociationData
     return (
         <>
             <main>
+                <SEO title="Об ассоциации — Тхэквондо Му Дук Кван" description="История Краснодарской городской ассоциации тхэквондо Му Дук Кван и её достижения." />
                 <div className="history__layout">
                     <Breadcrumbs />
                     <h1>{title}</h1>

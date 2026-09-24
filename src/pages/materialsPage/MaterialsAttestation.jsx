@@ -1,4 +1,5 @@
 import BeltSection from "./BeltSection"
+import SEO from "../../components/SEO/SEO"
 import beltData from "../../data/materialsData/beltData"
 
 
@@ -14,6 +15,7 @@ const MaterialsAttestation = () => {
 
     return (
         <>
+            <SEO title="Аттестационная программа — Тхэквондо Му Дук Кван" description="Аттестационная программа сдачи на пояса по тхэквондо Му Дук Кван." />
             <h1>Аттестационная программа сдачи на пояса</h1>
             <div className="divider"></div>
             <div className="attestation">{standarts}</div>

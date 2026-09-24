@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { adminFetch } from "../../utils/api";
 import { BELTS } from "../../utils/belts";
@@ -38,6 +38,7 @@ const NewsForm = () => {
     attestation: emptyAttestation(),
   })
   const [coverFile, setCoverFile] = useState(null)
+  const coverInputRef = useRef(null)
   const [existingImage, setExistingImage] = useState(null)
   const [albums, setAlbums] = useState([])
   const [videos, setVideos] = useState([])
@@ -257,7 +258,7 @@ const NewsForm = () => {
         </label>
         <label className="admin-form__field">
           <span>Обложка</span>
-          <input type="file" accept="image/*" onChange={(e) => { setCoverFile(e.target.files[0] || null); setForm((prev) => ({ ...prev, removeImage: false })) }} />
+          <input ref={coverInputRef} type="file" accept="image/*" onChange={(e) => { setCoverFile(e.target.files[0] || null); setForm((prev) => ({ ...prev, removeImage: false })) }} />
         </label>
       </div>
 
@@ -280,6 +281,13 @@ const NewsForm = () => {
       {coverFile && (
         <div className="admin-form__preview">
           <img src={URL.createObjectURL(coverFile)} alt="Новая обложка" />
+          <button
+            type="button"
+            className="admin-btn admin-btn_danger admin-btn_small"
+            onClick={() => { setCoverFile(null); if (coverInputRef.current) coverInputRef.current.value = ''; setForm((prev) => ({ ...prev, removeImage: false })) }}
+          >
+            Удалить
+          </button>
         </div>
       )}
 

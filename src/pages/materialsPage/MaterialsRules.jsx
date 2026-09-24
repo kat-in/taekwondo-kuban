@@ -1,4 +1,5 @@
 import rulesData from "../../data/materialsData/rulesData";
+import SEO from "../../components/SEO/SEO";
 
 const MaterialsRules = () => {
     const { fightArea, handStrikes, legStrikes, illegal, victoryOptions } = rulesData
@@ -6,6 +7,7 @@ const MaterialsRules = () => {
 
     return (
         <>
+            <SEO title="Правила поединка — Тхэквондо Му Дук Кван" description="Правила проведения поединков спортсменов направления Му Дук Кван." />
             <h1>Правила поединка спортсменов направления МУ ДУК КВАН</h1>
             <div className='divider'></div>
             <div className="rules">

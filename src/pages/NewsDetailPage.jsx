@@ -5,7 +5,14 @@ import RutubeVideo from "../components/RutubeVideo";
 import Breadcrumbs from "../components/Breadcrumbs";
 import NotFound from "./NotFound";
 import { BELTS, humanCount } from "../utils/belts";
-import { formatDate } from "../utils/date";
+import { formatDate } from "../utils/date"
+import SEO from "../components/SEO/SEO"
+
+const getNewsDescription = (content) => {
+    const text = String(content || '').replace(/[#*_`]/g, ' ').replace(/\s+/g, ' ').trim()
+    return text.split(' ').slice(0, 25).join(' ') || 'Новость Краснодарской городской ассоциации тхэквондо Му Дук Кван.'
+}
+;
 
 const NewsDetailPage = () => {
     const navigate = useNavigate()
@@ -96,6 +103,7 @@ const NewsDetailPage = () => {
 
     return (
         <main>
+            <SEO title={currentNews.title} description={getNewsDescription(currentNews.content)} image={currentNews.image?.url} />
             <div className="news__detail__section">
                 <Breadcrumbs name={currentNews.title} />
                 <div><h2>{currentNews.title}</h2></div>

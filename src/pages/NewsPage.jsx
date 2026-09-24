@@ -2,6 +2,7 @@ import Markdown from "react-markdown"
 import { useState, useEffect } from "react"
 import { useSearchParams, Link } from "react-router-dom"
 import Breadcrumbs from "../components/Breadcrumbs"
+import SEO from "../components/SEO/SEO"
 import { formatDate, sortByDateDesc } from "../utils/date"
 
 const NEWS_PER_PAGE = 10
@@ -84,6 +85,7 @@ const NewsPage = () => {
 
     return (
         <main>
+            <SEO title="Новости — Тхэквондо Му Дук Кван" description="Новости Краснодарской городской ассоциации тхэквондо Му Дук Кван: соревнования, аттестация и события." />
             <div className="news__container">
             <Breadcrumbs />
             <h1>Новости</h1>

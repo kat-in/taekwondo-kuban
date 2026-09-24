@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation } from "react-router";
 import { useState } from "react";
 import cn from 'classnames'
 import Breadcrumbs from "../../components/Breadcrumbs"
+import SEO from "../../components/SEO/SEO"
 
 const links = [
     { title: 'Аттестация', link: '/materials/attestation' },
@@ -33,6 +34,7 @@ const MaterialsLayout = () => {
 
     return (
         <main>
+            <SEO title="База знаний — Тхэквондо Му Дук Кван" description="Правила, кодекс, аттестационные программы и другая полезная информация о тхэквондо Му Дук Кван." />
             <div className="materials__layout">
                 <div className="materials__sidebar">
                     {navLinks}

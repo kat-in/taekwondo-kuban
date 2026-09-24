@@ -1,4 +1,5 @@
 import glossaryData from '../../data/materialsData/glossaryData.js'
+import SEO from '../../components/SEO/SEO'
 
 const TITLE = 'Словарик для запоминания'
 
@@ -16,6 +17,7 @@ const MaterialsGlossary = () => {
 
     return (
         <>
+            <SEO title="Словарик — Тхэквондо Му Дук Кван" description="Словарь основных терминов тхэквондо Му Дук Кван." />
             <div className="glossary__print-area">
                 <h1>{TITLE}</h1>
                 <div className='divider'></div>
