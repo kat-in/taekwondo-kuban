@@ -4,16 +4,14 @@ import gymData from '../../data/gymsData';
 
 function GymSection() {
 
-    const gyms = gymData.map((gym) => <GymCard key={gym.id} gym={gym}/>);
-    console.log(gyms);
-   
+    const gyms = gymData.map((gym) => <GymCard key={gym.id} gym={gym} />)
 
     return (
         <div className="gym__section">
-        <div><GymMap/></div>
-        <div className="gym__cards">{gyms}</div>
+            <div className="gym__cards">{gyms}</div>
+            <GymMap />
         </div>
-    );
+    )
 }
 
 export default GymSection;

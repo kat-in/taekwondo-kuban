@@ -33,6 +33,7 @@ import MaterialsCodex from './pages/materialsPage/MaterialsCodex'
 import MaterialsRules from './pages/materialsPage/MaterialsRules'
 import GalleryPage from './pages/galleryPage/GalleryPage'
 import AlbumGalleryPage from './pages/galleryPage/AlbumGalleryPage'
+import AddressesPage from './pages/AddressesPage'
 
 
 
@@ -74,6 +75,7 @@ function PageRoutes() {
         <Route path="/gallery/:albumId" element={<AlbumGalleryPage />} />
         <Route path="/photo/*" element={<Navigate to="/gallery/*" />} />
         <Route path="/beginners" element={<BeginnersPage />} />
+        <Route path="/addresses" element={<AddressesPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<HomePage />} />
         <Route

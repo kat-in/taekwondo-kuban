@@ -7,7 +7,7 @@ function GymCard({gym}) {
       <h3>{title}</h3>
       <p>{address}</p>
       <div className="gym__card__days">{schedule}</div>
-      <div>{time}</div>
+      <div className="gym__card__time">{time}</div>
     </div>
   );
 }

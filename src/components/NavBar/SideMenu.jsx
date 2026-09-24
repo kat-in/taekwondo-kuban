@@ -18,6 +18,9 @@ const SideMenu = ({ onClose }) => {
                     <a href="/about" onClick={onClose}>О нас</a>
                 </li>
                 <li className="side-menu__item">
+                    <a href="/addresses" onClick={onClose}>Адреса занятий</a>
+                </li>
+                <li className="side-menu__item">
                     <a href="/gallery" onClick={onClose}>Фото и видео</a>
                 </li>
             </ul>
