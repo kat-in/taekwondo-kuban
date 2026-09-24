@@ -49,6 +49,11 @@ const VideoForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!form.title.trim() || !form.videoId.trim() || !form.date) {
+      setError('Заполните название, ID ролика и дату')
+      return
+    }
+
     setError('')
     setSaving(true)
     try {
@@ -86,7 +91,7 @@ const VideoForm = () => {
       <div className="admin-form__row">
         <label className="admin-form__field">
           <span>Дата</span>
-          <Calendar value={form.date} maxDate={getTodayDate()} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
+          <Calendar required value={form.date} maxDate={getTodayDate()} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
         <label className="admin-form__field">
           <span>Привязать к новости</span>

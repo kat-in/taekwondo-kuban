@@ -4,6 +4,9 @@ import { adminFetch } from "../../utils/api";
 import Calendar from "../../components/ui/Calendar";
 import { formatDate, getTodayDate, sortByDateDesc } from "../../utils/date";
 
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024
+const MAX_ALBUM_PHOTOS = 50
+
 const AlbumForm = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -48,7 +51,23 @@ const AlbumForm = () => {
   }
 
   const handleFiles = (e) => {
-    setNewPhotos(Array.from(e.target.files || []))
+    const files = Array.from(e.target.files || [])
+    const oversizedPhoto = files.find((file) => file.size > MAX_IMAGE_SIZE)
+    if (oversizedPhoto) {
+      setError(`Файл «${oversizedPhoto.name}» больше 10 МБ`)
+      e.target.value = ''
+      return
+    }
+
+    const retainedCount = currentPhotos.filter((photo) => !removedPhotos.includes(photo)).length
+    if (retainedCount + files.length > MAX_ALBUM_PHOTOS) {
+      setError(`В одном альбоме можно сохранить не более ${MAX_ALBUM_PHOTOS} фотографий`)
+      e.target.value = ''
+      return
+    }
+
+    setError('')
+    setNewPhotos(files)
   }
 
   const handleRemoveExisting = (url) => {
@@ -61,6 +80,11 @@ const AlbumForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!form.title.trim() || !form.date) {
+      setError('Укажите название и дату альбома')
+      return
+    }
+
     setError('')
     setSaving(true)
     try {
@@ -96,7 +120,7 @@ const AlbumForm = () => {
       <div className="admin-form__row">
         <label className="admin-form__field">
           <span>Дата</span>
-          <Calendar value={form.date} maxDate={getTodayDate()} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
+          <Calendar required value={form.date} maxDate={getTodayDate()} onChange={(value) => setForm((prev) => ({ ...prev, date: value }))} />
         </label>
         <label className="admin-form__field">
           <span>Привязать к новости</span>
@@ -112,6 +136,7 @@ const AlbumForm = () => {
       <label className="admin-form__field">
         <span>{isEdit ? 'Добавить фото' : 'Фото'}</span>
         <input type="file" accept="image/*" multiple onChange={handleFiles} />
+        <p className="admin-form__hint-text">До {MAX_ALBUM_PHOTOS} фотографий в альбоме, до 10 МБ каждая.</p>
       </label>
 
       {isEdit && (

@@ -5,6 +5,8 @@ import { BELTS } from "../../utils/belts";
 import Calendar from "../../components/ui/Calendar";
 import { formatDate, getTodayDate, sortByDateDesc } from "../../utils/date";
 
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024
+
 const emptyAttestation = () => BELTS.reduce((acc, belt) => ({ ...acc, [belt]: '' }), {})
 
 const MarkdownHint = () => (
@@ -93,6 +95,20 @@ const NewsForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleCoverFile = (e) => {
+    const file = e.target.files[0] || null
+    if (file && file.size > MAX_IMAGE_SIZE) {
+      setError(`Файл «${file.name}» больше 10 МБ`)
+      e.target.value = ''
+      setCoverFile(null)
+      return
+    }
+
+    setError('')
+    setCoverFile(file)
+    setForm((prev) => ({ ...prev, removeImage: false }))
   }
 
   const handleAddVideo = () => {
@@ -258,7 +274,8 @@ const NewsForm = () => {
         </label>
         <label className="admin-form__field">
           <span>Обложка</span>
-          <input ref={coverInputRef} type="file" accept="image/*" onChange={(e) => { setCoverFile(e.target.files[0] || null); setForm((prev) => ({ ...prev, removeImage: false })) }} />
+          <input ref={coverInputRef} type="file" accept="image/*" onChange={handleCoverFile} />
+          <p className="admin-form__hint-text">Обложка должна быть не больше 10 МБ.</p>
         </label>
       </div>
 

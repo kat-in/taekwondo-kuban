@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import sharp from 'sharp';
 import path from 'path';
 import { promises as fs } from 'fs';
 import { fileURLToPath } from 'url';
@@ -20,6 +21,10 @@ const VIDEO_FILE = path.join(DATA_DIR, 'video.json');
 const UPLOADS_DIR = path.join(BACKEND_DIR, 'uploads');
 const NEWS_UPLOADS_DIR = path.join(UPLOADS_DIR, 'news');
 const ALBUMS_UPLOADS_DIR = path.join(UPLOADS_DIR, 'albums');
+const MAX_IMAGE_SIZE = 10 * 1024 * 1024;
+const MAX_ALBUM_PHOTOS = 50;
+const WEBP_QUALITY = 84;
+const MAX_IMAGE_DIMENSION = 2560;
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -34,7 +39,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 15 * 1024 * 1024 },
+  limits: { fileSize: MAX_IMAGE_SIZE },
   fileFilter: (req, file, cb) => cb(null, file.mimetype.startsWith('image/')),
 });
 
@@ -42,6 +47,8 @@ const parseOptionalInt = (value) => {
   const num = Number.parseInt(value, 10);
   return Number.isNaN(num) ? null : num;
 };
+
+const parseText = (value) => typeof value === 'string' ? value.trim() : '';
 
 const parseOptionalIntList = (value) => {
   let values = value;
@@ -79,6 +86,58 @@ const unlinkIfExists = async (filePath) => {
   }
 };
 
+const removeUploadedFiles = (files = []) => Promise.all(files.map((file) => unlinkIfExists(file.path)));
+
+const convertUploadedImages = async (req, res, next) => {
+  const files = req.files || (req.file ? [req.file] : []);
+  try {
+    for (const file of files) {
+      const sourcePath = file.path;
+      const { dir, name } = path.parse(sourcePath);
+      const convertedPath = path.join(dir, `${name}-converted.webp`);
+      const webpPath = path.join(dir, `${name}.webp`);
+      const [originalSize, converted] = await Promise.all([
+        fs.stat(sourcePath).then((stats) => stats.size),
+        sharp(sourcePath)
+          .rotate()
+          .resize({
+            width: MAX_IMAGE_DIMENSION,
+            height: MAX_IMAGE_DIMENSION,
+            fit: 'inside',
+            withoutEnlargement: true,
+          })
+          .webp({ quality: WEBP_QUALITY, effort: 6, smartSubsample: true })
+          .toFile(convertedPath),
+      ]);
+
+      if (converted.size < originalSize) {
+        await unlinkIfExists(sourcePath);
+        await fs.rename(convertedPath, webpPath);
+        file.path = webpPath;
+        file.filename = `${name}.webp`;
+        file.size = converted.size;
+        file.mimetype = 'image/webp';
+      } else {
+        await unlinkIfExists(convertedPath);
+      }
+    }
+    next();
+  } catch (error) {
+    await Promise.all(
+      files.flatMap((file) => {
+        const { dir, name } = path.parse(file.path);
+        return [
+          unlinkIfExists(file.path),
+          unlinkIfExists(path.join(dir, `${name}-converted.webp`)),
+        ];
+      })
+    );
+    error.status = 500;
+    error.message = 'Не удалось обработать фото';
+    next(error);
+  }
+};
+
 router.post('/login', async (req, res) => {
   const { password } = req.body;
   const isValid = bcrypt.compareSync(password, globalThis.process.env.ADMIN_PASSWORD);
@@ -102,7 +161,7 @@ router.get('/news', async (req, res) => {
   }
 });
 
-router.post('/news', upload.single('cover'), async (req, res) => {
+router.post('/news', upload.single('cover'), convertUploadedImages, async (req, res) => {
   try {
     const news = await readJson(NEWS_FILE);
     const albums = await readJson(ALBUMS_FILE);
@@ -154,7 +213,7 @@ router.post('/news', upload.single('cover'), async (req, res) => {
   }
 });
 
-router.put('/news/:id', upload.single('cover'), async (req, res) => {
+router.put('/news/:id', upload.single('cover'), convertUploadedImages, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     const news = await readJson(NEWS_FILE);
@@ -259,11 +318,16 @@ router.get('/albums', async (req, res) => {
   }
 });
 
-router.post('/albums', upload.array('photos', 100), async (req, res) => {
+router.post('/albums', upload.array('photos', MAX_ALBUM_PHOTOS), convertUploadedImages, async (req, res) => {
   try {
     const albums = await readJson(ALBUMS_FILE);
+    const date = parseText(req.body.date);
+    const title = parseText(req.body.title);
+    if (!title || !date) {
+      await removeUploadedFiles(req.files);
+      return res.status(400).json({ success: false, message: 'Укажите название и дату альбома' });
+    }
     const id = nextId(albums);
-    const date = req.body.date || '';
     const newsId = parseOptionalInt(req.body.newsId);
     if (newsId !== null && albums.some((album) => album.newsId === newsId)) {
       return res.status(409).json({ success: false, message: 'К этой новости уже привязан альбом' });
@@ -272,7 +336,7 @@ router.post('/albums', upload.array('photos', 100), async (req, res) => {
     const item = {
       newsId,
       id,
-      title: req.body.title || '',
+      title,
       date,
       photos,
     };
@@ -284,28 +348,38 @@ router.post('/albums', upload.array('photos', 100), async (req, res) => {
   }
 });
 
-router.put('/albums/:id', upload.array('photos', 100), async (req, res) => {
+router.put('/albums/:id', upload.array('photos', MAX_ALBUM_PHOTOS), convertUploadedImages, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     const albums = await readJson(ALBUMS_FILE);
     const item = albums.find((a) => a.id === id);
     if (!item) return res.status(404).json({ success: false, message: 'Альбом не найден' });
 
-    const date = req.body.date !== undefined ? req.body.date : item.date;
+    const date = parseText(req.body.date !== undefined ? req.body.date : item.date);
+    const title = parseText(req.body.title !== undefined ? req.body.title : item.title);
+    if (!title || !date) {
+      await removeUploadedFiles(req.files);
+      return res.status(400).json({ success: false, message: 'Укажите название и дату альбома' });
+    }
     const newsId = parseOptionalInt(req.body.newsId);
     if (newsId !== null && albums.some((album) => album.newsId === newsId && album.id !== id)) {
       return res.status(409).json({ success: false, message: 'К этой новости уже привязан альбом' });
     }
     item.newsId = newsId;
-    item.title = req.body.title ?? item.title;
+    item.title = title;
     item.date = date;
 
     const removed = JSON.parse(req.body.removedPhotos || '[]');
+    const retainedPhotos = item.photos.filter((p) => !removed.includes(p));
+    if (retainedPhotos.length + (req.files || []).length > MAX_ALBUM_PHOTOS) {
+      await removeUploadedFiles(req.files);
+      return res.status(400).json({ success: false, message: `В альбоме можно сохранить не более ${MAX_ALBUM_PHOTOS} фотографий` });
+    }
     for (const photoUrl of removed) {
       const photoPath = resolveUploadPath(photoUrl);
       if (photoPath) await unlinkIfExists(photoPath);
     }
-    item.photos = item.photos.filter((p) => !removed.includes(p));
+    item.photos = retainedPhotos;
     (req.files || []).forEach((f) => item.photos.push(`/uploads/albums/${f.filename}`));
 
     await writeJson(ALBUMS_FILE, albums);
@@ -348,14 +422,19 @@ router.get('/video', async (req, res) => {
 router.post('/video', async (req, res) => {
   try {
     const videos = await readJson(VIDEO_FILE);
+    const date = parseText(req.body.date);
+    const videoId = parseText(req.body.videoId);
+    const title = parseText(req.body.title);
+    if (!title || !videoId || !date) {
+      return res.status(400).json({ success: false, message: 'Заполните название, ID ролика и дату' });
+    }
     const id = nextId(videos);
-    const date = req.body.date || '';
     const item = {
       newsId: parseOptionalInt(req.body.newsId),
       id,
       date,
-      videoId: req.body.videoId || '',
-      title: req.body.title || '',
+      videoId,
+      title,
     };
     videos.push(item);
     await writeJson(VIDEO_FILE, videos);
@@ -372,11 +451,16 @@ router.put('/video/:id', async (req, res) => {
     const item = videos.find((v) => v.id === id);
     if (!item) return res.status(404).json({ success: false, message: 'Видео не найдено' });
 
-    const date = req.body.date !== undefined ? req.body.date : item.date;
+    const date = parseText(req.body.date !== undefined ? req.body.date : item.date);
+    const videoId = parseText(req.body.videoId !== undefined ? req.body.videoId : item.videoId);
+    const title = parseText(req.body.title !== undefined ? req.body.title : item.title);
+    if (!title || !videoId || !date) {
+      return res.status(400).json({ success: false, message: 'Заполните название, ID ролика и дату' });
+    }
     item.newsId = parseOptionalInt(req.body.newsId);
     item.date = date;
-    item.videoId = req.body.videoId ?? item.videoId;
-    item.title = req.body.title ?? item.title;
+    item.videoId = videoId;
+    item.title = title;
 
     await writeJson(VIDEO_FILE, videos);
     res.json({ success: true, data: item });
@@ -398,5 +482,19 @@ router.delete('/video/:id', async (req, res) => {
 });
 
 /* VIDEOS END */
+
+router.use((error, req, res, next) => {
+  if (error.status === 500 && error.message === 'Не удалось обработать фото') {
+    return res.status(500).json({ success: false, message: error.message })
+  }
+  if (!(error instanceof multer.MulterError)) return next(error)
+  if (error.code === 'LIMIT_FILE_SIZE') {
+    return res.status(413).json({ success: false, message: 'Размер фото не должен превышать 10 МБ' })
+  }
+  if (error.code === 'LIMIT_FILE_COUNT') {
+    return res.status(400).json({ success: false, message: `В альбоме можно загрузить не более ${MAX_ALBUM_PHOTOS} фотографий за раз` })
+  }
+  return res.status(400).json({ success: false, message: 'Не удалось загрузить файл' })
+})
 
 export default router
