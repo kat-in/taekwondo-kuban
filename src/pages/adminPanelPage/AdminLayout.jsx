@@ -30,6 +30,14 @@ const AdminLayout = () => {
               </NavLink>
             ))}
           </nav>
+          <details className="admin__hint">
+            <summary className="admin__hint-summary">Подсказка</summary>
+            <div className="admin__hint-content">
+              <p>Новости, альбомы и видео можно добавлять независимо друг от друга.</p>
+              <p>Чтобы фото и видео отображались в новости, свяжите новость с нужным альбомом или видео.</p>
+              <p>С каждой новостью может быть связан только один альбом и/или несколько видео.</p>
+            </div>
+          </details>
         </aside>
         <section className="admin__content">
           <Outlet />
