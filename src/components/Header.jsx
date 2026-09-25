@@ -10,7 +10,7 @@ const Header = () => {
     return (
         <div className='header' >
             <div className='header__container'>
-            <Link to='/'> <div className='header__logo'>
+            <Link className='header__logo-link' to='/'> <div className='header__logo'>
                 <div className='logo1'></div>
                 <div className='logo2'></div>
                 {!isHome && <div className='header__logo-text'><span className='header__logo-line'>Краснодарская городская</span><span className='header__logo-line'>Ассоциация Тхэквондо</span><span className='header__logo-line'>МУ ДУК КВАН</span></div>}
