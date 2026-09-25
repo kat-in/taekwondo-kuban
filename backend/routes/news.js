@@ -1,5 +1,5 @@
 import express from 'express';
-import { promises as fs } from 'fs';
+import { readJson } from '../utils/jsonStore.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -12,26 +12,25 @@ const sortByDateDesc = (items) => [...items].sort((a, b) => {
     return dateOrder || (Number(b.id) || 0) - (Number(a.id) || 0);
 });
 
+const parseId = (value) => {
+    const id = Number.parseInt(value, 10);
+    return Number.isNaN(id) ? null : id;
+};
+
 router.get('/', async (req, res) => {
-    try {
-        const data = await fs.readFile(DATA_FILE, 'utf8')
-        const newsData = JSON.parse(data);
-        res.json(sortByDateDesc(newsData));
-    } catch (parseErr) {
-        res.status(500).send(parseErr.message);
-    }
+    res.json(sortByDateDesc(await readJson(DATA_FILE)));
 });
 
 router.get('/:id', async (req, res) => {
-    try {
-        const newsId = parseInt(req.params.id);
-        const data = await fs.readFile(DATA_FILE, 'utf8')
-        const news = JSON.parse(data).find((item) => item.id === newsId)
-        if (!news) return res.status(404).json({ error: 'Новость не найдена' });
-        res.json(news);
-    } catch (parseErr) {
-        res.status(500).send(parseErr.message);
+    const id = parseId(req.params.id);
+    if (id === null) {
+        return res.status(400).json({ success: false, message: 'Некорректный идентификатор новости' });
     }
+    const news = (await readJson(DATA_FILE)).find((item) => item.id === id);
+    if (!news) {
+        return res.status(404).json({ success: false, message: 'Новость не найдена' });
+    }
+    res.json(news);
 });
 
 export default router

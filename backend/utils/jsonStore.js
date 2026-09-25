@@ -1,15 +1,36 @@
 import { promises as fs } from 'fs';
 
+let writeQueue = Promise.resolve();
+
+export const withWriteLock = (task) => {
+  const result = writeQueue.then(task, task);
+  writeQueue = result.then(() => undefined, () => undefined);
+  return result;
+};
+
 export const readJson = async (file) => {
   const data = await fs.readFile(file, 'utf8');
   return JSON.parse(data);
 };
 
 export const writeJson = async (file, data) => {
-  const temporaryFile = `${file}.tmp`;
-  await fs.writeFile(temporaryFile, JSON.stringify(data, null, 2), 'utf8');
-  await fs.rename(temporaryFile, file);
+  const temporaryFile = `${file}.${process.pid}.${Date.now()}.tmp`;
+  try {
+    await fs.writeFile(temporaryFile, JSON.stringify(data, null, 2), 'utf8');
+    await fs.rename(temporaryFile, file);
+  } catch (error) {
+    await fs.unlink(temporaryFile).catch(() => undefined);
+    throw error;
+  }
 };
+
+export const updateJson = (file, mutator) =>
+  withWriteLock(async () => {
+    const data = await readJson(file);
+    const result = await mutator(data);
+    await writeJson(file, data);
+    return result;
+  });
 
 export const nextId = (items) => items.reduce((max, item) => Math.max(max, item.id || 0), 0) + 1;
 

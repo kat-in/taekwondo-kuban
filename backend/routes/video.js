@@ -1,5 +1,5 @@
 import express from 'express';
-import { promises as fs } from 'fs';
+import { readJson } from '../utils/jsonStore.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -7,9 +7,13 @@ const DATA_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 
 
 const router = express.Router();
 
+const parseId = (value) => {
+    const id = Number.parseInt(value, 10);
+    return Number.isNaN(id) ? null : id;
+};
+
 const readVideos = async () => {
-    const data = await fs.readFile(DATA_FILE, 'utf8')
-    const videoData = JSON.parse(data)
+    const videoData = await readJson(DATA_FILE)
 
     const seen = new Set()
     const unique = []
@@ -25,22 +29,15 @@ const readVideos = async () => {
 }
 
 router.get('/', async (req, res) => {
-    try {
-        res.json(await readVideos());
-    } catch (parseErr) {
-        res.status(500).send(parseErr.message);
-    }
+    res.json(await readVideos());
 });
 
 router.get('/:newsId', async (req, res) => {
-    try {
-        const newsId = parseInt(req.params.newsId);
-        const videoData = await readVideos()
-        const newsVideo = videoData.filter((video) => video.newsId === newsId)
-        res.json(newsVideo);
-    } catch (parseErr) {
-        res.status(500).send(parseErr.message);
+    const newsId = parseId(req.params.newsId);
+    if (newsId === null) {
+        return res.status(400).json({ success: false, message: 'Некорректный идентификатор новости' });
     }
+    res.json((await readVideos()).filter((video) => video.newsId === newsId));
 });
 
 export default router
