@@ -15,7 +15,8 @@ const Footer = () => {
                         <li><a href="/news">Новости</a></li>
                         <li><a href="/materials">Знания</a></li>
                         <li><a href="/about">О нас</a></li>
-                        <li><a href="/addresses">Адреса занятий</a></li>
+                        <li><a href="/president">Президент</a></li>
+                        <li><a href="/addresses">Где заниматься</a></li>
                         <li><a href="/gallery">Фото и видео</a></li>
                     </ul>
                     <div className="footer__social">

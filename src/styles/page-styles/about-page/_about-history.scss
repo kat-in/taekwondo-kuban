@@ -13,6 +13,16 @@
     flex-direction: column;
     text-align: justify;
     gap: 30px;
+        a {
+        text-decoration: none;
+        color: #222;
+        font-weight: 700;
+    }
+
+    a:hover {
+        color: #FF3C3C;
+        transition: all 0.3s ease;
+    }
 }
 
 .history__students {
@@ -50,4 +60,81 @@
             animation: all 0.3s ease-in-out;
         }
     }
+}
+
+.history__master-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 780px;
+    margin: 0 auto;
+
+    img {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+        gap: 10px;
+        max-width: 520px;
+    }
+}
+
+.history__master-caption {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: 700;
+}
+
+.history__row {
+    display: flow-root;
+
+    >p,
+    >.history__row-text {
+        margin: 0 0 20px;
+    }
+
+    .history__students {
+        padding: 0 40px;
+        margin-bottom: 20px;
+    }
+}
+
+.history__row-figure {
+    float: right;
+    width: 200px;
+    margin: 0 0 10px 45px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    @media (max-width: 700px) {
+        width: 110px;
+        margin-left: 38px;
+    }
+
+    @media (max-width: 500px) {
+        width: 90px;
+        margin-left: 32px;
+    }
+}
+
+.history__row-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.history__row-caption {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    text-align: center;
+    color: $info-text;
+}
+
+.history__row-text {
+    text-align: justify;
 }

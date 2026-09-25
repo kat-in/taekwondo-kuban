@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Breadcrumbs from '../components/Breadcrumbs'
 import SEO from '../components/SEO/SEO'
 
@@ -13,6 +14,7 @@ const BeginnersPage = () => {
                 <p>Мы принимаем в наши секции детей с 5 лет.</p>
                 <p>При себе нужно иметь спортивную форму, а также медицинскую справку о том, что ребенок здоров и может заниматься спортом.</p>
                 <p><b>Первая тренировка бесплатно.</b></p>
+                <Link className="beginners__link" to="/addresses">Где заниматься</Link>
                 <p>У нас вы можете приобрести форму для занятий (добок) и пояса.</p>
             <div className="beginners__dobok">
                 <img src='./images/dobok/form1.jpg' />

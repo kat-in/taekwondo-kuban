@@ -5,6 +5,7 @@ import PresidentSection from './PresidentSection'
 import LastNewsSection from '../../components/LastNewsSection'
 import SEO from '../../components/SEO/SEO'
 import PartnersSection from './PartnersSection'
+import HomeInstructorsSection from './HomeInstructorsSection'
 
 const HomePage = () => {
     return ( 
@@ -14,6 +15,7 @@ const HomePage = () => {
     <AboutSection/>
     <PresidentSection/>
     <AboutTaekwandoSection/>
+    <HomeInstructorsSection/>
     <LastNewsSection/>
     <PartnersSection/>
   </>

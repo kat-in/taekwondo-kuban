@@ -1,0 +1,98 @@
+@use '../../abstracts/variables' as *;
+
+.places {
+    display: flex;
+    background-color: transparent;
+    color: $dark;
+}
+
+.places__section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 30px 40px 40px;
+
+    @media (max-width: 560px) {
+        padding: 20px 15px;
+    }
+}
+
+.places__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.places__title {
+    font-size: 2.4rem;
+}
+
+.places__link {
+    padding: 8px 24px;
+    border: 1px solid $dark;
+    border-radius: 20px;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $dark;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        background-color: $dark;
+        color: $white;
+    }
+}
+
+.places__instructors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 35px 20px;
+    width: 100%;
+}
+
+.places__instructor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+
+    img {
+        flex: 0 0 180px;
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 50%;
+        background-color: $section-light;
+    }
+
+    figcaption {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        text-align: center;
+    }
+}
+
+.places__name {
+    font-family: "Oswald", sans-serif;
+    font-size: 1.4rem;
+}
+
+.places__role {
+    font-size: 1.2rem;
+    color: $info-text;
+}
+
+.places__belt {
+    font-size: 1.2rem;
+    font-weight: 700;
+}

@@ -1,5 +1,6 @@
 import Breadcrumbs from '../components/Breadcrumbs'
 import GymSection from '../components/GymSection/GymSection'
+import InstructorsSection from '../components/GymSection/InstructorsSection'
 import SEO from '../components/SEO/SEO'
 
 const AddressesPage = () => {
@@ -10,9 +11,10 @@ const AddressesPage = () => {
                 description="Адреса залов и расписание занятий Краснодарской городской ассоциации тхэквондо Му Дук Кван."
             />
             <Breadcrumbs />
-            <h1>Адреса занятий</h1>
+            <h1>Занятия проходят в Краснодаре по следующим адресам:</h1>
             <div className="divider"></div>
             <GymSection />
+            <InstructorsSection />
         </main>
     )
 }

@@ -34,6 +34,7 @@ import MaterialsRules from './pages/materialsPage/MaterialsRules'
 import GalleryPage from './pages/galleryPage/GalleryPage'
 import AlbumGalleryPage from './pages/galleryPage/AlbumGalleryPage'
 import AddressesPage from './pages/AddressesPage'
+import PresidentPage from './pages/PresidentPage'
 
 
 
@@ -71,6 +72,7 @@ function PageRoutes() {
 
         </Route>
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/president" element={<PresidentPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/gallery/:albumId" element={<AlbumGalleryPage />} />
         <Route path="/photo/*" element={<Navigate to="/gallery/*" />} />

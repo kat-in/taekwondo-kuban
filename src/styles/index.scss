@@ -15,6 +15,7 @@
 @use 'page-styles/home-page/homepage-index';
 @use 'page-styles/about-page/about-history';
 @use 'page-styles/beginners-page/beginners';
+@use 'page-styles/home-page/president-page';
 @use 'page-styles/admin/admin';
 
 
@@ -632,90 +633,142 @@ p {
 .gym__section {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 25px;
   width: 100%;
   max-width: $max-width;
   margin: 0 auto;
   padding: 30px 40px 40px;
 }
 
+.gym__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  align-items: stretch;
+  gap: 30px;
+}
+
+.gym__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: $info-text;
+}
+
 .gym-map {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  position: sticky;
+  top: 20px;
   align-self: stretch;
-  gap: 20px;
+  min-width: 0;
+  height: 100%;
+}
+
+.gym-map__frame {
+  flex: 1;
   width: 100%;
-  max-width: none;
+  min-height: 420px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .gym-map iframe {
+  display: block;
   width: 100%;
-  height: 500px;
+  height: 100%;
+  min-height: 420px;
   border: 0;
-  border-radius: 10px;
 }
 
 .gym__cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-self: start;
-  gap: 20px;
+  gap: 15px;
   align-content: start;
 }
 
 .gym__card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
-  padding: 20px;
+  padding: 16px;
   border-radius: 10px;
   background-color: #fff;
   font-size: 1.2rem;
   font-weight: 400;
   overflow-wrap: anywhere;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 14px rgba(34, 34, 34, 0.12);
+    transform: translateY(-2px);
+  }
 
   h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
+}
+
+.gym__card__address {
+  color: $info-text;
+  font-size: 1.2rem;
 }
 
 .gym__card__days {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  gap: 6px;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 2px;
 }
 
 .gym__card__day {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
-  padding: 5px 6px;
-  white-space: nowrap;
-  border-radius: 10px;
-  background-color: $light;
-  font-weight: 600;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background-color: $dark;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: default;
 }
 
 .gym__card__time {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: $dark;
+}
+
+@media (max-width: 1400px) {
+  .gym__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 1100px) {
-  .gym__section {
-    max-width: $max-width;
+  .gym__body {
+    grid-template-columns: 1fr;
   }
 
   .gym-map {
-    max-width: none;
+    position: static;
+    order: -1;
+    height: auto;
   }
 
-  .gym__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .gym-map__frame {
+    height: 380px;
+    min-height: 0;
+  }
+
+  .gym-map iframe {
+    min-height: 0;
   }
 }
 
@@ -725,12 +778,140 @@ p {
     padding: 20px 0 30px;
   }
 
+  .gym-map__frame {
+    height: 300px;
+  }
+
   .gym-map iframe {
-    height: 360px;
+    min-height: 0;
+  }
+
+  .gym__body {
+    display: contents;
+  }
+
+  .gym-map {
+    order: 1;
   }
 
   .gym__cards {
+    order: 2;
     grid-template-columns: 1fr;
   }
+
+  .gym__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: 15px;
+    row-gap: 6px;
+  }
+
+  .gym__card h3 {
+    grid-column: 1;
+    font-size: 1.5rem;
+  }
+
+  .gym__card__address {
+    grid-column: 1;
+  }
+
+  .gym__card__days {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .gym__card__time {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    text-align: center;
+    white-space: nowrap;
+  }
 }
+
+/*INSTRUCTORS START*/
+.instructors {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 10px 40px 40px;
+}
+
+.instructors__title {
+  text-align: center;
+  font-size: 2.6rem;
+}
+
+.instructors__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.instructors__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.instructors__item img {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: $section-light;
+}
+
+.instructors__item figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.instructors__name {
+  font-family: "Oswald";
+  font-size: 1.6rem;
+}
+
+.instructors__role {
+  font-size: 1.3rem;
+  color: $info-text;
+}
+
+.instructors__belt {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .instructors__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .instructors {
+    padding: 10px 0 30px;
+  }
+
+  .instructors__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+
+  .instructors__item img {
+    max-width: 130px;
+  }
+}
+/*INSTRUCTORS END*/
 /*GYM END*/

@@ -8,8 +8,10 @@ function GymSection() {
 
     return (
         <div className="gym__section">
-            <div className="gym__cards">{gyms}</div>
-            <GymMap />
+            <div className="gym__body">
+                <div className="gym__cards">{gyms}</div>
+                <GymMap />
+            </div>
         </div>
     )
 }
