@@ -9,20 +9,32 @@ import albumRoutes from './routes/albums.js'
 import newsRoutes from './routes/news.js'
 import videoRoutes from './routes/video.js'
 import adminRoutes from './routes/admin.js'
+import { ensureJsonFiles } from './utils/jsonStore.js'
 
 
 const BACKEND_DIR = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(BACKEND_DIR, '.env'), quiet: true });
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = Number.parseInt(process.env.PORT, 10) || 5001;
+// HOST=127.0.0.1 закрывает API от внешних подключений: наружу смотрит только nginx
+const host = process.env.HOST?.trim() || undefined;
 const isProduction = process.env.NODE_ENV === 'production';
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
 
-app.set('trust proxy', 1);
+// 0 или false — сервер за nginx на том же хосте; 1 — за одним прокси; N — за N прокси
+const parseTrustProxy = (value) => {
+  const raw = String(value ?? '1').trim().toLowerCase();
+  if (raw === 'false' || raw === '0' || raw === 'no') return false;
+  if (raw === 'true' || raw === 'yes') return true;
+  const hops = Number.parseInt(raw, 10);
+  return Number.isNaN(hops) || hops < 0 ? 1 : hops;
+};
+
+app.set('trust proxy', parseTrustProxy(process.env.TRUST_PROXY));
 app.disable('x-powered-by');
 
 app.use(helmet({
@@ -87,8 +99,16 @@ export { app };
 const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
 if (isDirectRun) {
-    const server = app.listen(port, () => {
-        console.log(`Сервер запущен на http://localhost:${port}`);
+    const created = await ensureJsonFiles(
+      ['news.json', 'albums.json', 'video.json'].map((name) => path.join(BACKEND_DIR, 'data', name)),
+    );
+    for (const file of created) {
+        console.log(`Создан пустой файл данных ${file}`);
+    }
+
+    const server = host ? app.listen(port, host) : app.listen(port);
+    server.on('listening', () => {
+        console.log(`Сервер запущен на http://${host || '0.0.0.0'}:${port}`);
     });
 
     const shutdown = (signal) => {
