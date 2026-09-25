@@ -12,12 +12,12 @@ import adminRoutes from './routes/admin.js'
 
 
 const BACKEND_DIR = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(BACKEND_DIR, '.env') });
+dotenv.config({ path: path.join(BACKEND_DIR, '.env'), quiet: true });
 
 const app = express();
-const port = globalThis.process.env.PORT || 5001;
-const isProduction = globalThis.process.env.NODE_ENV === 'production';
-const allowedOrigins = (globalThis.process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
+const port = process.env.PORT || 5001;
+const isProduction = process.env.NODE_ENV === 'production';
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);

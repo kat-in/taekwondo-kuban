@@ -17,8 +17,21 @@ const parseId = (value) => {
     return Number.isNaN(id) ? null : id;
 };
 
+const readNews = async () => {
+    const newsData = await readJson(DATA_FILE)
+
+    const seen = new Set()
+    const unique = []
+    for (const news of newsData) {
+        if (!news || news.id === undefined || seen.has(news.id)) continue
+        seen.add(news.id)
+        unique.push(news)
+    }
+    return sortByDateDesc(unique)
+}
+
 router.get('/', async (req, res) => {
-    res.json(sortByDateDesc(await readJson(DATA_FILE)));
+    res.json(await readNews());
 });
 
 router.get('/:id', async (req, res) => {
@@ -26,7 +39,7 @@ router.get('/:id', async (req, res) => {
     if (id === null) {
         return res.status(400).json({ success: false, message: 'Некорректный идентификатор новости' });
     }
-    const news = (await readJson(DATA_FILE)).find((item) => item.id === id);
+    const news = (await readNews()).find((item) => item.id === id);
     if (!news) {
         return res.status(404).json({ success: false, message: 'Новость не найдена' });
     }

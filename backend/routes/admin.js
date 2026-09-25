@@ -5,7 +5,6 @@ import path from 'path';
 import rateLimit from 'express-rate-limit';
 import { promises as fs } from 'fs';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { authMiddleware, passwordFingerprint } from '../utils/auth.js';
@@ -13,7 +12,6 @@ import { readJson, writeJson, nextId, formatDisplayDate, withWriteLock } from '.
 import { parseAttestation, validateAlbum, validateDateValue, validateIdList, validateNewPassword, validateNews, validateVideo } from '../utils/validate.js';
 
 const BACKEND_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-dotenv.config({ path: path.join(BACKEND_DIR, '.env') });
 
 const router = express.Router();
 const DATA_DIR = path.join(BACKEND_DIR, 'data');
@@ -32,22 +30,28 @@ const LOGIN_MAX_ATTEMPTS = 8;
 const MUTATION_WINDOW_MS = 60 * 1000;
 const MUTATION_MAX_REQUESTS = 40;
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const dir = req.originalUrl.split('?')[0].includes('/albums') ? ALBUMS_UPLOADS_DIR : NEWS_UPLOADS_DIR;
-    cb(null, dir);
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname) || '.jpg';
-    cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
-  },
+const filename = (req, file, cb) => {
+  const ext = path.extname(file.originalname) || '.jpg';
+  cb(null, `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
+};
+
+const fileFilter = (req, file, cb) => {
+  if (!file.mimetype.startsWith('image/')) {
+    const error = new Error('Можно загружать только изображения');
+    error.status = 400;
+    return cb(error);
+  }
+  cb(null, true);
+};
+
+const createUploader = (destination) => multer({
+  storage: multer.diskStorage({ destination: (req, file, cb) => cb(null, destination), filename }),
+  limits: { fileSize: MAX_IMAGE_SIZE, files: MAX_ALBUM_PHOTOS },
+  fileFilter,
 });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: MAX_IMAGE_SIZE, files: MAX_ALBUM_PHOTOS },
-  fileFilter: (req, file, cb) => cb(null, file.mimetype.startsWith('image/')),
-});
+const uploadNewsImage = createUploader(NEWS_UPLOADS_DIR);
+const uploadAlbumPhotos = createUploader(ALBUMS_UPLOADS_DIR);
 
 const parseOptionalInt = (value) => {
   const num = Number.parseInt(value, 10);
@@ -217,8 +221,8 @@ const mutationLimiter = rateLimit({
 
 router.post('/login', loginLimiter, async (req, res) => {
   const password = typeof req.body?.password === 'string' ? req.body.password : '';
-  const passwordHash = globalThis.process.env.ADMIN_PASSWORD;
-  const jwtSecret = globalThis.process.env.JWT_SECRET;
+  const passwordHash = process.env.ADMIN_PASSWORD;
+  const jwtSecret = process.env.JWT_SECRET;
   if (!password || !passwordHash || !jwtSecret) {
     return res.status(401).json({ success: false, message: 'Неверный пароль' });
   }
@@ -245,7 +249,7 @@ router.post('/password', mutationLimiter, async (req, res) => {
   const currentPassword = typeof req.body?.currentPassword === 'string' ? req.body.currentPassword : '';
   const newPassword = typeof req.body?.newPassword === 'string' ? req.body.newPassword : '';
   const repeatPassword = typeof req.body?.repeatPassword === 'string' ? req.body.repeatPassword : '';
-  const currentHash = globalThis.process.env.ADMIN_PASSWORD;
+  const currentHash = process.env.ADMIN_PASSWORD;
 
   if (!currentHash) {
     return res.status(500).json({ success: false, message: 'Пароль на сервере не настроен' });
@@ -275,7 +279,7 @@ router.post('/password', mutationLimiter, async (req, res) => {
       }
       const newHash = await bcrypt.hash(newPassword, 12);
       await writeEnvValue('ADMIN_PASSWORD', newHash);
-      globalThis.process.env.ADMIN_PASSWORD = newHash;
+      process.env.ADMIN_PASSWORD = newHash;
     });
   } catch (error) {
     if (error.status === 409) {
@@ -312,7 +316,7 @@ router.get('/news', async (req, res) => {
   res.json(await readJson(NEWS_FILE));
 });
 
-router.post('/news', mutationLimiter, upload.single('cover'), convertUploadedImages, (req, res) =>
+router.post('/news', mutationLimiter, uploadNewsImage.single('cover'), convertUploadedImages, (req, res) =>
   respond(req, res, async () => {
     const titleError = validateNews(req.body);
     if (titleError) return invalid(titleError);
@@ -371,7 +375,7 @@ router.post('/news', mutationLimiter, upload.single('cover'), convertUploadedIma
     return ok(item);
   }));
 
-router.put('/news/:id', mutationLimiter, upload.single('cover'), convertUploadedImages, (req, res) =>
+router.put('/news/:id', mutationLimiter, uploadNewsImage.single('cover'), convertUploadedImages, (req, res) =>
   respond(req, res, async () => {
     const id = parseInt(req.params.id, 10);
     const news = await readJson(NEWS_FILE);
@@ -468,7 +472,7 @@ router.get('/albums', async (req, res) => {
   res.json(await readJson(ALBUMS_FILE));
 });
 
-router.post('/albums', mutationLimiter, upload.array('photos', MAX_ALBUM_PHOTOS), convertUploadedImages, (req, res) =>
+router.post('/albums', mutationLimiter, uploadAlbumPhotos.array('photos', MAX_ALBUM_PHOTOS), convertUploadedImages, (req, res) =>
   respond(req, res, async () => {
     const albumError = validateAlbum(req.body);
     if (albumError) return invalid(albumError);
@@ -495,7 +499,7 @@ router.post('/albums', mutationLimiter, upload.array('photos', MAX_ALBUM_PHOTOS)
     return ok(item);
   }));
 
-router.put('/albums/:id', mutationLimiter, upload.array('photos', MAX_ALBUM_PHOTOS), convertUploadedImages, (req, res) =>
+router.put('/albums/:id', mutationLimiter, uploadAlbumPhotos.array('photos', MAX_ALBUM_PHOTOS), convertUploadedImages, (req, res) =>
   respond(req, res, async () => {
     const id = parseInt(req.params.id, 10);
     const albums = await readJson(ALBUMS_FILE);
@@ -626,11 +630,16 @@ router.delete('/video/:id', mutationLimiter, (req, res) =>
 
 /* VIDEOS END */
 
-router.use((error, req, res, next) => {
+router.use(async (error, req, res, next) => {
   if (error.status === 500 && error.message === 'Не удалось обработать фото') {
     return res.status(500).json({ success: false, message: error.message })
   }
+  if (error.status === 400 && error.message === 'Можно загружать только изображения') {
+    await discardUploads(req);
+    return res.status(400).json({ success: false, message: error.message })
+  }
   if (!(error instanceof multer.MulterError)) return next(error)
+  await discardUploads(req);
   if (error.code === 'LIMIT_FILE_SIZE') {
     return res.status(413).json({ success: false, message: 'Размер фото не должен превышать 10 МБ' })
   }
