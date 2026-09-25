@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import path from 'path';
 
 let writeQueue = Promise.resolve();
 
@@ -32,7 +33,7 @@ export const readJsonCached = async (file) => {
 export const writeJson = async (file, data) => {
   const temporaryFile = `${file}.${process.pid}.${Date.now()}.tmp`;
   try {
-    await fs.writeFile(temporaryFile, JSON.stringify(data, null, 2), 'utf8');
+    await fs.writeFile(temporaryFile, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
     await fs.rename(temporaryFile, file);
     cache.delete(file);
   } catch (error) {
@@ -60,4 +61,19 @@ export const formatDisplayDate = (date) => {
   } catch {
     return '';
   }
+};
+
+// Чтобы сайт поднимался на чистой машине, где файлов данных ещё нет
+export const ensureJsonFiles = async (files) => {
+  const created = [];
+  for (const file of files) {
+    try {
+      await fs.access(file);
+    } catch {
+      await fs.mkdir(path.dirname(file), { recursive: true });
+      await writeJson(file, []);
+      created.push(file);
+    }
+  }
+  return created;
 };
