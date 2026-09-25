@@ -23,6 +23,7 @@ import AlbumsList from './pages/adminPanelPage/AlbumsList'
 import AlbumForm from './pages/adminPanelPage/AlbumForm'
 import VideosList from './pages/adminPanelPage/VideosList'
 import VideoForm from './pages/adminPanelPage/VideoForm'
+import PasswordForm from './pages/adminPanelPage/PasswordForm'
 import MaterialsLayout from './pages/materialsPage/MaterialsLayout'
 import MaterialsRanks from './pages/materialsPage/MaterialsRanks'
 import MaterialsPoomsae from './pages/materialsPage/MaterialsPoomsae'
@@ -94,6 +95,7 @@ function PageRoutes() {
           <Route path="videos" element={<VideosList />} />
           <Route path="videos/new" element={<VideoForm />} />
           <Route path="videos/:id/edit" element={<VideoForm />} />
+          <Route path="password" element={<PasswordForm />} />
         </Route>
       </Routes>
       {isLoginOpen && <LoginPage />}

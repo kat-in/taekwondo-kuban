@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import PasswordInput from "../components/ui/PasswordInput";
 
 const LoginPage = () => {
     const inputRef = useRef(null)
@@ -45,10 +46,9 @@ const LoginPage = () => {
                 <button className="login__modal-close" onClick={closeModal} type="button">×</button>
                 <h2 className="login__modal-title">Вход для администратора</h2>
                 <form className="login__modal-form" onSubmit={logIn}>
-                    <input
+                    <PasswordInput
                         name="password"
                         ref={inputRef}
-                        type="password"
                         placeholder="Пароль"
                         value={pass}
                         onChange={(e) => setPass(e.target.value)}

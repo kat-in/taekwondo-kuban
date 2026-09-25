@@ -38,6 +38,29 @@ const AdminLayout = () => {
               <p>С каждой новостью может быть связан только один альбом и/или несколько видео.</p>
             </div>
           </details>
+          <div className="admin__sidebar-footer">
+            <NavLink
+              to="/admin/password"
+              className={({ isActive }) => `admin__sidebar-link${isActive ? ' admin__sidebar-link_active' : ''}`}
+            >
+              <svg
+                className="admin__sidebar-link-icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7 10V8a5 5 0 0 1 10 0v2M5 10h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1Z"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span>Смена пароля</span>
+            </NavLink>
+          </div>
         </aside>
         <section className="admin__content">
           <Outlet />

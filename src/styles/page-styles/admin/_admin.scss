@@ -115,6 +115,50 @@
   }
 }
 
+.admin__sidebar-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid $light;
+}
+
+.admin__sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid $light;
+  border-radius: 12px;
+  background-color: $white;
+  color: $info-text;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $dark;
+    background-color: $light;
+    color: $dark;
+  }
+}
+
+.admin__sidebar-link-icon {
+  flex: 0 0 auto;
+}
+
+.admin__sidebar-link_active {
+  border-color: $dark;
+  background-color: $dark;
+  color: $white;
+
+  &:hover {
+    border-color: $dark;
+    background-color: $dark;
+    color: $white;
+  }
+}
+
 .admin__logout {
   padding: 10px 18px;
   border: 1px solid $dark;
@@ -339,6 +383,21 @@
 .admin-form__error {
   color: $dark;
   font-size: 1.4rem;
+}
+
+.admin-form__success {
+  color: #1a7f37;
+  font-size: 1.4rem;
+}
+
+.admin-form__hint {
+  color: $info-text;
+  font-size: 1.3rem;
+  line-height: 1.5;
+
+  code {
+    font-size: 1.2rem;
+  }
 }
 
 .admin-form__field {
@@ -770,6 +829,17 @@ input.admin-calendar__year[type='number'] {
     font-size: 1.2rem;
     text-align: center;
     white-space: nowrap;
+  }
+
+  .admin__sidebar-footer {
+    margin-top: 0;
+    padding-top: 10px;
+  }
+
+  .admin__sidebar-link {
+    justify-content: center;
+    padding: 10px;
+    font-size: 1.2rem;
   }
 
   .admin-table {
