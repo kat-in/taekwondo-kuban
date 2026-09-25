@@ -24,6 +24,8 @@ curl http://localhost:5001/api/health
 | Переменная | Назначение |
 | --- | --- |
 | `PORT` | Порт API, по умолчанию `5001` |
+| `HOST` | Интерфейс для прослушивания; `127.0.0.1` закрывает API от внешних подключений |
+| `TRUST_PROXY` | Сколько прокси перед API: `0`/`false` — прокси нет, `1` — один nginx, `N` — N прокси |
 | `ADMIN_PASSWORD` | **bcrypt-хэш** пароля админки, не сам пароль |
 | `JWT_SECRET` | Секрет для подписи JWT |
 | `NODE_ENV` | `production` включает строгий CORS и кэширование статики |
@@ -47,8 +49,56 @@ node -e "import('bcryptjs').then(b=>b.default.hash('ВАШ_ПАРОЛЬ',10).the
 ```bash
 npm run lint
 npm run build
+npm --prefix backend test
 ```
 
 Данные хранятся в `backend/data`, загруженные файлы — в `backend/uploads`. Для production настройте reverse proxy для `/api` и `/uploads` на порт backend.
 
 Все ответы API возвращаются в едином формате: успех — данные (или `{ "success": true, "data": ... }` в админке), ошибка — `{ "success": false, "message": "..." }`.
+
+## Работа с контентом
+
+Контент — это `backend/data/*.json` и `backend/uploads`. Он лежит в Git, поэтому история изменений сохраняется, а на новом сервере сайт сразу появляется со всеми новостями и фото.
+
+Если файлы данных удалить, приложение создаст их пустыми при следующем запуске, и сайт поднимется уже без контента.
+
+`make backup` — собрать архив контента с датой в папку за пределами репозитория (по умолчанию `~/backups/taekwondo-kuban`). Путь меняется переменной `BACKUP_DIR`. Копию забери на свой компьютер: `scp <сервер>:<путь> ~/Downloads/`.
+
+`make save-content` — зафиксировать в Git то, что загружено через админку. Запускай после каждой загрузки фото или правки новостей на сервере: тогда `git pull` при обновлении кода не увидит контент как чужие изменения.
+
+## Подготовка к деплою
+
+Нужен Node.js 20 или новее. На любом сервере:
+
+```bash
+git clone <адрес репозитория> && cd taekwondo-kuban
+npm ci
+npm --prefix backend ci --omit=dev
+npm run build
+cd backend
+node -e "import('bcryptjs').then(b=>b.default.hash('ПАРОЛЬ',10).then(h=>console.log(h)))"
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+Второй вывод — значение для `JWT_SECRET`. Дальше создать `backend/.env`:
+
+```bash
+PORT=5001
+HOST=127.0.0.1
+TRUST_PROXY=1
+NODE_ENV=production
+ALLOWED_ORIGINS=https://example.ru
+ADMIN_PASSWORD=< bcrypt-хэш из первого вывода >
+JWT_SECRET=< значение из второго вывода >
+```
+
+Запуск и проверка:
+
+```bash
+npm start           # в папке backend
+curl http://localhost:5001/api/health
+```
+
+`HOST=127.0.0.1` оставляет API доступным только с самой машины: снаружи сайт должен открывать nginx, и подделать `X-Forwarded-For` извне не получится. Если API нужно открыть наружу целиком (например, на платформе без своего прокси) — убери `HOST`, тогда обязательно поставь `TRUST_PROXY=0`, иначе ограничение на попытки входа можно обойти подменой заголовка.
+
+Папку `backend/uploads` и файлы `backend/data` на сервере нужно сохранять отдельно: при удалении машины контент пропадёт. Помогает `make backup`.
