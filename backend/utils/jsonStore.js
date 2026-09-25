@@ -8,9 +8,25 @@ export const withWriteLock = (task) => {
   return result;
 };
 
+const cache = new Map();
+
 export const readJson = async (file) => {
   const data = await fs.readFile(file, 'utf8');
   return JSON.parse(data);
+};
+
+// Для публичных ответов: разобранный JSON переиспользуется, пока файл не менялся.
+// Ключ кэша — mtime и размер, поэтому правка файла извне тоже инвалидирует кэш.
+// Возвращает общий объект: использовать только там, где его не изменяют.
+export const readJsonCached = async (file) => {
+  const stats = await fs.stat(file);
+  const cached = cache.get(file);
+  if (cached && cached.mtimeMs === stats.mtimeMs && cached.size === stats.size) {
+    return cached.data;
+  }
+  const data = await readJson(file);
+  cache.set(file, { mtimeMs: stats.mtimeMs, size: stats.size, data });
+  return data;
 };
 
 export const writeJson = async (file, data) => {
@@ -18,6 +34,7 @@ export const writeJson = async (file, data) => {
   try {
     await fs.writeFile(temporaryFile, JSON.stringify(data, null, 2), 'utf8');
     await fs.rename(temporaryFile, file);
+    cache.delete(file);
   } catch (error) {
     await fs.unlink(temporaryFile).catch(() => undefined);
     throw error;

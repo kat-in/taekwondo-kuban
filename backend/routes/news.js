@@ -1,5 +1,5 @@
 import express from 'express';
-import { readJson } from '../utils/jsonStore.js';
+import { readJsonCached } from '../utils/jsonStore.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,7 +18,7 @@ const parseId = (value) => {
 };
 
 const readNews = async () => {
-    const newsData = await readJson(DATA_FILE)
+    const newsData = await readJsonCached(DATA_FILE)
 
     const seen = new Set()
     const unique = []

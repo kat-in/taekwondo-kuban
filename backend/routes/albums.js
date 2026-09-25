@@ -1,5 +1,5 @@
 import express from 'express';
-import { readJson } from '../utils/jsonStore.js';
+import { readJsonCached } from '../utils/jsonStore.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -13,7 +13,7 @@ const parseId = (value) => {
 };
 
 const readAlbums = async () => {
-    const albumsData = await readJson(DATA_FILE);
+    const albumsData = await readJsonCached(DATA_FILE);
 
     const seen = new Set()
     const unique = []

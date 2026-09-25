@@ -82,20 +82,26 @@ app.use((error, req, res, next) => {
 })
 
 
-const server = app.listen(port, () => {
-    console.log(`Сервер запущен на http://localhost:${port}`);
-});
+export { app };
 
-const shutdown = (signal) => {
-    console.log(`Получен ${signal}, останавливаю сервер`);
-    server.close(() => process.exit(0));
-    setTimeout(() => process.exit(1), 10 * 1000).unref();
-};
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 
-process.on('SIGTERM', () => shutdown('SIGTERM'));
-process.on('SIGINT', () => shutdown('SIGINT'));
-process.on('unhandledRejection', (reason) => console.error('Необработанное отклонение промиса:', reason));
-process.on('uncaughtException', (error) => {
-    console.error('Необработанное исключение:', error);
-    shutdown('uncaughtException');
-});
+if (isDirectRun) {
+    const server = app.listen(port, () => {
+        console.log(`Сервер запущен на http://localhost:${port}`);
+    });
+
+    const shutdown = (signal) => {
+        console.log(`Получен ${signal}, останавливаю сервер`);
+        server.close(() => process.exit(0));
+        setTimeout(() => process.exit(1), 10 * 1000).unref();
+    };
+
+    process.on('SIGTERM', () => shutdown('SIGTERM'));
+    process.on('SIGINT', () => shutdown('SIGINT'));
+    process.on('unhandledRejection', (reason) => console.error('Необработанное отклонение промиса:', reason));
+    process.on('uncaughtException', (error) => {
+        console.error('Необработанное исключение:', error);
+        shutdown('uncaughtException');
+    });
+}
