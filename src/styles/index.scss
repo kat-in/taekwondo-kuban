@@ -131,6 +131,27 @@ p {
 .navigation a {
   text-decoration: none;
   color: #fff;
+  white-space: nowrap;
+}
+
+@media (max-width: 1260px) {
+  .navigation li {
+    padding: 0 8px;
+  }
+
+  .navigation a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .navigation li {
+    padding: 0 5px;
+  }
+
+  .navigation a {
+    font-size: 13px;
+  }
 }
 
 .navigation a:hover {
