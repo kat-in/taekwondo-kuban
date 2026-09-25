@@ -1,21 +1,21 @@
-@import 'base/typography';
-@import 'base/elements';
+@use 'abstracts/variables' as *;
 
-@import 'component-styles/header';
-@import 'component-styles/hero';
-@import 'component-styles/footer';
-@import 'component-styles/burger';
-@import 'component-styles/breadcrumbs';
-@import 'component-styles/scroll-top';
+@use 'base/typography';
+@use 'base/elements';
 
-@import 'page-styles/materials/materials';
-@import 'page-styles/photo/photo';
-@import 'page-styles/home-page/homepage-index';
-@import 'page-styles/about-page/about-history';
-@import 'page-styles/beginners-page/beginners';
-@import 'page-styles/admin/admin';
+@use 'component-styles/header';
+@use 'component-styles/hero';
+@use 'component-styles/footer';
+@use 'component-styles/burger';
+@use 'component-styles/breadcrumbs';
+@use 'component-styles/scroll-top';
 
-@import 'abstracts/variables';
+@use 'page-styles/materials/materials';
+@use 'page-styles/photo/photo';
+@use 'page-styles/home-page/homepage-index';
+@use 'page-styles/about-page/about-history';
+@use 'page-styles/beginners-page/beginners';
+@use 'page-styles/admin/admin';
 
 
 
