@@ -1,8 +1,9 @@
-// Обложка видео: сначала локальный файл из public/images/rutube,
-// иначе — напрямую с Rutube. Локальный файл надёжнее: не зависит от внешнего
-// сервиса и не грузит его CDN при каждом показе.
-// Скачать обложки локально: npm run thumbnails
-const LOCAL_THUMBNAIL_BASE = '/images/rutube'
+// Обложка видео: сначала локальный файл, который бэкенд сам скачивает
+// с Rutube при добавлении видео, иначе — напрямую с Rutube.
+// Локальный файл надёжнее: не зависит от внешнего сервиса и не грузит его
+// CDN при каждом показе. Обложки лежат в backend/uploads/video-thumbs и
+// попадают в бэкап вместе с остальным контентом.
+const LOCAL_THUMBNAIL_BASE = '/uploads/video-thumbs'
 
 export const getVideoThumbnail = (videoId) => {
   if (!videoId) return ''

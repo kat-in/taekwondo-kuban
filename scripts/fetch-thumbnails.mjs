@@ -1,17 +1,20 @@
 #!/usr/bin/env node
-// Скачивает обложки видео с Rutube в public/images/rutube, чтобы сайт не зависел
-// от внешнего сервиса. Запускай после добавления новых видео.
+// Докачивает обложки видео, которых ещё нет локально.
+// Обычно это не нужно: бэкенд сам сохраняет обложку при добавлении видео
+// через админку. Скрипт нужен после ручной правки video.json или
+// если обложки были удалены из uploads.
 //
 //   npm run thumbnails
 //
-// Уже скачанные обложки перезаписываются только при --force.
+// Уже скачанные обложки не перезаписываются, для принудительного обновления
+// добавь --force.
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA_FILE = path.join(ROOT, 'backend', 'data', 'video.json')
-const OUT_DIR = path.join(ROOT, 'public', 'images', 'rutube')
+const OUT_DIR = path.join(ROOT, 'backend', 'uploads', 'video-thumbs')
 
 const force = process.argv.includes('--force')
 const videos = JSON.parse(await fs.readFile(DATA_FILE, 'utf8'))
@@ -34,9 +37,11 @@ for (const videoId of unique) {
     }
   }
 
-  const source = `https://rutube.ru/api/video/${videoId}/thumbnail/?redirect=1`
   try {
-    const response = await fetch(source, { redirect: 'follow', signal: AbortSignal.timeout(20000) })
+    const response = await fetch(`https://rutube.ru/api/video/${videoId}/thumbnail/?redirect=1`, {
+      redirect: 'follow',
+      signal: AbortSignal.timeout(20000),
+    })
     if (!response.ok) {
       console.warn(`  ${videoId} — Rutube ответил ${response.status}`)
       failed += 1

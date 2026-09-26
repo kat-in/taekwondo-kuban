@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 import { authMiddleware, passwordFingerprint } from '../utils/auth.js';
 import { readJson, writeJson, nextId, formatDisplayDate, withWriteLock } from '../utils/jsonStore.js';
 import { parseAttestation, validateAlbum, validateDateValue, validateIdList, validateNewPassword, validateNews, validateVideo } from '../utils/validate.js';
+import { removeThumbnail, saveThumbnailInBackground } from '../utils/thumbnails.js';
 
 const BACKEND_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -588,6 +589,7 @@ router.post('/video', mutationLimiter, (req, res) =>
     };
     videos.push(item);
     await writeJson(VIDEO_FILE, videos);
+    saveThumbnailInBackground(item.videoId);
     return ok(item);
   }));
 
@@ -606,6 +608,7 @@ router.put('/video/:id', mutationLimiter, (req, res) =>
     if (videoError) return invalid(videoError);
 
     const news = await readJson(NEWS_FILE);
+    const previousVideoId = item.videoId;
     const newsId = req.body.newsId === undefined ? item.newsId : parseOptionalInt(req.body.newsId);
     if (newsId !== null && !news.some((entry) => entry.id === newsId)) {
       return invalid('Новость, к которой привязывается видео, не найдена');
@@ -616,6 +619,11 @@ router.put('/video/:id', mutationLimiter, (req, res) =>
     item.title = parseText(req.body.title !== undefined ? req.body.title : item.title);
 
     await writeJson(VIDEO_FILE, videos);
+    // Обложка старая больше не нужна, если ролик заменили на другой
+    if (previousVideoId !== item.videoId) {
+      removeThumbnail(previousVideoId);
+    }
+    saveThumbnailInBackground(item.videoId);
     return ok(item);
   }));
 
@@ -623,8 +631,13 @@ router.delete('/video/:id', mutationLimiter, (req, res) =>
   respond(req, res, async () => {
     const id = parseInt(req.params.id, 10);
     const videos = await readJson(VIDEO_FILE);
-    if (!videos.find((video) => video.id === id)) return notFound('Видео не найдено');
+    const item = videos.find((video) => video.id === id);
+    if (!item) return notFound('Видео не найдено');
     await writeJson(VIDEO_FILE, videos.filter((video) => video.id !== id));
+    // Обложку удаляем, только если этот ролик больше не используется
+    if (item.videoId && !videos.some((video) => video.videoId === item.videoId)) {
+      removeThumbnail(item.videoId);
+    }
     return { status: 200, body: { success: true } };
   }));
 
