@@ -83,7 +83,7 @@ const NewsDetailPage = () => {
 
     const image = currentNews?.image && <div className="news__detail__img_container"><img src={currentNews.image.url} alt={currentNews.image.description || currentNews.title} /><div>{currentNews.image.description}</div></div>
     const images = currentAlbum?.photos?.map((photo) => <div key={photo}><img src={photo} alt={currentAlbum.title} /></div>)
-    const video = currentVideo.length > 0 && currentVideo.map((item) => <div className='video_container' key={item.id}><RutubeVideo videoId={item.videoId} /></div>)
+    const video = currentVideo.length > 0 && currentVideo.map((item) => <div className='video_container' key={item.id}><RutubeVideo videoId={item.videoId} title={item.title} /></div>)
 
     const attestationRows = (currentNews?.attestation && BELTS.filter((belt) => currentNews.attestation[belt] != null).reverse()) || []
     const attestation = attestationRows.length > 0 && (

@@ -243,7 +243,7 @@ const GalleryPage = () => {
                         <button className="photo__modal-close" onClick={() => setActiveVideo(null)}>×</button>
                         <h2 className="photo__modal-title">{activeVideo.title}</h2>
                         <div className="photo__modal-video">
-                            <RutubeVideo videoId={activeVideo.videoId} />
+                            <RutubeVideo videoId={activeVideo.videoId} title={activeVideo.title} />
                         </div>
                     </div>
                 </div>

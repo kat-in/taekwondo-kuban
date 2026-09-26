@@ -1,0 +1,59 @@
+@use '../abstracts/variables' as *;
+
+// Ленивый плеер: сначала обложка с кнопкой play, iframe по клику.
+// Размеры наследуются от контейнера, который держит aspect-ratio 16/9,
+// поэтому компонент просто занимает всю доступную область.
+.rutube-video__preview {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: $dark;
+  cursor: pointer;
+}
+
+.rutube-video__poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rutube-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.55);
+  transition: background-color 0.2s ease;
+}
+
+.rutube-video__play::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-width: 12px 0 12px 22px;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+}
+
+.rutube-video__preview:hover .rutube-video__play {
+  background-color: $accent;
+}
+
+.rutube-video__player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}

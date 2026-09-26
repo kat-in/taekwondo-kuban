@@ -82,7 +82,7 @@ const PresidentPage = () => {
 
             <div className="president-page__year-title">{video.year}</div>
             <div className="president-page__video">
-                <RutubeVideo videoId={video.id} />
+                <RutubeVideo videoId={video.id} title={`Видео ${video.year}`} />
             </div>
 
             {activePhoto !== null && (
