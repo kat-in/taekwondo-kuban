@@ -6,6 +6,15 @@
     padding: 30px 60px 40px;
     margin: 0 auto;
     gap: 30px;
+
+    @media (max-width: 900px) {
+        padding: 20px 16px 28px;
+        gap: 24px;
+    }
+
+    @media (max-width: 560px) {
+        padding: 16px 16px 24px;
+    }
 }
 
 .history__content {
@@ -33,11 +42,11 @@
     padding: 0 200px;
 
     @media (max-width: 900px) {
-        padding: 0px 80px;
+        padding: 0px 40px;
     }
 
-    @media (max-width: 500px) {
-        padding: 0px 20px;
+    @media (max-width: 560px) {
+        padding: 0px 16px;
     }
 }
 
@@ -48,6 +57,11 @@
     padding: 30px;
     gap: 30px;
     border-radius: 10px;
+
+    @media (max-width: 900px) {
+        padding: 20px 16px;
+        gap: 20px;
+    }
 
     & a {
         text-decoration: none;
@@ -112,12 +126,12 @@
 
     @media (max-width: 700px) {
         width: 110px;
-        margin-left: 38px;
+        margin-left: 24px;
     }
 
     @media (max-width: 500px) {
         width: 90px;
-        margin-left: 32px;
+        margin-left: 16px;
     }
 }
 
