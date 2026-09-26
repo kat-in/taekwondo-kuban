@@ -40,6 +40,9 @@ app.disable('x-powered-by');
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
   contentSecurityPolicy: false,
+  // Плеер Rutube смотрит Referer, чтобы понять, с какого домена открыли ролик.
+  // С no-referrer он его не видит и отдаёт «видео временно недоступно».
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
 }));
 
 app.use(cors({
