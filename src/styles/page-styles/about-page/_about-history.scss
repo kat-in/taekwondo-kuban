@@ -8,12 +8,12 @@
     gap: 30px;
 
     @media (max-width: 900px) {
-        padding: 20px 16px 28px;
+        padding: 24px 24px 32px;
         gap: 24px;
     }
 
     @media (max-width: 560px) {
-        padding: 16px 16px 24px;
+        padding: 20px 24px 28px;
     }
 }
 
@@ -46,7 +46,7 @@
     }
 
     @media (max-width: 560px) {
-        padding: 0px 16px;
+        padding: 0px 24px;
     }
 }
 
@@ -59,7 +59,7 @@
     border-radius: 10px;
 
     @media (max-width: 900px) {
-        padding: 20px 16px;
+        padding: 24px;
         gap: 20px;
     }
 
