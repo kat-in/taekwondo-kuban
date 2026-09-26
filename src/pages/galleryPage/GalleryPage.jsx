@@ -5,6 +5,7 @@ import Breadcrumbs from "../../components/Breadcrumbs"
 import SEO from "../../components/SEO/SEO"
 import RutubeVideo from "../../components/RutubeVideo"
 import { formatDate, sortByDateDesc } from "../../utils/date"
+import { getVideoThumbnail, handleThumbnailError } from "../../utils/videoThumbnail"
 
 const tabs = [
     { id: 'photo', title: 'Фото' },
@@ -151,11 +152,17 @@ const GalleryPage = () => {
     ))
 
     const videoCards = visibleVideos.map((video) => {
-        const thumbnailUrl = `https://rutube.ru/api/video/${video.videoId}/thumbnail/?redirect=1`
+        const thumbnailUrl = getVideoThumbnail(video.videoId)
         return (
             <button key={video.id} className="photo__video-card" onClick={() => setActiveVideo(video)}>
                 <div className="photo__video-cover">
-                    <img src={thumbnailUrl} alt={video.title} loading="lazy" />
+                    <img
+                        src={thumbnailUrl}
+                        alt={video.title}
+                        loading="lazy"
+                        data-video-id={video.videoId}
+                        onError={handleThumbnailError}
+                    />
                     <div className="photo__video-play"></div>
                 </div>
                 <div className="photo__video-title">{video.title}</div>

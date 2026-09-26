@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { formatDate, sortByDateDesc } from "../utils/date"
+import { getVideoThumbnail, handleThumbnailError } from "../utils/videoThumbnail"
 
 const LastNewsSection = () => {
     const [newsData, setNewsData] = useState([])
@@ -45,8 +46,8 @@ const LastNewsSection = () => {
 
         const newsImgCover = item.image?.url && <div className='lastnews__cover'><img src={item.image.url} alt={item.title} /></div>
         const hasVideo = videoData.find((video) => item.id === video.newsId)
-        const thumbnailUrl = hasVideo && `https://rutube.ru/api/video/${hasVideo.videoId}/thumbnail/?redirect=1`
-        const videoCover = hasVideo && <div className='lastnews__cover'><img src={thumbnailUrl} alt={hasVideo.title || item.title} /></div>
+        const thumbnailUrl = hasVideo && getVideoThumbnail(hasVideo.videoId)
+        const videoCover = hasVideo && <div className='lastnews__cover'><img src={thumbnailUrl} alt={hasVideo.title || item.title} data-video-id={hasVideo.videoId} onError={handleThumbnailError} /></div>
 
         const cover = newsImgCover || albumCover || videoCover || null
 

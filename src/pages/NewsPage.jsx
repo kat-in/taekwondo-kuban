@@ -4,6 +4,7 @@ import { useSearchParams, Link } from "react-router-dom"
 import Breadcrumbs from "../components/Breadcrumbs"
 import SEO from "../components/SEO/SEO"
 import { formatDate, sortByDateDesc } from "../utils/date"
+import { getVideoThumbnail, handleThumbnailError } from "../utils/videoThumbnail"
 
 const NEWS_PER_PAGE = 10
 
@@ -58,8 +59,8 @@ const NewsPage = () => {
 
         const newsImgCover = item.image?.url && <div className='news_card_cover'><img src={item.image.url} /></div>
         const hasVideo = videoData.find((video) => item.id === video.newsId)
-        const thumbnailUrl = hasVideo && `https://rutube.ru/api/video/${hasVideo.videoId}/thumbnail/?redirect=1`
-        const videoCover = hasVideo && <div className='news_card_cover'><img src={thumbnailUrl} alt={hasVideo.title} /></div>
+        const thumbnailUrl = hasVideo && getVideoThumbnail(hasVideo.videoId)
+        const videoCover = hasVideo && <div className='news_card_cover'><img src={thumbnailUrl} alt={hasVideo.title} data-video-id={hasVideo.videoId} onError={handleThumbnailError} /></div>
 
         const cover = newsImgCover || albumCover || videoCover || null
 
