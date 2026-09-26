@@ -271,14 +271,20 @@
   transform: translateY(-2px);
 }
 
+// Высота считается через padding, а не aspect-ratio: карточка видео —
+// это <button> с display: flex, и WebKit не вычисляет aspect-ratio для
+// flex-item внутри кнопки (карточка схлопывается в ноль, особенно на iOS).
+// С альбомами такого нет: там обёртка <Link>, и aspect-ratio работает.
 .photo__video-cover {
   position: relative;
   overflow: hidden;
   border-radius: 10px;
-  aspect-ratio: 16 / 9;
+  padding-top: 56.25%;
 }
 
 .photo__video-cover img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;

@@ -36,6 +36,10 @@
 .scroll-top--visible {
   opacity: 1;
   visibility: visible;
+  // Обязательно возвращаем pointer-events: базовый класс ставит none,
+  // иначе кнопка выглядит нажатой, но клики уходят сквозь неё
+  // на ссылку под ней.
+  pointer-events: auto;
   transform: translateY(0);
 }
 
