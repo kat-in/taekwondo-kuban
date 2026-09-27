@@ -9,7 +9,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { authMiddleware, passwordFingerprint } from '../utils/auth.js';
 import { readJson, writeJson, nextId, formatDisplayDate, withWriteLock } from '../utils/jsonStore.js';
-import { parseAttestation, validateAlbum, validateDateValue, validateIdList, validateNewPassword, validateNews, validateVideo } from '../utils/validate.js';
+import { parseAttestation, parseBlackBelts, validateAlbum, validateDateValue, validateIdList, validateNewPassword, validateNews, validateVideo } from '../utils/validate.js';
 import { removeThumbnail, saveThumbnailInBackground } from '../utils/thumbnails.js';
 
 const BACKEND_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -356,6 +356,8 @@ router.post('/news', mutationLimiter, uploadNewsImage.single('cover'), convertUp
     if (req.body.details) item.details = req.body.details;
     const attestation = parseAttestation(req.body.attestation);
     if (attestation) item.attestation = attestation;
+    const blackBelts = parseBlackBelts(req.body.blackBelts);
+    if (blackBelts) item.blackBelts = blackBelts;
     if (req.file) {
       item.image = {
         url: `/uploads/news/${req.file.filename}`,
@@ -401,6 +403,9 @@ router.put('/news/:id', mutationLimiter, uploadNewsImage.single('cover'), conver
     const attestation = parseAttestation(req.body.attestation);
     if (attestation) item.attestation = attestation;
     else delete item.attestation;
+    const blackBelts = parseBlackBelts(req.body.blackBelts);
+    if (blackBelts) item.blackBelts = blackBelts;
+    else delete item.blackBelts;
 
     const albumId = parseOptionalInt(req.body.albumId);
     if (albumId !== null && albums.some((album) => album.id === albumId && album.newsId !== null && album.newsId !== id)) {

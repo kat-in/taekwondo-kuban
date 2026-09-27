@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { formatDate, sortByDateDesc } from "../utils/date"
+import toPlainText from "../utils/newsText"
 import { getVideoThumbnail, handleThumbnailError } from "../utils/videoThumbnail"
 
 const LastNewsSection = () => {
@@ -58,7 +59,7 @@ const LastNewsSection = () => {
                 </div>
                 <div className="lastnews__content">
                     {cover}
-                    <div className="lastnews__text">{item.content}</div>
+                    <div className="lastnews__text">{toPlainText(item.content)}</div>
                     <div className="lastnews__more">
                         <span>{item.displayDate || formatDate(item.date)}</span>
                     </div>

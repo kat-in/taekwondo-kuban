@@ -11,6 +11,7 @@
 @use 'component-styles/scroll-top';
 @use 'component-styles/password-field';
 @use 'component-styles/rutube-video';
+@use 'component-styles/year-filter';
 
 @use 'page-styles/materials/materials';
 @use 'page-styles/photo/photo';
@@ -241,6 +242,17 @@ p {
     padding: 0;
     list-style: none;
   }
+
+  .news__detail__attestation-separator {
+    margin: 14px 0;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  // Чёрный пояс идёт после разделителя и выглядит весомее остальных строк.
+  .news__detail__attestation-black li {
+    font-weight: 700;
+  }
 }
 
 .news__detail__images img {
@@ -282,6 +294,42 @@ p {
   }
 }
 
+
+// Заголовок и фильтр по году — как в альбомах: заголовок слева, фильтр справа.
+.news__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.news__heading-title {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.news__heading-title h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  margin: 0;
+}
+
+.news__year-filter {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.news__empty {
+  margin: 0;
+  padding: 40px 20px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: $info-text;
+}
 
 .news__section {
   display: flex;
@@ -400,6 +448,14 @@ p {
   .news__section {
     padding: 12px 16px;
     gap: 32px;
+  }
+
+  .news__heading {
+    gap: 12px;
+  }
+
+  .news__heading-title h1 {
+    font-size: 1.9rem;
   }
 
   .news_card_cover {

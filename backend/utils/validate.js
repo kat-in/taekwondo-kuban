@@ -90,3 +90,34 @@ export const parseAttestation = (value) => {
     return null;
   }
 };
+
+const MAX_BLACK_BELT_NAME = 100;
+
+// Чёрные пояса хранятся списком: [{ dan: 1, name: 'Иванов Иван' }].
+// dan — число или null, когда степень не указана; имя может быть пустым,
+// тогда на сайте показывается «1 человек». Строки без степени и без имени
+// отбрасываются: это пустая строка формы.
+export const parseBlackBelts = (value) => {
+  if (!value) return null;
+  let parsed = value;
+  if (typeof value === 'string') {
+    try {
+      parsed = JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+  if (!Array.isArray(parsed)) return null;
+
+  const result = [];
+  for (const entry of parsed) {
+    if (!isPlainObject(entry)) continue;
+    const name = cleanString(entry.name);
+    const dan = Number(entry.dan);
+    const hasDan = Number.isInteger(dan) && dan > 0;
+    if (!name && !hasDan) continue;
+    if (name.length > MAX_BLACK_BELT_NAME) return null;
+    result.push({ dan: hasDan ? dan : null, name });
+  }
+  return result.length ? result : null;
+};

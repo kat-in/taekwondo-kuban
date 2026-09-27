@@ -4,7 +4,7 @@ import Markdown from 'react-markdown';
 import RutubeVideo from "../components/RutubeVideo";
 import Breadcrumbs from "../components/Breadcrumbs";
 import NotFound from "./NotFound";
-import { BELTS, humanCount } from "../utils/belts";
+import { BELTS, humanCount, formatDan } from "../utils/belts";
 import { formatDate } from "../utils/date"
 import SEO from "../components/SEO/SEO"
 
@@ -86,7 +86,8 @@ const NewsDetailPage = () => {
     const video = currentVideo.length > 0 && currentVideo.map((item) => <div className='video_container' key={item.id}><RutubeVideo videoId={item.videoId} title={item.title} /></div>)
 
     const attestationRows = (currentNews?.attestation && BELTS.filter((belt) => currentNews.attestation[belt] != null).reverse()) || []
-    const attestation = attestationRows.length > 0 && (
+    const blackBelts = (currentNews?.blackBelts || []).filter((entry) => entry && (entry.name || entry.dan))
+    const attestation = (attestationRows.length > 0 || blackBelts.length > 0) && (
         <section className="news__detail__attestation">
             <p className="news__detail__attestation-title">Результаты аттестации:</p>
             <ul>
@@ -94,6 +95,19 @@ const NewsDetailPage = () => {
                     <li key={belt}>{belt} - {humanCount(currentNews.attestation[belt])}</li>
                 ))}
             </ul>
+            {blackBelts.length > 0 && (
+                <>
+                    <hr className="news__detail__attestation-separator" />
+                    <p className="news__detail__attestation-title">Чёрный пояс:</p>
+                    <ul className="news__detail__attestation-black">
+                        {blackBelts.map((entry, index) => (
+                            <li key={`${entry.name || 'black'}-${index}`}>
+                                {entry.name || '1 человек'}{formatDan(entry.dan) && ` — ${formatDan(entry.dan)}`}
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
         </section>
     )
 

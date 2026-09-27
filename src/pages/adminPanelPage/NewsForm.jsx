@@ -9,6 +9,8 @@ const MAX_IMAGE_SIZE = 10 * 1024 * 1024
 
 const emptyAttestation = () => BELTS.reduce((acc, belt) => ({ ...acc, [belt]: '' }), {})
 
+const emptyBlackBelt = () => ({ dan: '', name: '' })
+
 const MarkdownHint = () => (
   <details className="admin-form__hint">
     <summary>Подсказка по Markdown</summary>
@@ -38,6 +40,7 @@ const NewsForm = () => {
     videoIds: [],
     removeImage: false,
     attestation: emptyAttestation(),
+    blackBelts: [],
   })
   const [coverFile, setCoverFile] = useState(null)
   const coverInputRef = useRef(null)
@@ -75,6 +78,10 @@ const NewsForm = () => {
               albumId: albumsData.find((a) => a.newsId === current.id)?.id || '',
               videoIds: videosData.filter((v) => v.newsId === current.id).map((v) => v.id),
               removeImage: false,
+              blackBelts: (current.blackBelts || []).map((entry) => ({
+                dan: entry.dan ? String(entry.dan) : '',
+                name: entry.name || '',
+              })),
               attestation: BELTS.reduce(
                 (acc, belt) => ({ ...acc, [belt]: current.attestation?.[belt] != null ? current.attestation[belt] : '' }),
                 {}
@@ -125,6 +132,21 @@ const NewsForm = () => {
     setForm((prev) => ({ ...prev, attestation: { ...prev.attestation, [belt]: value } }))
   }
 
+  const handleBlackBeltChange = (index, field, value) => {
+    setForm((prev) => ({
+      ...prev,
+      blackBelts: prev.blackBelts.map((entry, i) => (i === index ? { ...entry, [field]: value } : entry)),
+    }))
+  }
+
+  const handleAddBlackBelt = () => {
+    setForm((prev) => ({ ...prev, blackBelts: [...prev.blackBelts, emptyBlackBelt()] }))
+  }
+
+  const handleRemoveBlackBelt = (index) => {
+    setForm((prev) => ({ ...prev, blackBelts: prev.blackBelts.filter((_, i) => i !== index) }))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
@@ -148,6 +170,10 @@ const NewsForm = () => {
         {}
       )
       body.append('attestation', JSON.stringify(attestationResult))
+      const blackBeltsResult = form.blackBelts
+        .map((entry) => ({ dan: entry.dan, name: entry.name.trim() }))
+        .filter((entry) => entry.dan !== '' || entry.name)
+      body.append('blackBelts', JSON.stringify(blackBeltsResult))
       if (coverFile) body.append('cover', coverFile)
       if (form.removeImage) body.append('removeImage', '1')
 
@@ -202,25 +228,64 @@ const NewsForm = () => {
       </label>
 
       {form.category === 'Аттестация' && (
-        <fieldset className="admin-form__attestation">
-          <legend>Результаты аттестации</legend>
-          <div className="admin-form__attestation-list">
-            {BELTS.map((belt) => (
-              <label key={belt} className="admin-form__attestation-row">
-                <span>{belt}</span>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  value={form.attestation[belt]}
-                  placeholder="0"
-                  onChange={(e) => handleAttestationChange(belt, e.target.value.replace(/\D/g, ''))}
-                />
-                <span className="admin-form__attestation-unit">чел.</span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        <>
+          <fieldset className="admin-form__attestation">
+            <legend>Результаты аттестации</legend>
+            <div className="admin-form__attestation-list">
+              {BELTS.map((belt) => (
+                <label key={belt} className="admin-form__attestation-row">
+                  <span>{belt}</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    value={form.attestation[belt]}
+                    placeholder="0"
+                    onChange={(e) => handleAttestationChange(belt, e.target.value.replace(/\D/g, ''))}
+                  />
+                  <span className="admin-form__attestation-unit">чел.</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="admin-form__attestation">
+            <legend>Чёрный пояс</legend>
+            <div className="admin-form__attestation-list">
+              {form.blackBelts.map((entry, index) => (
+                <div key={index} className="admin-form__attestation-row">
+                  <input
+                    className="admin-form__black-belt-name"
+                    type="text"
+                    value={entry.name}
+                    placeholder="Фамилия и имя"
+                    onChange={(e) => handleBlackBeltChange(index, 'name', e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    value={entry.dan}
+                    placeholder="дан"
+                    title="Степень: 1, 2, 3…"
+                    onChange={(e) => handleBlackBeltChange(index, 'dan', e.target.value.replace(/\D/g, ''))}
+                  />
+                  <button
+                    type="button"
+                    className="admin-btn admin-btn_danger admin-btn_small"
+                    onClick={() => handleRemoveBlackBelt(index)}
+                  >
+                    Убрать
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button type="button" className="admin-btn admin-btn_small" onClick={handleAddBlackBelt}>
+              Добавить чёрный пояс
+            </button>
+            <p className="admin-form__hint-text">Чёрные пояса выводятся на сайте отдельным списком с фамилиями. Если фамилия не указана, будет показано «1 человек».</p>
+          </fieldset>
+        </>
       )}
 
       <div className="admin-form__attachments">

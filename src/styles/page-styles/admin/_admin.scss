@@ -633,6 +633,16 @@
   font-size: 1.2rem;
 }
 
+// У чёрных поясов вместо названия — фамилия и степень, поэтому строка
+// строится из двух полей и кнопки, а не из подписи и счётчика.
+// Поле «дан» уже свёрстано правилом выше для input[inputmode='numeric'].
+.admin-form__black-belt-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 6px 8px;
+  font-size: 1.4rem;
+}
+
 @media (max-width: 600px) {
   .admin-form__attestation-list {
     grid-template-columns: 1fr;

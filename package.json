@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "thumbnails": "node scripts/fetch-thumbnails.mjs"
+    "thumbnails": "node scripts/fetch-thumbnails.mjs",
+    "migrate-attestation": "node scripts/migrate-attestation.mjs"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.48.0",

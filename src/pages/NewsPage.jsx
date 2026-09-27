@@ -1,9 +1,10 @@
-import Markdown from "react-markdown"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useSearchParams, Link } from "react-router-dom"
 import Breadcrumbs from "../components/Breadcrumbs"
+import YearDropdown from "../components/ui/YearDropdown"
 import SEO from "../components/SEO/SEO"
 import { formatDate, sortByDateDesc } from "../utils/date"
+import toPlainText from "../utils/newsText"
 import { getVideoThumbnail, handleThumbnailError } from "../utils/videoThumbnail"
 
 const NEWS_PER_PAGE = 10
@@ -16,6 +17,7 @@ const NewsPage = () => {
     const [error, setError] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
     const page = Math.max(1, parseInt(searchParams.get("page"), 10) || 1)
+    const year = searchParams.get("year") || ''
 
     useEffect(() => {
 
@@ -50,9 +52,33 @@ const NewsPage = () => {
     }, [])
 
 
+    // Годы берём из самих новостей: новые годы появятся в фильтре сами,
+    // без правок кода. Год может прийти из адреса страницы, и если такого
+    // года в новостях нет, добавляем его в список — иначе кнопка молча
+    // показывала бы «Все годы» при непустом фильтре.
+    const newsYears = useMemo(() => {
+        const years = [...new Set(newsData.map((item) => item.date?.slice(0, 4)).filter(Boolean))]
+        years.sort((a, b) => b - a)
+        return year && !years.includes(year) ? [year, ...years] : years
+    }, [newsData, year])
+
     const sortedNews = sortByDateDesc(newsData)
-    const visibleNews = sortedNews.slice(0, page * NEWS_PER_PAGE)
-    const hasMore = page * NEWS_PER_PAGE < sortedNews.length
+    const filteredNews = year ? sortedNews.filter((item) => item.date?.slice(0, 4) === year) : sortedNews
+    const visibleNews = filteredNews.slice(0, page * NEWS_PER_PAGE)
+    const hasMore = page * NEWS_PER_PAGE < filteredNews.length
+
+    // Смена фильтра возвращает список на первую страницу, иначе после
+    // переключения пользователь окажется на пустом экране.
+    const buildParams = (nextYear, nextPage) => {
+        const params = {}
+        if (nextYear) params.year = nextYear
+        if (nextPage > 1) params.page = String(nextPage)
+        return params
+    }
+
+    const handleFilterChange = (nextYear) => setSearchParams(buildParams(nextYear, 1))
+    const handleShowMore = () => setSearchParams(buildParams(year, page + 1))
+
     const news = visibleNews.map((item) => {
         const hasAlbum = albumsData.find((album) => album.newsId === item.id)
         const albumCover = hasAlbum && <div className='news_card_cover'><img src={hasAlbum.photos[0]} /></div>
@@ -73,9 +99,7 @@ const NewsPage = () => {
                 <div className={newsContentWidth}>
                     <div><h3>{item.title}</h3></div>
                     <div className="news_date">{item.displayDate || formatDate(item.date)} </div>
-                    <div className="news_card_text">
-                        <Markdown>{item.content}</Markdown>
-                    </div>
+                    <div className="news_card_text">{toPlainText(item.content)}</div>
                 </div>
             </Link>
         )
@@ -89,14 +113,23 @@ const NewsPage = () => {
             <SEO title="Новости — Тхэквондо Му Дук Кван" description="Новости Краснодарской городской ассоциации тхэквондо Му Дук Кван: соревнования, аттестация и события." />
             <div className="news__container">
             <Breadcrumbs />
-            <h1>Новости</h1>
+            <div className="news__heading">
+                <div className="news__heading-title">
+                    <h1>Новости</h1>
+                </div>
+                <div className="news__year-filter">
+                    <YearDropdown years={newsYears} value={year} onChange={handleFilterChange} />
+                </div>
+            </div>
             <div className="divider"></div>
             <div className="news__section">
-                {news}
+                {news.length > 0 ? news : (
+                    <p className="news__empty">За {year} год новостей нет. Выберите другой год.</p>
+                )}
             </div>
             {hasMore && (
                 <div className="news__show-more">
-                    <button onClick={() => setSearchParams({ page: String(page + 1) })}>
+                    <button onClick={handleShowMore}>
                         Показать ещё
                     </button>
                 </div>

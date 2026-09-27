@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import cn from 'classnames'
 import Breadcrumbs from "../../components/Breadcrumbs"
 import SEO from "../../components/SEO/SEO"
 import RutubeVideo from "../../components/RutubeVideo"
+import YearDropdown from "../../components/ui/YearDropdown"
 import { formatDate, sortByDateDesc } from "../../utils/date"
 import { getVideoThumbnail, handleThumbnailError } from "../../utils/videoThumbnail"
 
@@ -11,60 +12,6 @@ const tabs = [
     { id: 'photo', title: 'Фото' },
     { id: 'video', title: 'Видео' },
 ]
-
-const ALL_YEARS_LABEL = 'Все годы'
-
-const YearDropdown = ({ years, value, onChange }) => {
-    const [open, setOpen] = useState(false)
-    const ref = useRef(null)
-
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) setOpen(false)
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [])
-
-    const handleSelect = (year) => {
-        onChange(year)
-        setOpen(false)
-    }
-
-    const options = [
-        { value: 'all', label: ALL_YEARS_LABEL },
-        ...years.map((year) => ({ value: year, label: year })),
-    ]
-
-    return (
-        <div className="photo__year-dropdown" ref={ref}>
-            <button
-                className={cn('photo__year-select', { 'photo__year-select_open': open })}
-                onClick={() => setOpen((o) => !o)}
-                aria-label="Год"
-                aria-expanded={open}
-            >
-                {value === 'all' ? ALL_YEARS_LABEL : value}
-            </button>
-            {open && (
-                <ul className="photo__year-options" role="listbox" aria-label="Год">
-                    {options.map((option) => (
-                        <li key={option.value}>
-                            <button
-                                className={cn('photo__year-option', { 'photo__year-option_active': value === option.value })}
-                                onClick={() => handleSelect(option.value)}
-                                role="option"
-                                aria-selected={value === option.value}
-                            >
-                                {option.label}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    )
-}
 
 const GalleryPage = () => {
     const CARDS_PER_PAGE = 12
@@ -76,8 +23,8 @@ const GalleryPage = () => {
     const [activeVideo, setActiveVideo] = useState(null)
     const [albumsVisibleCount, setAlbumsVisibleCount] = useState(CARDS_PER_PAGE)
     const [videosVisibleCount, setVideosVisibleCount] = useState(CARDS_PER_PAGE)
-    const [albumsYear, setAlbumsYear] = useState('all')
-    const [videosYear, setVideosYear] = useState('all')
+    const [albumsYear, setAlbumsYear] = useState('')
+    const [videosYear, setVideosYear] = useState('')
 
     useEffect(() => {
         const getData = async () => {
@@ -122,8 +69,8 @@ const GalleryPage = () => {
     const albumsYears = getYears(sortedAlbums)
     const videosYears = getYears(sortedVideos)
 
-    const filteredAlbums = albumsYear === 'all' ? sortedAlbums : sortedAlbums.filter((album) => getYear(album) === albumsYear)
-    const filteredVideos = videosYear === 'all' ? sortedVideos : sortedVideos.filter((video) => getYear(video) === videosYear)
+    const filteredAlbums = !albumsYear ? sortedAlbums : sortedAlbums.filter((album) => getYear(album) === albumsYear)
+    const filteredVideos = !videosYear ? sortedVideos : sortedVideos.filter((video) => getYear(video) === videosYear)
 
     const visibleAlbums = filteredAlbums.slice(0, albumsVisibleCount)
     const hasMoreAlbums = albumsVisibleCount < filteredAlbums.length
