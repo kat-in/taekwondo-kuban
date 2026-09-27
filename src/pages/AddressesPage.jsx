@@ -1,6 +1,7 @@
 import Breadcrumbs from '../components/Breadcrumbs'
 import GymSection from '../components/GymSection/GymSection'
 import InstructorsSection from '../components/GymSection/InstructorsSection'
+import PresidentSection from '../components/PresidentSection'
 import SEO from '../components/SEO/SEO'
 
 const AddressesPage = () => {
@@ -14,6 +15,7 @@ const AddressesPage = () => {
             <h1>Занятия проходят в Краснодаре по следующим адресам:</h1>
             <div className="divider"></div>
             <GymSection />
+            <PresidentSection />
             <InstructorsSection />
         </main>
     )

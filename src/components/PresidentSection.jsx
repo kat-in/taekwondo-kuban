@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import presidentData from "../../data/presidentData"
+import presidentData from "../data/presidentData"
 import Markdown from "react-markdown"
 
 const PresidentSection = () => {
