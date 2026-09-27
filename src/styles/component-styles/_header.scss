@@ -71,47 +71,51 @@
 }
 
 .header__logo-text {
-  width: 300px;
+  width: 355px;
   font-family: "Oswald", sans-serif;
   font-weight: 250;
-  font-size: 2.2rem;
-  line-height: 2.8rem;
+  font-size: 2.6rem;
+  line-height: 3.3rem;
   text-align: left;
   text-transform: uppercase;
   color: $white;
 
   @media (max-width: 1500px) {
-    width: 265px;
-    font-size: 1.9rem;
-    line-height: 2.4rem;
+    width: 315px;
+    font-size: 2.2rem;
+    line-height: 2.8rem;
   }
 
   @media (max-width: 1400px) {
-    width: 230px;
-    font-size: 1.7rem;
-    line-height: 2.2rem;
+    width: 285px;
+    font-size: 2rem;
+    line-height: 2.5rem;
   }
 
   @media (max-width: 1300px) {
-    width: 210px;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    width: 255px;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
   }
 
   @media (max-width: 1180px) {
-    width: 195px;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
+    width: 228px;
+    font-size: 1.6rem;
+    line-height: 2rem;
   }
 
   @media (max-width: 1080px) {
-    width: 180px;
-    font-size: 1.3rem;
-    line-height: 1.7rem;
+    width: 205px;
+    font-size: 1.45rem;
+    line-height: 1.9rem;
   }
 
   @media (max-width: 980px) {
-    width: 100%;
+    // Раньше здесь стояло width: 100% — название занимало всю строку внутри
+    // блока с логотипом. Теперь оно стоит между двумя логотипами, и 100%
+    // растягивало бы его поверх них, сбивая центровку. Ширина по содержимому,
+    // кегль прежний: три строки влезают между логотипами до 400px.
+    width: auto;
     font-size: 1.9rem;
     line-height: 2.3rem;
   }
@@ -161,4 +165,83 @@
 
 .logo2 {
   background-image: url('/logo_itf.png');
+}
+
+// Блок с логотипами: логотип 1, название ассоциации, логотип 2. Название имеет
+// фиксированную ширину, а логотипы одинаковые, поэтому текст оказывается ровно
+// посередине между ними. Меню стоит отдельно, справа от блока.
+.header__logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+
+.header__logo-text {
+  text-align: center;
+}
+
+@media (min-width: 876px) {
+  // На неглавных страницах блок с логотипами прижат к левому краю, а меню — к
+  // правому. Зазор остаётся как минимум: если места не хватит, блок и меню не
+  // сольются, а строка начнёт ужиматься.
+  .header__container:not(.header__container_home) {
+    justify-content: space-between;
+    column-gap: 40px;
+  }
+
+  // На главной названия нет, и там по центру встаёт меню. В этом случае блок
+  // не создаёт own box: логотипы раскладываются прямо в контейнер, и меню с
+  // auto-отступами встаёт между ними.
+  .header__container_home {
+    .header__logos {
+      display: contents;
+    }
+
+    .header__logo-link,
+    .logo2 {
+      flex: 0 0 auto;
+    }
+
+    .navigation {
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 875px) {
+  // Меню на узких экранах скрыто, его заменяет бургер: блок с логотипами
+  // занимает всю ширину, бургер уезжает к правому краю. Зазор нужен, чтобы
+  // тянулись к бургеру, а не к логотипу — по нажатию на логотип ничего
+  // не происходит, и кнопка меню не открывается.
+  .burger {
+    margin-left: 26px;
+  }
+
+  // Блок занимает всю доступную ширину: логотип 1 у левого края, логотип 2 — у
+  // правого, рядом с бургером, а название растянуто между ними и центрировано.
+  .header__logos {
+    flex: 1 1 auto;
+    gap: 8px;
+  }
+
+  // Ссылка с логотипом по умолчанию flex: 1 и забирает свободное место на себя,
+  // из-за чего блок названия сдвигается вправо от центра. Здесь она сжимается
+  // до логотипа, и всё место между логотипами достаётся названию.
+  .header__logo-link {
+    flex: 0 0 auto;
+  }
+
+  .header__logo-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+  }
+
+  // Строки переносятся по словам. Там, где ширины хватает, остаются те же
+  // три строки, а на узких экранах длинная строка просто переносится, вместо
+  // того чтобы наезжать на логотипы.
+  .header__logo-line {
+    white-space: normal;
+  }
 }

@@ -105,14 +105,41 @@
     }
 }
 
+// Надпись с юбилеем на узких экранах: фотография героя там скрыта, поэтому
+// она встаёт в текстовую колонку — над «Мы гордимся званием лучших!». Без
+// наклона, в отличие от .rotated-text поверх фотографии на широких экранах:
+// в колонке текста поворот мешает читать.
+.hero__anniversary {
+    display: none;
+
+    @media (max-width: 875px) {
+        display: block;
+        align-self: flex-start;
+        margin: 12px 0 16px;
+        font-size: 3.5rem;
+        line-height: 1.1;
+        text-align: left;
+    }
+
+    @media (max-width: 560px) {
+        margin: 10px 0 14px;
+        font-size: 2.9rem;
+    }
+
+    @media (max-width: 400px) {
+        margin: 8px 0 12px;
+        font-size: 2.4rem;
+    }
+}
+
+// Надпись с юбилеем внутри фотографии героя. Шрифт и цвет берутся из
+// .anniversary-badge, здесь только расположение и размер.
 .rotated-text {
     position: absolute;
     top: 250px;
     left: 280px;
     display: inline-block;
-    font-family: "Corvetta";
     font-size: 3rem;
-    color: $accent;
     transform: rotate(-10deg);
 
     @media (max-width: 1260px) {

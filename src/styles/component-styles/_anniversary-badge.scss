@@ -1,0 +1,8 @@
+@use '../abstracts/variables' as *;
+
+// Общая часть надписи с юбилеем: шрифт и цвет. Размер, наклон и расположение
+// задаёт класс, который навешивает место использования.
+.anniversary-badge {
+    font-family: "Corvetta";
+    color: $accent;
+}

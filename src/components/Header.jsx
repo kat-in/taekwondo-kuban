@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom"
+import cn from 'classnames'
 import Navigation from "./NavBar/Navigation"
 import Burger from "./NavBar/Burger"
 import { Link } from 'react-router-dom'
@@ -9,13 +10,15 @@ const Header = () => {
 
     return (
         <div className='header' >
-            <div className='header__container'>
-            <Link className='header__logo-link' to='/'> <div className='header__logo'>
-                <div className='logo1'></div>
-                <div className='logo2'></div>
+            <div className={cn('header__container', { 'header__container_home': isHome })}>
+            <div className="header__logos">
+                <Link className='header__logo-link' to='/'> <div className='header__logo'>
+                    <div className='logo1'></div>
+                </div>
+                </Link>
                 {!isHome && <div className='header__logo-text'><span className='header__logo-line'>Краснодарская городская</span><span className='header__logo-line'>Ассоциация Тхэквондо</span><span className='header__logo-line'>МУ ДУК КВАН</span></div>}
+                <div className='logo2'></div>
             </div>
-            </Link>
             <Navigation />
             <Burger />
             </div>
