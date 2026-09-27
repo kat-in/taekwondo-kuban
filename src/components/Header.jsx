@@ -17,7 +17,11 @@ const Header = () => {
                     <div className='logo1'></div>
                 </div>
                 </Link>
-                {!isHome && <div className='header__logo-text'><span className='header__logo-line'>Краснодарская городская</span><span className='header__logo-line'>Ассоциация Тхэквондо</span><span className='header__logo-line'>МУ ДУК КВАН</span></div>}
+                {!isHome && (
+                    <Link className="header__logo-text-link" to='/'>
+                        <div className='header__logo-text'><span className='header__logo-line'>Краснодарская городская</span><span className='header__logo-line'>Ассоциация Тхэквондо</span><span className='header__logo-line'>МУ ДУК КВАН</span></div>
+                    </Link>
+                )}
                 {isHome && <AnniversaryBadge className="header__anniversary" />}
                 <div className='logo2'></div>
             </div>

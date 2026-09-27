@@ -181,6 +181,20 @@
   text-align: center;
 }
 
+// Название ассоциации ведёт на главную. Выглядит как обычный текст, но
+// подсвечивается при наведении, как и пункты меню.
+.header__logo-text-link {
+  display: block;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: $accent;
+    text-decoration: none;
+  }
+}
+
 @media (min-width: 876px) {
   // На неглавных страницах блок с логотипами прижат к левому краю, а меню — к
   // правому. Зазор остаётся как минимум: если места не хватит, блок и меню не
@@ -291,9 +305,14 @@
     flex: 0 0 auto;
   }
 
-  .header__logo-text {
+  // Название теперь обёрнуто в ссылку, и именно она стала элементом flex в
+  // блоке: растягиваться и сжиматься должна ссылка, а не текст внутри неё.
+  .header__logo-text-link {
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  .header__logo-text {
     text-align: center;
   }
 
