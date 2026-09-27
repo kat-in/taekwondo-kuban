@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom"
 import cn from 'classnames'
 import Navigation from "./NavBar/Navigation"
 import Burger from "./NavBar/Burger"
+import AnniversaryBadge from "./AnniversaryBadge"
 import { Link } from 'react-router-dom'
 
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
                 </div>
                 </Link>
                 {!isHome && <div className='header__logo-text'><span className='header__logo-line'>Краснодарская городская</span><span className='header__logo-line'>Ассоциация Тхэквондо</span><span className='header__logo-line'>МУ ДУК КВАН</span></div>}
+                {isHome && <AnniversaryBadge className="header__anniversary" />}
                 <div className='logo2'></div>
             </div>
             <Navigation />

@@ -13,7 +13,6 @@ const Hero = () => {
       <div className='hero__container'>
         <div className='hero__title'>
           <h1>Краснодарская городская Ассоциация Тхэквондо МУ ДУК КВАН</h1>
-          <AnniversaryBadge className="hero__anniversary" />
           <h2>Мы гордимся званием лучших!</h2>
           <Button handleClick={goToBeginners}>Новичкам</Button>
         </div>
